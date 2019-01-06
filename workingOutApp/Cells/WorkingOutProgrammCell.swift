@@ -9,8 +9,12 @@
 import UIKit
 
 class WorkingOutProgrammCell: UITableViewCell {
-    weak var delegate: HandlingTimerSeconds?
-    var seconds = 0.0
+
+    var seconds = 0.0 {
+        didSet {
+            delegate?.passingSeconds(seconds: seconds)
+        }
+    }
     // MARK: I know its not corect. I need to change that...
     var rounds = 0.00  {
         didSet {
@@ -23,6 +27,8 @@ class WorkingOutProgrammCell: UITableViewCell {
         }
     }
 
+    weak var delegate: DidSetSecondsFromCellToTableController?
+    
     let widthOfViewContainerForImage: CGFloat = 125
     let heightOfViewContainerForImage: CGFloat = 125
 
@@ -165,7 +171,6 @@ class WorkingOutProgrammCell: UITableViewCell {
         if sender == stepperOfRounds {
             roundsNumberLabel.text = String(Int(sender.value))
             rounds = (sender.value * 60)
-            
         }
         if sender == stepperOfAmount {
             amountNumberLabel.text = String(Int(sender.value))

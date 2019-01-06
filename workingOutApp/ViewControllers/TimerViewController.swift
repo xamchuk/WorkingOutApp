@@ -8,9 +8,6 @@
 
 import UIKit
 
-protocol HandlingTimerSeconds: class {
-    func didAddedNewSeconds(secondsDelegate: Double)
-}
 class TimerViewController: UIViewController {
 
     var widthOfTimerView: CGFloat!
@@ -22,13 +19,15 @@ class TimerViewController: UIViewController {
     let borderWidthOfTimerView: CGFloat = 2
     let colorStroke: CGColor = UIColor.gray.cgColor
 
-    weak var delegate: HandlingTimerSeconds?
+    
 
     var isRunning = true
     var secondsTimer: Double = 10
     var startValue: Double = 100
 
     var timer = Timer()
+    
+    weak var delegate: PassDataFromTabBarToTimer?
 
     var level: CGFloat = 1 {
         didSet {
@@ -194,5 +193,13 @@ class TimerViewController: UIViewController {
         let seconds = Int(time) % 60
         return String(format: "%02i:%02i:%02i", hours, minutes, seconds)
     }
+}
+
+extension TimerViewController: PassDataFromTabBarToTimer {
+    func passingSeconds(seconds: Double) {
+        timerLabel.text = "\(seconds)"
+    }
+
+
 }
 

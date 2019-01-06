@@ -8,11 +8,16 @@
 
 import UIKit
 
-
 class WorckingOutTableTableViewController: UIViewController {
-
+    var passedSecondsFormCells = 0.00 {
+        didSet {
+            delegate?.passingSeconds(seconds: passedSecondsFormCells)
+        }
+    }
     let cellId = "cellId"
     let tableView = UITableView()
+
+    weak var delegate: PassDataFromTableControllerToTabBar?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +37,6 @@ class WorckingOutTableTableViewController: UIViewController {
     }
 
     @objc func handeleAddButton(_ sender: UIBarButtonItem) {
-        print("comming soon")
     }
 }
 
@@ -44,6 +48,14 @@ extension WorckingOutTableTableViewController: UITableViewDataSource {
 
      func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! WorkingOutProgrammCell
+        cell.delegate = self
+
         return cell
+    }
+}
+
+extension WorckingOutTableTableViewController : DidSetSecondsFromCellToTableController {
+    func passingSeconds(seconds: Double) {
+        passedSecondsFormCells = seconds
     }
 }
