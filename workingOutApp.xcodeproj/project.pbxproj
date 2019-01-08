@@ -17,6 +17,10 @@
 		B0479A6221DE564E00AC09A7 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0479A6121DE564E00AC09A7 /* Default-568h@2x.png */; };
 		B0479A6421DEAE7100AC09A7 /* Extetions +UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0479A6321DEAE7100AC09A7 /* Extetions +UIView.swift */; };
 		B0479A6C21E2136700AC09A7 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0479A6B21E2136700AC09A7 /* Protocols.swift */; };
+		B0479A7021E282DC00AC09A7 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0479A6F21E282DC00AC09A7 /* Item.swift */; };
+		B0479A7221E3485C00AC09A7 /* AddNewExCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0479A7121E3485C00AC09A7 /* AddNewExCollectionViewController.swift */; };
+		B0479A7421E34BD900AC09A7 /* AddNewExCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0479A7321E34BD900AC09A7 /* AddNewExCollectionViewCell.swift */; };
+		B0479A7621E36C5700AC09A7 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0479A7521E36C5700AC09A7 /* InfoViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +36,10 @@
 		B0479A6121DE564E00AC09A7 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		B0479A6321DEAE7100AC09A7 /* Extetions +UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extetions +UIView.swift"; sourceTree = "<group>"; };
 		B0479A6B21E2136700AC09A7 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		B0479A6F21E282DC00AC09A7 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		B0479A7121E3485C00AC09A7 /* AddNewExCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewExCollectionViewController.swift; sourceTree = "<group>"; };
+		B0479A7321E34BD900AC09A7 /* AddNewExCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewExCollectionViewCell.swift; sourceTree = "<group>"; };
+		B0479A7521E36C5700AC09A7 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +100,8 @@
 				B0479A5621DE528600AC09A7 /* CustomTabBarController.swift */,
 				B0479A5821DE530F00AC09A7 /* TimerViewController.swift */,
 				B0479A5A21DE539B00AC09A7 /* WorckingOutTableTableViewController.swift */,
+				B0479A7121E3485C00AC09A7 /* AddNewExCollectionViewController.swift */,
+				B0479A7521E36C5700AC09A7 /* InfoViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -100,6 +110,7 @@
 			isa = PBXGroup;
 			children = (
 				B0479A5C21DE553600AC09A7 /* WorkingOutProgrammCell.swift */,
+				B0479A7321E34BD900AC09A7 /* AddNewExCollectionViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -107,6 +118,7 @@
 		B0479A6721E0A42900AC09A7 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				B0479A6F21E282DC00AC09A7 /* Item.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -182,10 +194,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0479A7421E34BD900AC09A7 /* AddNewExCollectionViewCell.swift in Sources */,
+				B0479A7621E36C5700AC09A7 /* InfoViewController.swift in Sources */,
 				B0479A4521DE4D5500AC09A7 /* AppDelegate.swift in Sources */,
 				B0479A5D21DE553600AC09A7 /* WorkingOutProgrammCell.swift in Sources */,
 				B0479A6C21E2136700AC09A7 /* Protocols.swift in Sources */,
 				B0479A5921DE530F00AC09A7 /* TimerViewController.swift in Sources */,
+				B0479A7021E282DC00AC09A7 /* Item.swift in Sources */,
+				B0479A7221E3485C00AC09A7 /* AddNewExCollectionViewController.swift in Sources */,
 				B0479A5721DE528600AC09A7 /* CustomTabBarController.swift in Sources */,
 				B0479A5B21DE539B00AC09A7 /* WorckingOutTableTableViewController.swift in Sources */,
 				B0479A6421DEAE7100AC09A7 /* Extetions +UIView.swift in Sources */,

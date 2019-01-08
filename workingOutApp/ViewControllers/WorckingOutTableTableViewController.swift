@@ -8,12 +8,12 @@
 
 import UIKit
 
+
+
 class WorckingOutTableTableViewController: UIViewController {
-    var passedSecondsFormCells = 0.00 {
-        didSet {
-            delegate?.passingSeconds(seconds: passedSecondsFormCells)
-        }
-    }
+
+    var items: [Item] = []
+
     let cellId = "cellId"
     let tableView = UITableView()
 
@@ -21,6 +21,7 @@ class WorckingOutTableTableViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         view.backgroundColor = .white
         setupTableView()
 
@@ -37,18 +38,30 @@ class WorckingOutTableTableViewController: UIViewController {
     }
 
     @objc func handeleAddButton(_ sender: UIBarButtonItem) {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        let addNewExCollectionViewController = AddNewExCollectionViewController(collectionViewLayout: layout)
+        addNewExCollectionViewController.delegate = self
+        show(addNewExCollectionViewController, sender: true)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+
     }
 }
 
 extension WorckingOutTableTableViewController: UITableViewDataSource {
 
      func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+       // guard let itemsNotNil = items else { return 0}
+        return items.count
     }
 
      func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! WorkingOutProgrammCell
         cell.delegate = self
+        //if let itemsNotNil = items {
+        cell.item = items[indexPath.row]
 
         return cell
     }
@@ -56,6 +69,15 @@ extension WorckingOutTableTableViewController: UITableViewDataSource {
 
 extension WorckingOutTableTableViewController : DidSetSecondsFromCellToTableController {
     func passingSeconds(seconds: Double) {
-        passedSecondsFormCells = seconds
+        delegate?.passingSeconds(seconds: seconds)
     }
+}
+extension WorckingOutTableTableViewController: SelectedItemFromCollectionView {
+    func appendingItem(item: Item) {
+        items.append(item)
+        tableView.reloadData()
+        
+    }
+
+
 }

@@ -8,22 +8,33 @@
 
 import UIKit
 
-class WorkingOutProgrammCell: UITableViewCell {
+protocol DidSetSecondsFromCellToTableController: AnyObject {
+    func passingSeconds(seconds: Double)
+}
 
+class WorkingOutProgrammCell: UITableViewCell {
+    var item: Item? {
+        didSet {
+            titleLabel.text = item?.name
+            rounds = item?.rounds ?? 0
+            amount = item?.amount ?? 0
+            imageViewOfExersice.downloaded(from: item?.imageName ?? "")
+        }
+    }
     var seconds = 0.0 {
         didSet {
             delegate?.passingSeconds(seconds: seconds)
         }
     }
     // MARK: I know its not corect. I need to change that...
-    var rounds = 0.00  {
+    var rounds = 0  {
         didSet {
-            seconds = rounds + amount * stepperOfRounds.value
+            seconds = Double(rounds) + Double(amount) * stepperOfRounds.value
         }
     }
-    var amount = 0.00  {
+    var amount = 0  {
         didSet {
-            seconds = rounds + amount * stepperOfRounds.value
+            seconds = Double(rounds) + Double(amount) * stepperOfRounds.value
         }
     }
 
@@ -119,6 +130,8 @@ class WorkingOutProgrammCell: UITableViewCell {
 
     lazy var stepperOfAmount: UIStepper = {
         let stepper = UIStepper()
+        stepper.layer.borderColor = UIColor.red.cgColor
+        stepper.layer.borderWidth = 1
         stepper.addTarget(self, action: #selector(handleStepper), for: UIControl.Event.valueChanged)
         return stepper
     }()
@@ -132,7 +145,7 @@ class WorkingOutProgrammCell: UITableViewCell {
 
     lazy var imageViewOfExersice: UIImageView = {
         let imageEx = UIImageView()
-        imageEx.image = UIImage(named: "zhim-lezha")
+        //imageEx.image = UIImage(named: "")
         imageEx.contentMode = .scaleAspectFill
         imageEx.layer.cornerRadius = 16
         imageEx.backgroundColor = .white
@@ -170,11 +183,11 @@ class WorkingOutProgrammCell: UITableViewCell {
         // MARK: Its not realy good code. I'll chande it ...
         if sender == stepperOfRounds {
             roundsNumberLabel.text = String(Int(sender.value))
-            rounds = (sender.value * 60)
+            rounds = Int((sender.value * 60))
         }
         if sender == stepperOfAmount {
             amountNumberLabel.text = String(Int(sender.value))
-            amount = (sender.value * 3)
+            amount = Int((sender.value * 3))
         }
         if sender == stepperOfWeight {
             weightNumberLabel.text = String("\(sender.value) kg")

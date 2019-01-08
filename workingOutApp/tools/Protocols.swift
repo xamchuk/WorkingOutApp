@@ -8,13 +8,8 @@
 
 import Foundation
 
-protocol DidSetSecondsFromCellToTableController: class {
-    func passingSeconds(seconds: Double)
-}
-protocol PassDataFromTableControllerToTabBar: class {
-    func passingSeconds(seconds: Double)
-}
-protocol PassDataFromTabBarToTimer: class {
+
+protocol PassDataFromTableControllerToTabBar: AnyObject {
     func passingSeconds(seconds: Double)
 }
 
