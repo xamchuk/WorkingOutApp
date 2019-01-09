@@ -7,9 +7,12 @@
 //
 
 import UIKit
+import AudioToolbox
+
 
 class TimerViewController: UIViewController {
 
+    var items: [Item]?
     var widthOfTimerView: CGFloat!
     var heightOfTimerView: CGFloat!
     var cornerRadius: CGFloat!
@@ -18,10 +21,15 @@ class TimerViewController: UIViewController {
     let strokeLines = CAShapeLayer()
     let borderWidthOfTimerView: CGFloat = 2
     let colorStroke: CGColor = UIColor.gray.cgColor
-
-    
-
-    var isRunning = false
+    var isRunning = false {
+        didSet {
+            if isRunning{
+                 startButton.setTitle("Pause", for: .normal)
+            } else {
+                 startButton.setTitle("Start", for: .normal)
+            }
+        }
+    }
     var secondsTimer: Double = 10
     var startSeconds: Double = 10
     var startValue: Double = 100
@@ -35,7 +43,9 @@ class TimerViewController: UIViewController {
             if level < 0.5 {
                 shapeLayer.strokeColor = UIColor.purple.cgColor
             } else {
-                shapeLayer.strokeColor = UIColor.green.cgColor
+                 let redC = UIColor(displayP3Red: 0/255, green: 234/255, blue: 255/255, alpha: 1)
+                shapeLayer.strokeColor = redC.cgColor
+
             }
         }
     }
@@ -70,7 +80,7 @@ class TimerViewController: UIViewController {
         timerview.layer.borderColor = colorStroke
         timerview.layer.borderWidth = borderWidthOfTimerView
         timerview.layer.masksToBounds = true
-        timerview.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handlePan(gesture:))))
+        
 
         let strokePath = UIBezierPath()
 
@@ -145,47 +155,52 @@ class TimerViewController: UIViewController {
         startButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     }
 
-    @objc func handlePan(gesture: UIPanGestureRecognizer) {
-        let translation = gesture.translation(in: gesture.view)
-        let percent = translation.y / timerView.bounds.height
-
-        level = max(0, min(1, shapeLayer.strokeEnd - percent))
-
-        CATransaction.begin()
-        CATransaction.setDisableActions(true)
-        shapeLayer.strokeEnd = level
-        CATransaction.commit()
-
-        gesture.setTranslation(.zero, in: gesture.view)
-    }
-
-
+   
     @objc func handleStartButton(_ sender: UIButton) {
-        if !isRunning {
-            startValue = 100 / startSeconds
-             timer = Timer.scheduledTimer(timeInterval: 1, target: self,   selector: (#selector(updateTimer)), userInfo: nil, repeats: true)
 
-            startButton.setTitle("Pause", for: .normal)
+        // lets mess here // trying figure out aboud single rounds and breaks
+        guard let items = items else { return }
+        for item in items {
+            for _ in 0...item.rounds {
+                startValue = 60
+                startSeconds = 60
 
-        } else if secondsTimer > 0 && isRunning {
-            timer.invalidate()
-            startButton.setTitle("Start", for: .normal)
+                if !isRunning || secondsTimer == 0{
+                    isRunning = true
+                    startValue = 100 / startSeconds
+                    timer = Timer.scheduledTimer(timeInterval: 1, target: self,   selector: (#selector(updateTimer)), userInfo: nil, repeats: true)
+
+
+
+                } else if secondsTimer > 0 {
+                    timer.invalidate()
+                    isRunning = false
+
+                }
+            }
         }
-        
-        isRunning = !isRunning
+
+
+
     }
     @objc func updateTimer() {
+
         if secondsTimer >= 0 {
             timerLabel.text = timeString(time: TimeInterval(secondsTimer)) //This will update the label.
             secondsTimer -= 1
             let newValue: Double = startValue * secondsTimer / 100
-            level = CGFloat(newValue)
             shapeLayer.strokeEnd = level
-
-
+            level = CGFloat(newValue)
         } else {
             timer.invalidate()
             startButton.setTitle("Start", for: .normal)
+            isRunning = false
+
+
+            AudioServicesPlayAlertSound(1304)
+
+
+
         }
     }
     func timeString(time:TimeInterval) -> String {

@@ -146,6 +146,11 @@ class WorkingOutProgrammCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViewsInCell()
         }
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        imageViewOfExersice.image = nil
+        titleLabel.text = nil
+    }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -194,7 +199,7 @@ class WorkingOutProgrammCell: UITableViewCell {
         if let item = item {
             roundsNumberLabel.text = "\(item.rounds)"
             amountNumberLabel.text = "\(item.amount)"
-            weightNumberLabel.text = "\(item.weight) kg"
+            weightNumberLabel.text = "\(String(describing: item.weight)) kg"
         }
          delegate?.passingSeconds(seconds: seconds, item: item!)
     }
