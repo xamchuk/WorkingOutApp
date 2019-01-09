@@ -8,9 +8,6 @@
 
 import UIKit
 
-protocol HandlingTimerSeconds: class {
-    func didAddedNewSeconds(secondsDelegate: Double)
-}
 class TimerViewController: UIViewController {
 
     var widthOfTimerView: CGFloat!
@@ -22,13 +19,16 @@ class TimerViewController: UIViewController {
     let borderWidthOfTimerView: CGFloat = 2
     let colorStroke: CGColor = UIColor.gray.cgColor
 
-    weak var delegate: HandlingTimerSeconds?
+    
 
-    var isRunning = true
+    var isRunning = false
     var secondsTimer: Double = 10
+    var startSeconds: Double = 10
     var startValue: Double = 100
 
     var timer = Timer()
+    
+    
 
     var level: CGFloat = 1 {
         didSet {
@@ -89,7 +89,7 @@ class TimerViewController: UIViewController {
     }()
 
     lazy var startButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton.init(type: .roundedRect)
         button.setTitle("Start", for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 40)
@@ -101,12 +101,7 @@ class TimerViewController: UIViewController {
     }()
 
 
-    fileprivate func setupReusebleConstraints() {
 
-        heightOfTimerView = view.frame.height / 3
-        widthOfTimerView = view.frame.width / 4
-        cornerRadius = widthOfTimerView / 3
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -114,6 +109,13 @@ class TimerViewController: UIViewController {
         setupVisualEffects()
         setupReusebleConstraints()
         setupViews()
+        
+    }
+
+    fileprivate func setupReusebleConstraints() {
+        heightOfTimerView = view.frame.height / 3
+        widthOfTimerView = view.frame.width / 4
+        cornerRadius = widthOfTimerView / 3
     }
 
     // TODO: redraw layauts when oriontation has changed ???
@@ -159,19 +161,17 @@ class TimerViewController: UIViewController {
 
 
     @objc func handleStartButton(_ sender: UIButton) {
-        if isRunning == true {
-            startValue = 100 / secondsTimer
+        if !isRunning {
+            startValue = 100 / startSeconds
              timer = Timer.scheduledTimer(timeInterval: 1, target: self,   selector: (#selector(updateTimer)), userInfo: nil, repeats: true)
 
             startButton.setTitle("Pause", for: .normal)
 
-        } else if isRunning == false && secondsTimer > 0 {
+        } else if secondsTimer > 0 && isRunning {
             timer.invalidate()
             startButton.setTitle("Start", for: .normal)
         }
-        if secondsTimer <= 0 && isRunning == false {
-            secondsTimer = 60
-        }
+        
         isRunning = !isRunning
     }
     @objc func updateTimer() {
@@ -179,13 +179,13 @@ class TimerViewController: UIViewController {
             timerLabel.text = timeString(time: TimeInterval(secondsTimer)) //This will update the label.
             secondsTimer -= 1
             let newValue: Double = startValue * secondsTimer / 100
-            shapeLayer.strokeEnd = level
             level = CGFloat(newValue)
+            shapeLayer.strokeEnd = level
+
 
         } else {
             timer.invalidate()
             startButton.setTitle("Start", for: .normal)
-            //seconds = 10
         }
     }
     func timeString(time:TimeInterval) -> String {

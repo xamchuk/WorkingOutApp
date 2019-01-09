@@ -10,8 +10,36 @@ import UIKit
 
 class CustomTabBarController: UITabBarController {
 
+    // MARK: I've not used protocols to pass data from tabBar to Timer. Couldn't figure out how to do that. 
+
+
+    var firstController: TimerViewController?
+    var secondController: WorckingOutTableTableViewController?
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        setingsOfTebleView()
+
+        let firstController = TimerViewController()
+        self.firstController = firstController
+
+        let secondController = WorckingOutTableTableViewController()
+        self.secondController = secondController
+
+        secondController.delegate = self
+
+        let nc = UINavigationController(rootViewController: secondController)
+        
+        firstController.tabBarItem.title = "Timer"
+        nc.tabBarItem.title = "Program"
+
+
+        viewControllers = [firstController, nc]
+
+
+    }
+
+    fileprivate func setingsOfTebleView() {
         tabBar.backgroundColor = .red
         tabBar.layer.cornerRadius = 40
         tabBar.layer.borderWidth = 2
@@ -20,13 +48,27 @@ class CustomTabBarController: UITabBarController {
         tabBar.isTranslucent = true
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 20)], for: .normal)
         tabBar.layer.masksToBounds = false
-        
-        let worckingOutTableTableViewController = UINavigationController(rootViewController: WorckingOutTableTableViewController() as UIViewController)
-        let timerViewController = TimerViewController() as UIViewController
-        timerViewController.tabBarItem.title = "Timer"
-    
-        worckingOutTableTableViewController.tabBarItem.title = "Program"
-        viewControllers = [timerViewController, worckingOutTableTableViewController]
-        // Do any additional setup after loading the view.
+    }
+
+}
+
+extension CustomTabBarController: PassDataFromTableControllerToTabBar {
+
+    func passingProgram(program: [Item]) {
+        print(program)
+        var secondsArray: [Double]  = []
+        for i in program {
+            let sec = (Double(i.rounds) * 60) + (Double(i.amount) * 3 * Double(i.rounds))
+            secondsArray.append(sec)
+        }
+        var seconds = 0.00
+        for i in secondsArray {
+            seconds += i
+        }
+
+        print(seconds)
+        firstController?.secondsTimer = seconds
+        firstController?.startSeconds = seconds
+        firstController?.timerLabel.text = "\(firstController?.timeString(time: seconds) ?? "00:00:00")"
     }
 }

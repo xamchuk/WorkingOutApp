@@ -8,21 +8,25 @@
 
 import UIKit
 
+protocol DidSetSecondsFromCellToTableController: AnyObject {
+    func passingSeconds(seconds: Double, item: Item)
+}
+
 class WorkingOutProgrammCell: UITableViewCell {
-    weak var delegate: HandlingTimerSeconds?
-    var seconds = 0.0
-    // MARK: I know its not corect. I need to change that...
-    var rounds = 0.00  {
+    var item: Item? {
         didSet {
-            seconds = rounds + amount * stepperOfRounds.value
+            titleLabel.text = item?.name
+            imageViewOfExersice.downloaded(from: item?.imageName ?? "")
         }
     }
-    var amount = 0.00  {
+    var seconds = 0.0 {
         didSet {
-            seconds = rounds + amount * stepperOfRounds.value
+            delegate?.passingSeconds(seconds: seconds, item: item!)
         }
     }
 
+    weak var delegate: DidSetSecondsFromCellToTableController?
+    
     let widthOfViewContainerForImage: CGFloat = 125
     let heightOfViewContainerForImage: CGFloat = 125
 
@@ -113,6 +117,9 @@ class WorkingOutProgrammCell: UITableViewCell {
 
     lazy var stepperOfAmount: UIStepper = {
         let stepper = UIStepper()
+        stepper.isEnabled = false
+        stepper.layer.borderColor = UIColor.red.cgColor
+        stepper.layer.borderWidth = 1
         stepper.addTarget(self, action: #selector(handleStepper), for: UIControl.Event.valueChanged)
         return stepper
     }()
@@ -126,7 +133,7 @@ class WorkingOutProgrammCell: UITableViewCell {
 
     lazy var imageViewOfExersice: UIImageView = {
         let imageEx = UIImageView()
-        imageEx.image = UIImage(named: "zhim-lezha")
+        //imageEx.image = UIImage(named: "")
         imageEx.contentMode = .scaleAspectFill
         imageEx.layer.cornerRadius = 16
         imageEx.backgroundColor = .white
@@ -159,21 +166,37 @@ class WorkingOutProgrammCell: UITableViewCell {
 
         imageViewOfExersice.anchor(top: titleLabel.bottomAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: nil, padding: .init(top: 8, left: 8, bottom: 8, right: 0), size: .init(width: heightOfViewContainerForImage, height: heightOfViewContainerForImage))
     }
-    
+
     @objc func handleStepper(_ sender: UIStepper) {
-        // MARK: Its not realy good code. I'll chande it ...
+
         if sender == stepperOfRounds {
-            roundsNumberLabel.text = String(Int(sender.value))
-            rounds = (sender.value * 60)
-            
+
+            //let value = sender.value
+
+            if sender.value == 0 {
+                item?.rounds = Int(sender.value)
+                item?.amount = 0
+                stepperOfAmount.isEnabled = false
+            } else {
+                stepperOfAmount.isEnabled = true
+                item?.amount = Int(stepperOfAmount.value)
+                item?.rounds = Int(sender.value)
+            }
+
         }
         if sender == stepperOfAmount {
-            amountNumberLabel.text = String(Int(sender.value))
-            amount = (sender.value * 3)
+            item?.amount = Int(sender.value)
         }
         if sender == stepperOfWeight {
-            weightNumberLabel.text = String("\(sender.value) kg")
+            item?.weight = sender.value
         }
+
+        if let item = item {
+            roundsNumberLabel.text = "\(item.rounds)"
+            amountNumberLabel.text = "\(item.amount)"
+            weightNumberLabel.text = "\(item.weight) kg"
+        }
+         delegate?.passingSeconds(seconds: seconds, item: item!)
     }
 }
 
