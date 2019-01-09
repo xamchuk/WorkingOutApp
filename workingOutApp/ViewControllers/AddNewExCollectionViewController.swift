@@ -27,7 +27,13 @@ class AddNewExCollectionViewController: UICollectionViewController, UICollection
 
         collectionView!.register(AddNewExCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
 
-        items = [Item(name: "Breast", imageName: "https://images.pexels.com/photos/1229356/pexels-photo-1229356.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940", rounds: 0, amount: 0, weight: 0, videoString: "gRVjAtPip0Y"), Item(name: "Legs", imageName: "https://images.pexels.com/photos/1431283/pexels-photo-1431283.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940", rounds: 0, amount: 0, weight: 0, videoString: "gRVjAtPip0Y")]
+        let backButton = UIBarButtonItem()
+        backButton.title = "Done"
+        navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
+        navigationController?.navigationBar.prefersLargeTitles = false
+
+        let json = LocalJson()
+        items = json.loadJson()
     }
     
     override func viewWillAppear(_ animated: Bool) {

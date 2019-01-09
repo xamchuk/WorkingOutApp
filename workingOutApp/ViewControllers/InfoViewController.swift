@@ -111,6 +111,7 @@ class InfoViewController: UIViewController, WKUIDelegate {
         guard let videoString = itemInfo.videoString else { return }
         navigationItem.title = itemInfo.name
         nameLabel.text = itemInfo.name
+        groupLabel.text = itemInfo.group
 
 
         configureWebView(videoString: videoString)

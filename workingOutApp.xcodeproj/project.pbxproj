@@ -21,6 +21,9 @@
 		B0479A7221E3485C00AC09A7 /* AddNewExCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0479A7121E3485C00AC09A7 /* AddNewExCollectionViewController.swift */; };
 		B0479A7421E34BD900AC09A7 /* AddNewExCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0479A7321E34BD900AC09A7 /* AddNewExCollectionViewCell.swift */; };
 		B0479A7621E36C5700AC09A7 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0479A7521E36C5700AC09A7 /* InfoViewController.swift */; };
+		B0479A7821E6103700AC09A7 /* CommentedCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0479A7721E6103700AC09A7 /* CommentedCode.swift */; };
+		B0479A7A21E61CFA00AC09A7 /* excercises.json in Resources */ = {isa = PBXBuildFile; fileRef = B0479A7921E61CFA00AC09A7 /* excercises.json */; };
+		B0479A7C21E61DBC00AC09A7 /* LocalJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0479A7B21E61DBC00AC09A7 /* LocalJson.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +43,9 @@
 		B0479A7121E3485C00AC09A7 /* AddNewExCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewExCollectionViewController.swift; sourceTree = "<group>"; };
 		B0479A7321E34BD900AC09A7 /* AddNewExCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewExCollectionViewCell.swift; sourceTree = "<group>"; };
 		B0479A7521E36C5700AC09A7 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		B0479A7721E6103700AC09A7 /* CommentedCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentedCode.swift; sourceTree = "<group>"; };
+		B0479A7921E61CFA00AC09A7 /* excercises.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = excercises.json; path = workingOutApp/excercises.json; sourceTree = SOURCE_ROOT; };
+		B0479A7B21E61DBC00AC09A7 /* LocalJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalJson.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +79,7 @@
 		B0479A4321DE4D5500AC09A7 /* workingOutApp */ = {
 			isa = PBXGroup;
 			children = (
+				B0479A7921E61CFA00AC09A7 /* excercises.json */,
 				B0479A6721E0A42900AC09A7 /* Models */,
 				B0479A5F21DE558500AC09A7 /* ViewControllers */,
 				B0479A6021DE559500AC09A7 /* Cells */,
@@ -90,6 +97,7 @@
 				B0479A4D21DE4D5800AC09A7 /* LaunchScreen.storyboard */,
 				B0479A5021DE4D5800AC09A7 /* Info.plist */,
 				B0479A6B21E2136700AC09A7 /* Protocols.swift */,
+				B0479A7721E6103700AC09A7 /* CommentedCode.swift */,
 			);
 			path = tools;
 			sourceTree = "<group>";
@@ -119,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				B0479A6F21E282DC00AC09A7 /* Item.swift */,
+				B0479A7B21E61DBC00AC09A7 /* LocalJson.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -182,6 +191,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B0479A4F21DE4D5800AC09A7 /* LaunchScreen.storyboard in Resources */,
+				B0479A7A21E61CFA00AC09A7 /* excercises.json in Resources */,
 				B0479A4C21DE4D5800AC09A7 /* Assets.xcassets in Resources */,
 				B0479A6221DE564E00AC09A7 /* Default-568h@2x.png in Resources */,
 			);
@@ -199,6 +209,8 @@
 				B0479A4521DE4D5500AC09A7 /* AppDelegate.swift in Sources */,
 				B0479A5D21DE553600AC09A7 /* WorkingOutProgrammCell.swift in Sources */,
 				B0479A6C21E2136700AC09A7 /* Protocols.swift in Sources */,
+				B0479A7821E6103700AC09A7 /* CommentedCode.swift in Sources */,
+				B0479A7C21E61DBC00AC09A7 /* LocalJson.swift in Sources */,
 				B0479A5921DE530F00AC09A7 /* TimerViewController.swift in Sources */,
 				B0479A7021E282DC00AC09A7 /* Item.swift in Sources */,
 				B0479A7221E3485C00AC09A7 /* AddNewExCollectionViewController.swift in Sources */,
