@@ -48,6 +48,17 @@ class InfoViewController: UIViewController, WKUIDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        let imageView = UIImageView()
+        imageView.downloaded(from: item?.imageName ?? "")
+        imageView.contentMode = .scaleAspectFill
+        view.addSubview(imageView)
+        imageView.fillSuperview()
+
+        let blurEffect = UIBlurEffect(style: .regular)
+        let visualEffectView = UIVisualEffectView(effect: blurEffect)
+        visualEffectView.alpha = 0.9
+        imageView.addSubview(visualEffectView)
+        visualEffectView.fillSuperview()
         navigationController?.navigationBar.prefersLargeTitles = false
         view.backgroundColor = .white
     }
@@ -62,7 +73,7 @@ class InfoViewController: UIViewController, WKUIDelegate {
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
         if UIDevice.current.orientation.isLandscape {
             portraitHeihtAnchor?.isActive = false
-            landscapeHeihtAnchor = continerView?.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.9)
+            landscapeHeihtAnchor = continerView?.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.86)
             landscapeHeihtAnchor?.isActive = true
             stackView.layoutIfNeeded()
             stackView.setNeedsLayout()
@@ -80,7 +91,8 @@ class InfoViewController: UIViewController, WKUIDelegate {
 
     fileprivate func setUpContainerView() {
         continerView = UIView()
-        continerView?.backgroundColor = .red
+        continerView?.layer.cornerRadius = 40
+        continerView?.layer.masksToBounds = true
         view.addSubview(continerView!)
         continerView?.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor, size: CGSize(width: 0, height: 0))
         portraitHeihtAnchor = continerView?.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.35)
@@ -108,10 +120,12 @@ class InfoViewController: UIViewController, WKUIDelegate {
         [nameLabel, groupLabel, descriotionLabel].forEach { stackView.addArrangedSubview($0) }
         let someView = UIView()
         view.addSubview(someView)
-        someView.backgroundColor = .yellow
-        someView.anchor(top: continerView?.bottomAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: .init(top: 16, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: 0))
+
+
+
+        someView.anchor(top: continerView?.bottomAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor)
         someView.addSubview(stackView)
-        stackView.anchor(top: someView.topAnchor, leading: webView.leadingAnchor, bottom: nil, trailing: someView.trailingAnchor)
+        stackView.anchor(top: someView.topAnchor, leading: webView.leadingAnchor, bottom: nil, trailing: someView.trailingAnchor, padding: .init(top: 16, left: 8, bottom: 8, right: 8), size: CGSize(width: 0, height: 0))
     }
 
     fileprivate func configureWebView(videoString: String) {

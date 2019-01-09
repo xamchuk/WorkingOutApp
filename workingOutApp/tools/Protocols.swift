@@ -9,7 +9,5 @@
 import Foundation
 
 
-protocol PassDataFromTableControllerToTabBar: AnyObject {
-    func passingSeconds(seconds: Double)
-}
+
 

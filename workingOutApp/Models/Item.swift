@@ -8,13 +8,13 @@
 
 import Foundation
 
-struct Item {
+struct Item: Equatable {
 
-    var name: String?
+    var name: String
     var imageName: String?
-    var rounds: Int?
-    var amount: Int?
-    var weight: Double?
+    var rounds: Int
+    var amount: Int
+    var weight: Double
     var videoString: String?
     var description: String?
     var group: String?

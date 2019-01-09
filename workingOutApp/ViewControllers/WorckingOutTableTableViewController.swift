@@ -8,14 +8,17 @@
 
 import UIKit
 
-
+protocol PassDataFromTableControllerToTabBar: AnyObject {
+    func passingProgram(program: [Item])
+}
 
 class WorckingOutTableTableViewController: UIViewController {
 
     var items: [Item] = []
-
+    var program: [Item] = []
     let cellId = "cellId"
     let tableView = UITableView()
+    var cells: [WorkingOutProgrammCell]?
 
     weak var delegate: PassDataFromTableControllerToTabBar?
 
@@ -27,6 +30,7 @@ class WorckingOutTableTableViewController: UIViewController {
 
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "Make your excerice list"
+        
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(handeleAddButton))
     }
 
@@ -36,17 +40,13 @@ class WorckingOutTableTableViewController: UIViewController {
         tableView.dataSource = self
         tableView.register(WorkingOutProgrammCell.self, forCellReuseIdentifier: cellId)
     }
-
+   
     @objc func handeleAddButton(_ sender: UIBarButtonItem) {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         let addNewExCollectionViewController = AddNewExCollectionViewController(collectionViewLayout: layout)
         addNewExCollectionViewController.delegate = self
         show(addNewExCollectionViewController, sender: true)
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-
     }
 }
 
@@ -60,16 +60,30 @@ extension WorckingOutTableTableViewController: UITableViewDataSource {
      func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! WorkingOutProgrammCell
         cell.delegate = self
-        //if let itemsNotNil = items {
         cell.item = items[indexPath.row]
-
+        cells?.append(cell)
         return cell
     }
 }
 
 extension WorckingOutTableTableViewController : DidSetSecondsFromCellToTableController {
-    func passingSeconds(seconds: Double) {
-        delegate?.passingSeconds(seconds: seconds)
+    func passingSeconds(seconds: Double, item: Item) {
+        var isMatch = false
+        if program.count == 0 {
+            program.append(item)
+        }
+        for i in program {
+            if i.name == item.name {
+                guard let index = program.index(of: i) else { return }
+                program[index] = item
+                isMatch = true
+                break
+            }
+        }
+        if !isMatch  {
+            program.append(item)
+        }
+        delegate?.passingProgram(program: program)
     }
 }
 extension WorckingOutTableTableViewController: SelectedItemFromCollectionView {

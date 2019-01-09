@@ -53,7 +53,20 @@ class CustomTabBarController: UITabBarController {
 }
 
 extension CustomTabBarController: PassDataFromTableControllerToTabBar {
-    func passingSeconds(seconds: Double) {
+
+    func passingProgram(program: [Item]) {
+        print(program)
+        var secondsArray: [Double]  = []
+        for i in program {
+            let sec = (Double(i.rounds) * 60) + (Double(i.amount) * 3 * Double(i.rounds))
+            secondsArray.append(sec)
+        }
+        var seconds = 0.00
+        for i in secondsArray {
+            seconds += i
+        }
+
+        print(seconds)
         firstController?.secondsTimer = seconds
         firstController?.startSeconds = seconds
         firstController?.timerLabel.text = "\(firstController?.timeString(time: seconds) ?? "00:00:00")"
