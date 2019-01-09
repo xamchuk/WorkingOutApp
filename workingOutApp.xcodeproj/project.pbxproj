@@ -31,7 +31,6 @@
 		B0479A4421DE4D5500AC09A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B0479A4B21DE4D5800AC09A7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B0479A4E21DE4D5800AC09A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		B0479A5021DE4D5800AC09A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B0479A5621DE528600AC09A7 /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		B0479A5821DE530F00AC09A7 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
 		B0479A5A21DE539B00AC09A7 /* WorckingOutTableTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorckingOutTableTableViewController.swift; sourceTree = "<group>"; };
@@ -46,6 +45,7 @@
 		B0479A7721E6103700AC09A7 /* CommentedCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentedCode.swift; sourceTree = "<group>"; };
 		B0479A7921E61CFA00AC09A7 /* excercises.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = excercises.json; path = workingOutApp/excercises.json; sourceTree = SOURCE_ROOT; };
 		B0479A7B21E61DBC00AC09A7 /* LocalJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalJson.swift; sourceTree = "<group>"; };
+		B0479A7D21E6978700AC09A7 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +80,7 @@
 			isa = PBXGroup;
 			children = (
 				B0479A7921E61CFA00AC09A7 /* excercises.json */,
+				B0479A7D21E6978700AC09A7 /* Info.plist */,
 				B0479A6721E0A42900AC09A7 /* Models */,
 				B0479A5F21DE558500AC09A7 /* ViewControllers */,
 				B0479A6021DE559500AC09A7 /* Cells */,
@@ -95,7 +96,6 @@
 				B0479A4421DE4D5500AC09A7 /* AppDelegate.swift */,
 				B0479A4B21DE4D5800AC09A7 /* Assets.xcassets */,
 				B0479A4D21DE4D5800AC09A7 /* LaunchScreen.storyboard */,
-				B0479A5021DE4D5800AC09A7 /* Info.plist */,
 				B0479A6B21E2136700AC09A7 /* Protocols.swift */,
 				B0479A7721E6103700AC09A7 /* CommentedCode.swift */,
 			);
