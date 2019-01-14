@@ -22,6 +22,7 @@ class WorckingOutTableTableViewController: UIViewController {
                 navigationItem.title = "\(items.count) exercises for today"
             } else {
                 navigationItem.title = "Lets's start with ADD"
+                tableLabel.isHidden = false
             }
         }
     }

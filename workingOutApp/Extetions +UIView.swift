@@ -8,6 +8,77 @@
 
 import UIKit
 
+extension UIColor {
+
+    static func rgb(r: CGFloat, g: CGFloat, b: CGFloat) -> UIColor {
+        return UIColor(red: r/255, green: g/255, blue: b/255, alpha: 1)
+    }
+
+    static let backgroundColor = UIColor.rgb(r: 21, g: 22, b: 33)
+    static let outlineStrokeColor = UIColor.rgb(r: 234, g: 46, b: 111)
+    static let trackStrokeColor = UIColor.rgb(r: 56, g: 25, b: 49)
+    static let pulsatingFillColor = UIColor.rgb(r: 86, g: 30, b: 63)
+}
+
+extension UIView {
+
+    enum Directons {
+        case horizontal
+        case vertical
+    }
+    
+    func setupSabLayer(shapelayerOfView: CAShapeLayer, cornerRadius: CGFloat, strokes: Int, direction: Directons) {
+
+        self.layer.cornerRadius = cornerRadius
+        self.layer.masksToBounds = true
+        self.layer.borderColor = UIColor.black.cgColor
+        self.layer.borderWidth = 1
+        let path = UIBezierPath()
+        let strokePath = UIBezierPath()
+        var stroke = 0
+        if  strokes == 0 {
+            stroke = 1
+        } else {
+            stroke = strokes
+        }
+        switch direction {
+        case .horizontal:
+            path.move(to: CGPoint(x: 0, y: self.frame.height / 2))
+            path.addLine(to: CGPoint(x: self.frame.width, y: self.frame.height / 2))
+
+            var x: CGFloat = 0
+            for _ in 0...stroke {
+                x = x + (self.frame.width / CGFloat(stroke * 2) ) // x * 2 = amount of strokes
+                strokePath.move(to: CGPoint(x: x + x, y: 0))
+                strokePath.addLine(to: CGPoint(x: x + x, y: self.frame.height))
+            }
+
+        case .vertical:
+            path.move(to: CGPoint(x: self.frame.width / 2, y: self.frame.height))
+            path.addLine(to: CGPoint(x: self.frame.width / 2, y: 0 ))
+
+            var y: CGFloat = 0
+            for _ in 0...stroke {
+                y = y + (self.frame.height / CGFloat(stroke) * 2 ) // x * 2 = amount of strokes
+                strokePath.move(to: CGPoint(x: 0, y: y + y))
+                strokePath.addLine(to: CGPoint(x: self.frame.width, y: y + y))
+            }
+        }
+        path.move(to: CGPoint(x: 0, y: self.frame.height / 2))
+        path.addLine(to: CGPoint(x: self.frame.width, y: self.frame.height / 2))
+
+        shapelayerOfView.path = path.cgPath
+        shapelayerOfView.lineWidth = self.frame.width
+        shapelayerOfView.strokeColor = UIColor.trackStrokeColor.cgColor
+        self.layer.addSublayer(shapelayerOfView)
+
+        let fillStrokes = CAShapeLayer()
+        fillStrokes.path = strokePath.cgPath
+        fillStrokes.lineWidth = 1
+        fillStrokes.strokeColor = UIColor.black.cgColor
+        self.layer.addSublayer(fillStrokes)
+    }
+}
 extension UIView {
 
     func fillSuperview() {

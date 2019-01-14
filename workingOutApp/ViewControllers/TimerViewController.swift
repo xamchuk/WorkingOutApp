@@ -12,29 +12,27 @@ import AudioToolbox
 
 class TimerViewController: UIViewController {
 
-    var items: [Item]?
+    var items: [Item]? 
     var widthOfTimerView: CGFloat!
     var heightOfTimerView: CGFloat!
     var cornerRadius: CGFloat!
-    let shapeLayer = CAShapeLayer()
+    let shapeLayerOfTimer = CAShapeLayer()
+    let shapeLayerOfStatus = CAShapeLayer()
     let maskLayer = CAShapeLayer()
-    let strokeLines = CAShapeLayer()
+    let strokeLinesOfTimerView = CAShapeLayer()
+    let strokeLinesOfStatus = CAShapeLayer()
     let borderWidthOfTimerView: CGFloat = 2
     let colorStroke: CGColor = UIColor.gray.cgColor
-    var isRunning = false {
-        didSet {
-            if isRunning{
-                 startButton.setTitle("Pause", for: .normal)
-            } else {
-                 startButton.setTitle("Start", for: .normal)
-            }
-        }
-    }
-    var secondsTimer: Double = 10
-    var startSeconds: Double = 10
-    var startValue: Double = 100
+    var isRunning = false
 
+
+    /// timers vars
+    var secondsTimer: Double = 0
+    var startSeconds: Double = 0
+    var startValue: Double = 100
+    var rounds = -1
     var timer = Timer()
+    ///
     
     
 
@@ -50,12 +48,7 @@ class TimerViewController: UIViewController {
         }
     }
 
-    let screenImage: UIImageView = {
-        let image = UIImageView()
-        image.image = UIImage(named: "screen")
-        image.contentMode = .scaleAspectFill
-        return image
-    }()
+
 
 
     lazy var timerLabel: UILabel = {
@@ -66,148 +59,184 @@ class TimerViewController: UIViewController {
         return label
     }()
 
-    lazy var timerView: UIView = {
-        let timerview = UIView()
-        timerview.layer.cornerRadius = cornerRadius
-        let path = UIBezierPath()
-        path.move(to: CGPoint(x: widthOfTimerView / 2, y: heightOfTimerView))
-        path.addLine(to: CGPoint(x: widthOfTimerView / 2, y: 0))
-        shapeLayer.path = path.cgPath
-        shapeLayer.lineWidth = widthOfTimerView
 
-        timerview.layer.addSublayer(shapeLayer)
-        timerview.backgroundColor = .clear
-        timerview.layer.borderColor = colorStroke
-        timerview.layer.borderWidth = borderWidthOfTimerView
-        timerview.layer.masksToBounds = true
-        
 
-        let strokePath = UIBezierPath()
+/////////// shape layer circle
 
-        var y: CGFloat = 0
-        for i in 0...10 {
-            y = y + (heightOfTimerView / 10 / 2)
-            strokePath.move(to: CGPoint(x: 0, y: y + y))
-            strokePath.addLine(to: CGPoint(x: widthOfTimerView, y: y + y))
-        }
+    var shapeLayer: CAShapeLayer!
+    var pulsatingLayer: CAShapeLayer!
 
-        strokeLines.path = strokePath.cgPath
-        strokeLines.lineWidth = borderWidthOfTimerView
-        strokeLines.strokeColor = colorStroke
-        timerview.layer.addSublayer(strokeLines)
-        return timerview
+    let percentageLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Start"
+        label.textAlignment = .center
+        label.font = UIFont.boldSystemFont(ofSize: 32)
+        label.textColor = .white
+        return label
     }()
 
-    lazy var startButton: UIButton = {
-        let button = UIButton.init(type: .roundedRect)
-        button.setTitle("Start", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 40)
-        button.layer.borderColor = colorStroke
-        button.layer.borderWidth = borderWidthOfTimerView
-        button.layer.cornerRadius = cornerRadius
-        button.addTarget(self, action: #selector(handleStartButton), for: .touchUpInside)
-        return button
-    }()
+    private func createCircleShapeLayer(strokeColor: UIColor, fillColor: UIColor) -> CAShapeLayer {
+        let layer = CAShapeLayer()
+        let circularPath = UIBezierPath(arcCenter: .zero, radius: 100, startAngle: 0, endAngle: 2 * CGFloat.pi, clockwise: true)
+        layer.path = circularPath.cgPath
+        layer.strokeColor = strokeColor.cgColor
+        layer.lineWidth = 20
+        layer.fillColor = fillColor.cgColor
+        layer.lineCap = CAShapeLayerLineCap.round
+        layer.position = view.center
+        return layer
+    }
 
+    private func setupPercentageLabel() {
+        view.addSubview(percentageLabel)
+        percentageLabel.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        percentageLabel.center = view.center
+    }
 
+    private func setupCircleLayers() {
+        pulsatingLayer = createCircleShapeLayer(strokeColor: .red, fillColor: .clear)
+        view.layer.addSublayer(pulsatingLayer)
+        animatePulsatingLayer()
+
+        let trackLayer = createCircleShapeLayer(strokeColor: .clear, fillColor: .clear)
+        view.layer.addSublayer(trackLayer)
+
+        shapeLayer = createCircleShapeLayer(strokeColor: .clear, fillColor: .clear)
+
+        shapeLayer.transform = CATransform3DMakeRotation(-CGFloat.pi / 2, 0, 0, 1)
+        shapeLayer.strokeEnd = 0
+        view.layer.addSublayer(shapeLayer)
+    }
+
+    private func animatePulsatingLayer() {
+        let animation = CABasicAnimation(keyPath: "transform.scale")
+
+        animation.toValue = 1.5
+        animation.duration = 0.8
+        animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeOut)
+        animation.autoreverses = true
+        animation.repeatCount = Float.infinity
+
+        pulsatingLayer.add(animation, forKey: "pulsing")
+    }
+
+    fileprivate func animateCircle() {
+        let basicAnimation = CABasicAnimation(keyPath: "strokeEnd")
+
+        basicAnimation.toValue = 1
+
+        basicAnimation.duration = 2
+
+        basicAnimation.fillMode = CAMediaTimingFillMode.forwards
+        basicAnimation.isRemovedOnCompletion = false
+
+        shapeLayer.add(basicAnimation, forKey: "urSoBasic")
+    }
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setupVisualEffects()
-        setupReusebleConstraints()
-        setupViews()
-        
     }
 
-    fileprivate func setupReusebleConstraints() {
-        heightOfTimerView = view.frame.height / 3
-        widthOfTimerView = view.frame.width / 4
-        cornerRadius = widthOfTimerView / 3
-    }
+
+
 
     // TODO: redraw layauts when oriontation has changed ???
 
-    fileprivate func setupVisualEffects() {
-
-        view.addSubview(screenImage)
-        screenImage.fillSuperview()
-
-        let blurEffect = UIBlurEffect(style: .regular)
-        let visualEffectView = UIVisualEffectView(effect: blurEffect)
-        visualEffectView.alpha = 1
-        view.addSubview(visualEffectView)
-        visualEffectView.fillSuperview()
-    }
-
-    fileprivate func setupViews() {
-
-        view.addSubview(timerView)
-        timerView.centerInSuperview(size: CGSize(width: widthOfTimerView, height: heightOfTimerView))
-
-        view.addSubview(timerLabel)
-        timerLabel.anchor(top: nil, leading: view.leadingAnchor, bottom: timerView.topAnchor, trailing: view.trailingAnchor, padding: .init(top: 0, left: 16, bottom: 24, right: 16))
-
-        view.addSubview(startButton)
-        startButton.anchor(top: nil, leading: nil, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: nil, padding: .init(top: 0, left: 0, bottom: 48, right: 0), size: CGSize(width: heightOfTimerView, height: widthOfTimerView / 1.2))
-        startButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-    }
-
-   
-    @objc func handleStartButton(_ sender: UIButton) {
-
-        // lets mess here // trying figure out aboud single rounds and breaks
-        guard let items = items else { return }
-        for item in items {
-            for _ in 0...item.rounds {
-                startValue = 60
-                startSeconds = 60
-
-                if !isRunning || secondsTimer == 0{
-                    isRunning = true
-                    startValue = 100 / startSeconds
-                    timer = Timer.scheduledTimer(timeInterval: 1, target: self,   selector: (#selector(updateTimer)), userInfo: nil, repeats: true)
 
 
-
-                } else if secondsTimer > 0 {
-                    timer.invalidate()
-                    isRunning = false
-
-                }
-            }
-        }
+//////
 
 
-
-    }
-    @objc func updateTimer() {
-
-        if secondsTimer >= 0 {
-            timerLabel.text = timeString(time: TimeInterval(secondsTimer)) //This will update the label.
-            secondsTimer -= 1
-            let newValue: Double = startValue * secondsTimer / 100
-            shapeLayer.strokeEnd = level
-            level = CGFloat(newValue)
-        } else {
-            timer.invalidate()
-            startButton.setTitle("Start", for: .normal)
-            isRunning = false
-
-
-            AudioServicesPlayAlertSound(1304)
-
-
-
-        }
-    }
-    func timeString(time:TimeInterval) -> String {
-        let hours = Int(time) / 3600
-        let minutes = Int(time) / 60 % 60
-        let seconds = Int(time) % 60
-        return String(format: "%02i:%02i:%02i", hours, minutes, seconds)
-    }
 }
 
+/*
+
+ var shapeLayer: CAShapeLayer!
+ var pulsatingLayer: CAShapeLayer!
+
+ let percentageLabel: UILabel = {
+ let label = UILabel()
+ label.text = "Start"
+ label.textAlignment = .center
+ label.font = UIFont.boldSystemFont(ofSize: 32)
+ label.textColor = .white
+ return label
+ }()
+
+
+
+ private func createCircleShapeLayer(strokeColor: UIColor, fillColor: UIColor) -> CAShapeLayer {
+ let layer = CAShapeLayer()
+ let circularPath = UIBezierPath(arcCenter: .zero, radius: 100, startAngle: 0, endAngle: 2 * CGFloat.pi, clockwise: true)
+ layer.path = circularPath.cgPath
+ layer.strokeColor = strokeColor.cgColor
+ layer.lineWidth = 20
+ layer.fillColor = fillColor.cgColor
+ layer.lineCap = CAShapeLayerLineCap.round
+ layer.position = view.center
+ return layer
+ }
+
+ override func viewDidLoad() {
+ super.viewDidLoad()
+
+ setupCircleLayers()
+
+ setupPercentageLabel()
+ }
+
+ private func setupPercentageLabel() {
+ view.addSubview(percentageLabel)
+ percentageLabel.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+ percentageLabel.center = view.center
+ }
+
+ private func setupCircleLayers() {
+ pulsatingLayer = createCircleShapeLayer(strokeColor: .clear, fillColor: UIColor.pulsatingFillColor)
+ view.layer.addSublayer(pulsatingLayer)
+ animatePulsatingLayer()
+
+ let trackLayer = createCircleShapeLayer(strokeColor: .trackStrokeColor, fillColor: .backgroundColor)
+ view.layer.addSublayer(trackLayer)
+
+ shapeLayer = createCircleShapeLayer(strokeColor: .outlineStrokeColor, fillColor: .clear)
+
+ shapeLayer.transform = CATransform3DMakeRotation(-CGFloat.pi / 2, 0, 0, 1)
+ shapeLayer.strokeEnd = 0
+ view.layer.addSublayer(shapeLayer)
+ }
+
+ private func animatePulsatingLayer() {
+ let animation = CABasicAnimation(keyPath: "transform.scale")
+
+ animation.toValue = 1.5
+ animation.duration = 0.8
+ animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeOut)
+ animation.autoreverses = true
+ animation.repeatCount = Float.infinity
+
+ pulsatingLayer.add(animation, forKey: "pulsing")
+ }
+
+ fileprivate func animateCircle() {
+ let basicAnimation = CABasicAnimation(keyPath: "strokeEnd")
+
+ basicAnimation.toValue = 1
+
+ basicAnimation.duration = 2
+
+ basicAnimation.fillMode = CAMediaTimingFillMode.forwards
+ basicAnimation.isRemovedOnCompletion = false
+
+ shapeLayer.add(basicAnimation, forKey: "urSoBasic")
+ }
+
+
+
+ }
+
+
+
+*/
