@@ -9,12 +9,12 @@
 import UIKit
 
 protocol PassingItemFromCellToController: AnyObject {
-    func pasingToController(itemFromFunc: Item)
+    func pasingToController(itemFromFunc: ItemJ)
 }
 
 class AddNewExCollectionViewCell: UICollectionViewCell {
 
-    var item: Item? {
+    var item: ItemJ? {
         didSet {
             imageViewOfExersice.downloaded(from: item?.imageName ?? "")
         }

@@ -15,7 +15,7 @@ class InfoViewController: UIViewController, WKUIDelegate {
     var landscapeHeihtAnchor: NSLayoutConstraint?
     var continerView: UIView?
     var webView: WKWebView!
-    var item: Item?
+    var item: ItemJ?
 
     let nameLabel: UILabel = {
         let label = UILabel()

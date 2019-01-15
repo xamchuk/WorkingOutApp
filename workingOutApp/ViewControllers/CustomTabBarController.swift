@@ -10,7 +10,6 @@ import UIKit
 
 class CustomTabBarController: UITabBarController {
     var testMainController: MainViewController?
-    var firstController: TimerViewController?
     var secondController: WorckingOutTableTableViewController?
 
     override func viewDidLoad() {
@@ -20,8 +19,6 @@ class CustomTabBarController: UITabBarController {
         let testMainController = MainViewController()
         self.testMainController = testMainController
 
-        let firstController = TimerViewController()
-        self.firstController = firstController
         let secondController = WorckingOutTableTableViewController()
         self.secondController = secondController
         secondController.delegate = self
@@ -37,7 +34,6 @@ class CustomTabBarController: UITabBarController {
 
     fileprivate func setingsOfTebleView() {
         tabBar.layer.borderColor = UIColor.purple.cgColor
-       // UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 20)], for: .normal)
         tabBar.layer.masksToBounds = false
     }
 }
@@ -53,10 +49,9 @@ extension CustomTabBarController: PassDataFromTableControllerToTabBar {
         for i in secondsArray {
             seconds += i
         }
+        
+        testMainController?.timer.invalidate()
         testMainController?.items = program
         testMainController?.secondsTimer = Int(seconds)
-//        firstController?.secondsTimer = seconds
-//        firstController?.startSeconds = seconds
-       // firstController?.timerLabel.text = "\(firstController?.timeString(time: seconds) ?? "00:00:00")"
     }
 }

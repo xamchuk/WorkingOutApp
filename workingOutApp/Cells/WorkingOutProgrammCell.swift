@@ -179,18 +179,18 @@ class WorkingOutProgrammCell: UITableViewCell {
             //let value = sender.value
 
             if sender.value == 0 {
-                item?.rounds = Int(sender.value)
+                item?.rounds = Int16(Int(sender.value))
                 item?.amount = 0
                 stepperOfAmount.isEnabled = false
             } else {
                 stepperOfAmount.isEnabled = true
-                item?.amount = Int(stepperOfAmount.value)
-                item?.rounds = Int(sender.value)
+                item?.amount = Int16(Int(stepperOfAmount.value))
+                item?.rounds = Int16(Int(sender.value))
             }
 
         }
         if sender == stepperOfAmount {
-            item?.amount = Int(sender.value)
+            item?.amount = Int16(Int(sender.value))
         }
         if sender == stepperOfWeight {
             item?.weight = sender.value

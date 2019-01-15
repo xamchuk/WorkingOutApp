@@ -9,12 +9,12 @@
 import UIKit
 
 protocol SelectedItemFromCollectionView: class {
-    func appendingItem(item: Item)
+    func appendingItem(item: ItemJ)
 }
 
 class AddNewExCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
-    var items: [Item]?
+    var items: [ItemJ]?
 
     private let reuseIdentifier = "Cell"
 
@@ -75,7 +75,7 @@ extension AddNewExCollectionViewController {
 }
 
 extension AddNewExCollectionViewController: PassingItemFromCellToController {
-    func pasingToController(itemFromFunc: Item) {
+    func pasingToController(itemFromFunc: ItemJ) {
         let infoViewController = InfoViewController()
         infoViewController.item = itemFromFunc
         show(infoViewController, sender: nil)

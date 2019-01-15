@@ -147,13 +147,13 @@ class MainViewController: UIViewController {
 
     var items: [Item]? {
         didSet {
-            seconds = 0
+            //seconds = 0
             guard let items = items else { return }
             array = []
             rounds = 0
             items.forEach { (i) in
                 for _ in 0..<i.rounds {
-                    array.append(i.amount * 3 + 10)
+                    array.append(Int16(i.amount * 3 + 10))
                     rounds += i.rounds
                 }
             }
@@ -166,15 +166,15 @@ class MainViewController: UIViewController {
 
     var startValueOfAllTraining = 0.00
 
-    var array = [Int]()
-    var rounds = 0
-    var index = 0 {
+    var array = [Int16]()
+    var rounds = Int16(0)
+    var index = Int16(0) {
         didSet {
             let newValue = CGFloat(((Double(index - 1) * 100) / Double(array.count)) / 100)
             shapeLayerOfStatusView.strokeEnd = newValue / 2
             guard let items = items else { return }
             if items.count > 1 {
-                nameOfExcercise.text = "\(items[(index / rounds)].name)"
+                nameOfExcercise.text = "\(items[Int(index - 1 / rounds)].name)"
             } else {
                 nameOfExcercise.text = "\(items[0].name)"
             }
@@ -216,7 +216,7 @@ class MainViewController: UIViewController {
          if secondsTimer >= 0 {
             if seconds == 0 && !isBreak && index <= array.count - 1 {
                 breakLabel.text = "WORK"
-                seconds = array[index]
+                seconds = Int(array[Int(index)])
                 index += 1
                 isBreak = true
                 startValue = 100 / Double(seconds)

@@ -8,9 +8,9 @@
 
 import Foundation
 struct Items: Decodable {
-    var items: [Item]
+    var items: [ItemJ]
 }
-struct Item: Equatable, Decodable {
+struct ItemJ: Equatable, Decodable {
 
     var name: String
     var imageName: String
