@@ -16,7 +16,14 @@ class WorkingOutProgrammCell: UITableViewCell {
     var item: Item? {
         didSet {
             titleLabel.text = item?.name
-            imageViewOfExersice.downloaded(from: item?.imageName ?? "")
+            if let imageData = item?.imageData {
+                imageViewOfExersice.image = UIImage(data: imageData as Data)
+            } else if let imageURL = item?.imageURL {
+                imageViewOfExersice.downloaded(from: imageURL)
+            } else  if let image = item?.imageName{
+                imageViewOfExersice.image = UIImage(named: image)
+            }
+
         }
     }
     var seconds = 0.0 {

@@ -27,6 +27,7 @@
 		B0479A8421EDE4C200AC09A7 /* Item.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B0479A8221EDE4C100AC09A7 /* Item.xcdatamodeld */; };
 		B0479A8721EDE6F000AC09A7 /* Item+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0479A8521EDE6F000AC09A7 /* Item+CoreDataClass.swift */; };
 		B0479A8821EDE6F000AC09A7 /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0479A8621EDE6F000AC09A7 /* Item+CoreDataProperties.swift */; };
+		B0479A8A21EE1EF300AC09A7 /* CreateNewExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0479A8921EE1EF300AC09A7 /* CreateNewExerciseViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		B0479A8321EDE4C200AC09A7 /* Item.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Item.xcdatamodel; sourceTree = "<group>"; };
 		B0479A8521EDE6F000AC09A7 /* Item+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataClass.swift"; sourceTree = "<group>"; };
 		B0479A8621EDE6F000AC09A7 /* Item+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		B0479A8921EE1EF300AC09A7 /* CreateNewExerciseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewExerciseViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,7 @@
 				B0479A5621DE528600AC09A7 /* CustomTabBarController.swift */,
 				B0479A8021E9EDD600AC09A7 /* MainViewController.swift */,
 				B0479A5A21DE539B00AC09A7 /* WorckingOutTableTableViewController.swift */,
+				B0479A8921EE1EF300AC09A7 /* CreateNewExerciseViewController.swift */,
 				B0479A7121E3485C00AC09A7 /* AddNewExCollectionViewController.swift */,
 				B0479A7521E36C5700AC09A7 /* InfoViewController.swift */,
 			);
@@ -219,6 +222,7 @@
 				B0479A5D21DE553600AC09A7 /* WorkingOutProgrammCell.swift in Sources */,
 				B0479A6C21E2136700AC09A7 /* Protocols.swift in Sources */,
 				B0479A7821E6103700AC09A7 /* CommentedCode.swift in Sources */,
+				B0479A8A21EE1EF300AC09A7 /* CreateNewExerciseViewController.swift in Sources */,
 				B0479A8721EDE6F000AC09A7 /* Item+CoreDataClass.swift in Sources */,
 				B0479A7C21E61DBC00AC09A7 /* LocalJson.swift in Sources */,
 				B0479A8421EDE4C200AC09A7 /* Item.xcdatamodeld in Sources */,

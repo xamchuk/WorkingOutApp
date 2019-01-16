@@ -147,7 +147,11 @@ class MainViewController: UIViewController {
 
     var items: [Item]? {
         didSet {
-            //seconds = 0
+            seconds = 0
+            if index != 0 {
+                index = 0
+            }
+            isBreak = false
             guard let items = items else { return }
             array = []
             rounds = 0
