@@ -7,11 +7,12 @@
 //
 
 import Foundation
-struct Items: Decodable {
-    var items: [ItemJ]
-}
-struct ItemJ: Equatable, Decodable {
 
+struct Items: Decodable {
+    var items: [ItemJson]
+}
+
+struct ItemJson: Equatable, Decodable {
     var name: String
     var imageName: String
     var rounds: Int
@@ -20,12 +21,4 @@ struct ItemJ: Equatable, Decodable {
     var videoString: String?
     var description: String?
     var group: String?
-
-//    init(name: String, imageName: String, rounds: Int, amount: Int, weight: Double, videoString: String) {
-//        self.name = name
-//        self.imageName = imageName
-//        self.rounds = rounds
-//        self.amount = amount
-//        self.weight = weight
-//        self.videoString = videoString
 }

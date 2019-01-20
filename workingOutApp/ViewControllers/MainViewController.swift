@@ -35,6 +35,11 @@ class MainViewController: UIViewController {
         label.font = UIFont.boldSystemFont(ofSize: size)
         label.textAlignment = .center
         label.text = text
+        label.textColor = .textColor
+        label.layer.shadowColor = UIColor.gradientLighter.cgColor
+        label.layer.shadowRadius = 3.0
+        label.layer.shadowOpacity = 1.0
+        label.layer.shadowOffset = CGSize(width: 4, height: 4)
     }
 
     lazy var startButton: UIButton = {
@@ -42,10 +47,11 @@ class MainViewController: UIViewController {
         button.setTitle("Start", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 32)
-        button.layer.borderColor = UIColor.trackStrokeColor.cgColor
+        button.layer.borderColor = UIColor.linesColor.cgColor
         button.layer.borderWidth = 5
         button.layer.cornerRadius = 50
         button.addTarget(self, action: #selector(handleStartButton), for: .touchUpInside)
+        
         return button
     }()
 
@@ -70,6 +76,12 @@ class MainViewController: UIViewController {
         visualEffectView.alpha = 0.9
         view.addSubview(visualEffectView)
         visualEffectView.fillSuperview()
+
+        let viewGradient = UIView()
+        viewGradient.alpha = 0.6
+        view.addSubview(viewGradient)
+        viewGradient.frame = view.frame
+        viewGradient.makeGradients()
     }
 
     func setupAllViews() {
@@ -102,7 +114,6 @@ class MainViewController: UIViewController {
         let constraint = cyrcleStatusView.bottomAnchor.constraint(equalTo: startButton.topAnchor)
         constraint.priority = UILayoutPriority(rawValue: 998)
         constraint.isActive = true
-        //cyrcleStatusView.heightAnchor.constraint(equalTo: cyrcleStatusView.widthAnchor, constant: 0).isActive = true
 
         cyrcleStatusView.addSubview(breakLabel)
         breakLabel.anchor(top: cyrcleStatusView.topAnchor, leading: nil, bottom: nil, trailing: nil, padding: .init(top: 28, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: 0))
@@ -130,11 +141,10 @@ class MainViewController: UIViewController {
     func setupLayerOfCyrcleView() {
         createCircleShapeLayer(viewOfSetup: cyrcleStatusView, shapeLayer: trackLayer, strokeColor: .trackStrokeColor, fillColor: .clear)
         createCircleShapeLayer(viewOfSetup: cyrcleStatusView, shapeLayer: cyrcleShapeLayer, strokeColor: .outlineStrokeColor, fillColor: .clear)
-        //cyrcleShapeLayer.strokeEnd = 0.5
     }
     
     private func createCircleShapeLayer(viewOfSetup: UIView , shapeLayer: CAShapeLayer, strokeColor: UIColor, fillColor: UIColor) {
-        shapeLayer.strokeColor = strokeColor.cgColor
+        shapeLayer.strokeColor = UIColor.darckOrange.cgColor////////
         shapeLayer.lineWidth = 20
         shapeLayer.fillColor = fillColor.cgColor
         shapeLayer.lineCap = CAShapeLayerLineCap.round
@@ -156,10 +166,11 @@ class MainViewController: UIViewController {
             array = []
             rounds = 0
             items.forEach { (i) in
-                for _ in 0..<i.rounds {
-                    array.append(Int16(i.amount * 3 + 10))
-                    rounds += i.rounds
-                }
+                
+//                for _ in 0..<i.sets.count {
+//                    array.append(Int16(i.amount * 3 + 10))
+//                    rounds += i.rounds
+//                }
             }
             statusView.isHidden = false
             nameOfExcercise.isHidden = false
@@ -232,6 +243,7 @@ class MainViewController: UIViewController {
                 startValue = 100 / Double(seconds)
                 AudioServicesPlayAlertSound(1304)
             }
+            
             seconds -= 1
             singleTimerLabel.text = "\(seconds)"
             allTimerLabel.text = timeString(time: TimeInterval(secondsTimer))

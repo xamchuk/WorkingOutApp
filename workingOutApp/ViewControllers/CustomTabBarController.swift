@@ -10,46 +10,41 @@ import UIKit
 
 class CustomTabBarController: UITabBarController {
     var testMainController: MainViewController?
-    var secondController: WorckingOutTableTableViewController?
+    var secondController: ExerciseTableViewController?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setingsOfTebleView()
-
         let testMainController = MainViewController()
         self.testMainController = testMainController
-
-        let secondController = WorckingOutTableTableViewController()
+        let secondController = ExerciseTableViewController()
         self.secondController = secondController
         secondController.delegate = self
         let nc = UINavigationController(rootViewController: secondController)
         testMainController.tabBarItem.title = "Timer"
         testMainController.tabBarItem.image = UIImage(named: "timer")
-        nc.tabBarItem.title = "Program"
+        nc.tabBarItem.title = "Exercise"
         nc.tabBarItem.image = UIImage(named: "fitness")
-
-
-        viewControllers = [testMainController, nc]
+        viewControllers = [nc, testMainController]
     }
 
     fileprivate func setingsOfTebleView() {
-        tabBar.layer.borderColor = UIColor.purple.cgColor
-        tabBar.layer.masksToBounds = false
+        tabBar.barTintColor = .gradientLighter
+        tabBar.tintColor = .textColor
     }
 }
 
 extension CustomTabBarController: PassDataFromTableControllerToTabBar {
     func passingProgram(program: [Item]) {
-        var secondsArray: [Double]  = []
+        var seconds: Int16 = 0
         for i in program {
-            let sec = (Double(i.rounds) * 60) + ((Double(i.amount) * 3 + 10) * Double(i.rounds))
-            secondsArray.append(sec)
+            guard let i = i.sets else { return }
+                for rep in i {
+                    let sec = (rep as! Sets).repeats * 3
+                    seconds += sec + 60
+                }
+
         }
-        var seconds = 0.00
-        for i in secondsArray {
-            seconds += i
-        }
-        
         testMainController?.timer.invalidate()
         testMainController?.items = program
         testMainController?.secondsTimer = Int(seconds)

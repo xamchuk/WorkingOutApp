@@ -18,9 +18,28 @@ extension UIColor {
     static let outlineStrokeColor = UIColor.rgb(r: 234, g: 46, b: 111)
     static let trackStrokeColor = UIColor.rgb(r: 56, g: 25, b: 49)
     static let pulsatingFillColor = UIColor.rgb(r: 86, g: 30, b: 63)
+
+
+    static let gradientDarker = UIColor.rgb(r: 86, g: 113, b: 123)
+    static let gradientLighter = UIColor.rgb(r: 53, g: 92, b: 97)
+
+    static let darckOrange = UIColor.rgb(r: 187, g: 147, b: 104)
+
+
+    static let linesColor = UIColor.rgb(r: 165, g: 162, b: 153)
+    static let textColor = UIColor.rgb(r: 196, g: 188, b: 188)
+
 }
 
 extension UIView {
+
+    func makeGradients() {
+        let gradient = CAGradientLayer()
+        gradient.colors = [UIColor.gradientDarker.cgColor, UIColor.gradientLighter.cgColor]
+        gradient.locations = [0, 1, 1 ,0]
+        gradient.frame = self.bounds
+        self.layer.addSublayer(gradient)
+    }
 
     enum Directons {
         case horizontal
@@ -31,7 +50,7 @@ extension UIView {
 
         self.layer.cornerRadius = cornerRadius
         self.layer.masksToBounds = true
-        self.layer.borderColor = UIColor.black.cgColor
+        self.layer.borderColor = UIColor.linesColor.cgColor
         self.layer.borderWidth = 1
         let path = UIBezierPath()
         let strokePath = UIBezierPath()
@@ -69,7 +88,7 @@ extension UIView {
 
         shapelayerOfView.path = path.cgPath
         shapelayerOfView.lineWidth = self.frame.width
-        shapelayerOfView.strokeColor = UIColor.trackStrokeColor.cgColor
+        shapelayerOfView.strokeColor = UIColor.darckOrange.cgColor
         self.layer.addSublayer(shapelayerOfView)
 
         let fillStrokes = CAShapeLayer()
@@ -139,9 +158,9 @@ extension UIView {
 }
 
 extension UIImageView {
-    func downloaded(from url: URL) {  // for swift 4.2 syntax just use ===> mode: UIView.ContentMode
-
-        URLSession.shared.dataTask(with: url) { data, response, error in
+    func downloaded(from link: String, item: Item?) {
+        guard let url = URL(string: link) else { return }
+        URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
             guard
                 let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
                 let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
@@ -149,12 +168,9 @@ extension UIImageView {
                 let image = UIImage(data: data)
                 else { return }
             DispatchQueue.main.async() {
-                self.image = image
+                self?.image = image
+                item?.imageData = data as NSData
             }
             }.resume()
-    }
-    func downloaded(from link: String, contentMode mode: UIView.ContentMode = .scaleAspectFit) {  // for swift 4.2 syntax just use ===> mode: UIView.ContentMode
-        guard let url = URL(string: link) else { return }
-        downloaded(from: url)
     }
 }

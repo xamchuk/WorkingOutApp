@@ -9,8 +9,19 @@
 //import Foundation
 
 
+// MARK: Custom Exercise Controller
+
+//func createButton(button: UIButton, title: String, action: Selector) {
+//    button.backgroundColor = .gray
+//    button.layer.cornerRadius = 20
+//    button.layer.borderWidth = 2
+//    button.layer.borderColor = UIColor.black.cgColor
+//    button.setTitle(title, for: .normal)
+//    button.addTarget(self, action: action, for: .touchUpInside)
+//}
 
 // MARK: Logic for edit button
+
 
 //func itemsChanges() {
 //

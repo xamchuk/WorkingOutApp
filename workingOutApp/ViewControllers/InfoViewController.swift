@@ -15,7 +15,7 @@ class InfoViewController: UIViewController, WKUIDelegate {
     var landscapeHeihtAnchor: NSLayoutConstraint?
     var continerView: UIView?
     var webView: WKWebView!
-    var item: ItemJ?
+    var item: ItemJson?
 
     let nameLabel: UILabel = {
         let label = UILabel()
@@ -49,7 +49,7 @@ class InfoViewController: UIViewController, WKUIDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         let imageView = UIImageView()
-        imageView.downloaded(from: item?.imageName ?? "")
+        imageView.downloaded(from: item?.imageName ?? "", item: nil)
         imageView.contentMode = .scaleAspectFill
         view.addSubview(imageView)
         imageView.fillSuperview()

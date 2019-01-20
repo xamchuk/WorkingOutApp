@@ -9,14 +9,14 @@
 import UIKit
 
 protocol PassingItemFromCellToController: AnyObject {
-    func pasingToController(itemFromFunc: ItemJ)
+    func pasingToController(itemFromFunc: ItemJson)
 }
 
 class AddNewExCollectionViewCell: UICollectionViewCell {
 
-    var item: ItemJ? {
+    var item: ItemJson? {
         didSet {
-            imageViewOfExersice.downloaded(from: item?.imageName ?? "")
+            imageViewOfExersice.downloaded(from: item?.imageName ?? "", item: nil)
         }
     }
     weak var delegate: PassingItemFromCellToController?
