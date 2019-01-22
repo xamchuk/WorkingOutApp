@@ -8,27 +8,37 @@
 
 import UIKit
 
+protocol CustomExerciseDelegate: AnyObject {
+    func customItem(item: ItemJson)
+
+}
 class CustomExerciseViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     let nameTextField = UITextField()
     let imagePicker = UIImagePickerController()
     let imageView = UIImageView()
-
-
+    let saveButton = UIButton(type: .system)
+    var item: ItemJson?
+    weak var delegate: CustomExerciseDelegate?
 
     
 
 
 
-//    @objc func handleSave() {
-//        let exer = Item(entity: Item.entity(), insertInto: context)
-//        exer.name = nameTextField?.text ?? "NIIIIIILLLLL"
-//        exer.imageName = "test"
-//        exer.imageData = imageView.image!.pngData() as NSData?
-//        exercises.append(exer)
-//        appDelegate.saveContext()
-//
-//    }
+    @objc func handleSave() {
+        var name = ""
+        if (nameTextField.text?.isEmpty)! {
+            name = "NIIIIIILLLLL"
+        } else {
+            name = nameTextField.text!
+        }
+        item = ItemJson(name: "La")
+        item?.name = name
+        item?.imageLocalName = "test"
+        item?.group = "LA LA LEND"
+        delegate?.customItem(item: item!)
+        dismiss(animated: true)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +51,8 @@ class CustomExerciseViewController: UIViewController, UITextFieldDelegate, UIIma
         setupImageView()
         view.addSubview(nameTextField)
         setupNameTextField()
+        view.addSubview(saveButton)
+        setupSaveButton()
     }
     
     @objc func loadImageButtonTapped(sender: UIButton) {
@@ -91,5 +103,17 @@ extension CustomExerciseViewController {
         nameTextField.backgroundColor = .gray
         nameTextField.layer.cornerRadius = 20
         nameTextField.anchor(top: imageView.bottomAnchor, leading: imageView.leadingAnchor, bottom: nil, trailing: imageView.trailingAnchor, padding: .init(top: 8, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: 50))
+    }
+
+    fileprivate func setupSaveButton() {
+        saveButton.setTitle("Save", for: .normal)
+        saveButton.setTitleColor(.white, for: .normal)
+        saveButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 32)
+        saveButton.layer.borderColor = UIColor.linesColor.cgColor
+        saveButton.layer.borderWidth = 5
+        saveButton.layer.cornerRadius = 50
+        saveButton.addTarget(self, action: #selector(handleSave), for: .touchUpInside)
+        saveButton.anchor(top: nil, leading: nil, bottom: view.safeAreaLayoutGuide.bottomAnchor , trailing: nil, padding: .init(top: 0, left: 0, bottom: 8, right: 0), size: CGSize(width: 100, height: 100))
+        saveButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     }
 }

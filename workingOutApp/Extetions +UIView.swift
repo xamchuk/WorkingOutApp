@@ -88,7 +88,7 @@ extension UIView {
 
         shapelayerOfView.path = path.cgPath
         shapelayerOfView.lineWidth = self.frame.width
-        shapelayerOfView.strokeColor = UIColor.darckOrange.cgColor
+        shapelayerOfView.strokeColor = UIColor.textColor.cgColor
         self.layer.addSublayer(shapelayerOfView)
 
         let fillStrokes = CAShapeLayer()
@@ -158,7 +158,7 @@ extension UIView {
 }
 
 extension UIImageView {
-    func downloaded(from link: String, item: Item?) {
+    func downloaded(from link: String, completion: ((Data) -> Void)? = nil) {
         guard let url = URL(string: link) else { return }
         URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
             guard
@@ -169,8 +169,9 @@ extension UIImageView {
                 else { return }
             DispatchQueue.main.async() {
                 self?.image = image
-                item?.imageData = data as NSData
+                completion?(data)
             }
+
             }.resume()
     }
 }

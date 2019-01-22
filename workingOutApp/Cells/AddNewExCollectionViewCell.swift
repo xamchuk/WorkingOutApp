@@ -16,7 +16,7 @@ class AddNewExCollectionViewCell: UICollectionViewCell {
 
     var item: ItemJson? {
         didSet {
-            imageViewOfExersice.downloaded(from: item?.imageName ?? "", item: nil)
+            imageViewOfExersice.downloaded(from: item?.imageName ?? "", completion: nil)
         }
     }
     weak var delegate: PassingItemFromCellToController?

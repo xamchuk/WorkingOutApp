@@ -49,7 +49,7 @@ class InfoViewController: UIViewController, WKUIDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         let imageView = UIImageView()
-        imageView.downloaded(from: item?.imageName ?? "", item: nil)
+        imageView.downloaded(from: item?.imageName ?? "")
         imageView.contentMode = .scaleAspectFill
         view.addSubview(imageView)
         imageView.fillSuperview()

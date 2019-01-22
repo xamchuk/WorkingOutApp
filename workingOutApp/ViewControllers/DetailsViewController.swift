@@ -18,7 +18,8 @@ class DetailsViewController: UIViewController {
     var tableView = UITableView()
     var footerView = UIView()
     var exercise: Item!
-//    var sets: [Sets] = []
+    var selectedIndexPath: IndexPath?
+    var isSelected = false
 
     private var fetchedRC: NSFetchedResultsController<Sets>!
     private var query = ""
@@ -97,6 +98,7 @@ extension DetailsViewController: UITableViewDataSource {
         cell.selectionStyle = .none
         cell.numberLabel.text = "\(indexPath.row + 1)"
         cell.set = fetchedRC.object(at: indexPath)
+       
         return cell
     }
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -108,6 +110,29 @@ extension DetailsViewController: UITableViewDataSource {
             tableView.reloadData()
         }
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! DetailTableViewCell
+        let oldIndexPath = selectedIndexPath
+        if indexPath == selectedIndexPath {
+            selectedIndexPath = nil
+        } else {
+            selectedIndexPath = indexPath
+        }
+
+        var indexPaths: [IndexPath] = []
+        if let old = oldIndexPath {
+            indexPaths += [old]
+            cell.pickerView.isHidden = true
+            (tableView.cellForRow(at: old) as! DetailTableViewCell).pickerView.isHidden = true
+        }
+        if let current = selectedIndexPath {
+            indexPaths += [current]
+            cell.pickerView.isHidden = false
+        }
+        if indexPaths.count > 0 {
+            tableView.reloadRows(at: [indexPath], with: .automatic)
+        }
+    }
 }
 extension DetailsViewController: UITableViewDelegate {
 
@@ -116,13 +141,16 @@ extension DetailsViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath == selectedIndexPath {
+            return 180
+        }
         return 100
     }
 }
 extension DetailsViewController {
 
     fileprivate func setupTableView() {
-        footerView = UIView.init(frame: CGRect(x: 0, y: 0, width: 0, height: 50))
+        footerView = UIView.init(frame: CGRect(x: 0, y: 0, width: 0, height: 55))
         tableView.fillSuperview()
         tableView.backgroundColor = .clear
         tableView.register(DetailTableViewCell.self, forCellReuseIdentifier: cellId)
@@ -130,30 +158,43 @@ extension DetailsViewController {
         tableView.tableFooterView = footerView
         tableView.dataSource = self
         tableView.delegate = self
-        footerView.addSubview(strokeView)
-        setupFooterVerticalStroke()
+
+
         footerView.addSubview(horizontalStroceView)
         setupFooterHorizontalView()
+
+        footerView.addSubview(strokeView)
+        setupFooterVerticalStroke()
+
         footerView.addSubview(footerAddButton)
         setUpButtonOfFooter()
-    }
-
-    fileprivate func setupFooterVerticalStroke() {
-        strokeView.layer.borderColor = UIColor.linesColor.cgColor
-        strokeView.layer.borderWidth = 1
-        strokeView.centerInSuperview(size: CGSize(width: 2, height: 50))
     }
 
     fileprivate func setupFooterHorizontalView() {
         horizontalStroceView.layer.borderColor = UIColor.linesColor.cgColor
         horizontalStroceView.layer.borderWidth = 1
         horizontalStroceView.translatesAutoresizingMaskIntoConstraints = false
+        horizontalStroceView.layer.cornerRadius = 1
+        horizontalStroceView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMinYCorner]
         NSLayoutConstraint.activate([
-            horizontalStroceView.topAnchor.constraint(equalTo: strokeView.topAnchor),
+            horizontalStroceView.topAnchor.constraint(equalTo: footerView.topAnchor, constant: 0),
             horizontalStroceView.leadingAnchor.constraint(equalTo: footerView.leadingAnchor, constant: 30),
-            horizontalStroceView.trailingAnchor.constraint(equalTo: strokeView.trailingAnchor),
+            horizontalStroceView.trailingAnchor.constraint(equalTo: footerView.centerXAnchor, constant: 0),
             horizontalStroceView.heightAnchor.constraint(equalToConstant: 2)])
     }
+
+    fileprivate func setupFooterVerticalStroke() {
+        strokeView.layer.borderColor = UIColor.linesColor.cgColor
+        strokeView.layer.borderWidth = 1
+        strokeView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            strokeView.topAnchor.constraint(equalTo: horizontalStroceView.bottomAnchor),
+            strokeView.trailingAnchor.constraint(equalTo: horizontalStroceView.trailingAnchor),
+            strokeView.widthAnchor.constraint(equalToConstant: 2),
+            strokeView.heightAnchor.constraint(equalToConstant: 15)])
+    }
+
+
     fileprivate func setUpButtonOfFooter() {
         footerAddButton.layer.cornerRadius = 20
         footerAddButton.layer.borderColor = UIColor.linesColor.cgColor
@@ -164,9 +205,9 @@ extension DetailsViewController {
         footerAddButton.addTarget(self, action: #selector(hendleFooterAddButton), for: .touchUpInside)
 
         footerAddButton.translatesAutoresizingMaskIntoConstraints = false
+        footerAddButton.topAnchor.constraint(equalTo: strokeView.bottomAnchor).isActive = true
         footerAddButton.bottomAnchor.constraint(equalTo: footerView.bottomAnchor).isActive = true
-        footerAddButton.centerXAnchor.constraint(equalTo: footerView.centerXAnchor).isActive = true
-        footerAddButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        footerAddButton.centerXAnchor.constraint(equalTo: strokeView.centerXAnchor).isActive = true
         footerAddButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
     }
 }

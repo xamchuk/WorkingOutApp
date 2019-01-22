@@ -46,7 +46,7 @@ extension CustomTabBarController: PassDataFromTableControllerToTabBar {
 
         }
         testMainController?.timer.invalidate()
-        testMainController?.items = program
+        
         testMainController?.secondsTimer = Int(seconds)
     }
 }

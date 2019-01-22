@@ -66,7 +66,6 @@ class ExerciseTableViewController: UIViewController {
         }
     }
     func refreshTableLable() {
-        //delegate?.passingProgram(program: fetchedRC)
         guard let obj = fetchedRC.fetchedObjects else { return }
         if obj.count > 0 {
             tableLabel.isHidden = true
@@ -80,6 +79,7 @@ class ExerciseTableViewController: UIViewController {
     @objc func handeleAddButton() {
         let addNewExCollectionViewController = AddNewExCollectionViewController()
         addNewExCollectionViewController.delegate = self
+        
         let navController = UINavigationController(rootViewController: addNewExCollectionViewController)
         present(navController, animated: true, completion: nil)
     }
@@ -96,6 +96,7 @@ extension ExerciseTableViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! ExerciseCell
         cell.delegate = self
         cell.item = fetchedRC.object(at: indexPath)
+        
         return cell
     }
 
@@ -104,8 +105,6 @@ extension ExerciseTableViewController: UITableViewDataSource {
             let exercise = fetchedRC.object(at: indexPath)
             context.delete(exercise)
             appDelegate.saveContext()
-            //refreshCoreData()
-            //tableView.reloadData()
         }
     }
 }
@@ -194,12 +193,11 @@ extension ExerciseTableViewController: SelectedItemFromCollectionView {
             let exer = Item(entity: Item.entity(), insertInto: context)
             exer.name = item.name
             exer.imageURL = item.imageName
+            exer.imageName = item.imageLocalName
             exer.descriptions = item.description
             exer.videoString = item.videoString
             exer.group = item.group
             appDelegate.saveContext()
-            //refreshCoreData()
-            //tableView.reloadData()
         }
     }
 }

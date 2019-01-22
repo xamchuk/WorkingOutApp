@@ -12,27 +12,40 @@ class DetailTableViewCell: UITableViewCell {
 
     private let appDelegate = UIApplication.shared.delegate as! AppDelegate
     private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-
+    
+    //var index = 0
+    //var sets = [Sets]()
     var set: Sets? {
         didSet {
             guard let set = set else { return }
-            repeatsTextField.text = "\(set.repeats)"
-            weightTextField.text = "\(set.weight)"
+            repeatsNumberLabel.text = "\(set.repeats)"
+            weightTextLabel.text = "\(set.weight)"
         }
     }
 
-    var verticalStrokeView = UIView()
-    var numberLabel = UILabel()
-    var repeatsTextField = UITextField()
-    var repeatsLabel = UILabel()
-    var weightTextField = UITextField()
-    var weightLabel = UILabel()
-    var restImageView = UIImageView()
-    var restLabel = UILabel()
+    let verticalStrokeView = UIView()
+    let numberLabel = UILabel()
+    var repeatsNumberLabel = UILabel() 
+    let repeatsLabel = UILabel()
+    let weightTextLabel = UILabel()
+    let weightLabel = UILabel()
+    let restImageView = UIImageView()
+    let restLabel = UILabel()
+    let pickerView = UIPickerView()
+
+
+    var repsIntegers: [String] = []
+    var weightDoubles: [String] = []
+    var pickerData: [[String]] = [[]]
+    var heightOfComponent: CGFloat = 30
+    var widthOfComponentsTitles: CGFloat = 80
+    var widhtOfComponentsNumbers: CGFloat = 40
+
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUI()
+        pickerView.delegate = self
     }
 
     fileprivate func setupUI() {
@@ -40,11 +53,11 @@ class DetailTableViewCell: UITableViewCell {
         setupVerticalStroke()
         addSubview(numberLabel)
         setupNumberOfSetLabel()
-        addSubview(repeatsTextField)
+        addSubview(repeatsNumberLabel)
         setupRepeatsTextField()
         addSubview(repeatsLabel)
         setupRepeatsLabel()
-        addSubview(weightTextField)
+        addSubview(weightTextLabel)
         setupWeightTextField()
         addSubview(weightLabel)
         setupWeightLabel()
@@ -52,6 +65,24 @@ class DetailTableViewCell: UITableViewCell {
         setupRestImageView()
         addSubview(restLabel)
         setupRestLabel()
+        addSubview(pickerView)
+        setupPickerView()
+
+        makeVarsForPicker()
+    }
+    func makeVarsForPicker() {
+        var reps: Int = 0
+        for _ in 0..<50 {
+            reps += 1
+            repsIntegers.append("\(reps)")
+        }
+
+        var weight: Double = 0
+        for _ in 0..<50 {
+            weight += 2.5
+            weightDoubles.append("\(weight)")
+        }
+        pickerData = [[" Reps"], repsIntegers, ["Weight"], weightDoubles]
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -60,6 +91,64 @@ class DetailTableViewCell: UITableViewCell {
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension DetailTableViewCell: UIPickerViewDelegate, UIPickerViewDataSource {
+
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return pickerData.count
+    }
+
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickerData[component].count
+    }
+
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return pickerData[component][row]
+
+    }
+
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if component == 1 {
+            repeatsNumberLabel.text = pickerData[component][row]
+        } else {
+            weightTextLabel.text = pickerData[component][row]
+        }
+        set?.repeats = Int16(repeatsNumberLabel.text!)!
+        set?.weight = Double(weightTextLabel.text!)!
+        appDelegate.saveContext()
+    }
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        if component == 1 || component == 3 {
+            let numbersView = UIView(frame: CGRect(x: 0, y: 0, width: widhtOfComponentsNumbers, height: heightOfComponent))
+            let label = UILabel(frame: numbersView.frame)
+            label.textAlignment = .center
+            label.font = UIFont.boldSystemFont(ofSize: heightOfComponent - 2)
+            label.adjustsFontSizeToFitWidth = true
+            label.textColor = .darckOrange
+            label.text = pickerData[component][row]
+            numbersView.addSubview(label)
+            return numbersView
+        } else {
+            let titlesView = UIView(frame: CGRect(x: 0, y: 0, width: widthOfComponentsTitles, height: heightOfComponent))
+            let label = UILabel(frame: titlesView.frame)
+            label.textAlignment = .center
+            label.font = UIFont.boldSystemFont(ofSize: heightOfComponent - 2)
+            label.adjustsFontSizeToFitWidth = true
+            label.textColor = .textColor
+            label.text = pickerData[component][row]
+            titlesView.addSubview(label)
+            return titlesView
+        }
+    }
+
+    func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
+        if component == 1 || component == 3 {
+            return widthOfComponentsTitles + 2
+        } else {
+            return widhtOfComponentsNumbers + 2
+        }
     }
 }
 
@@ -96,12 +185,12 @@ extension DetailTableViewCell {
     }
 
     fileprivate func setupRepeatsTextField() {
-        repeatsTextField.font = UIFont.boldSystemFont(ofSize: 32)
-        repeatsTextField.textColor = .textColor
-        repeatsTextField.translatesAutoresizingMaskIntoConstraints = false
+        repeatsNumberLabel.font = UIFont.boldSystemFont(ofSize: 32)
+        repeatsNumberLabel.textColor = .textColor
+        repeatsNumberLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            repeatsTextField.centerYAnchor.constraint(equalTo: numberLabel.centerYAnchor),
-            repeatsTextField.leadingAnchor.constraint(equalTo: numberLabel.trailingAnchor, constant: 24)])
+            repeatsNumberLabel.centerYAnchor.constraint(equalTo: numberLabel.centerYAnchor),
+            repeatsNumberLabel.leadingAnchor.constraint(equalTo: numberLabel.trailingAnchor, constant: 24)])
     }
 
     fileprivate func setupRepeatsLabel() {
@@ -110,18 +199,18 @@ extension DetailTableViewCell {
         repeatsLabel.font = UIFont.systemFont(ofSize: 24)
         repeatsLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            repeatsLabel.centerYAnchor.constraint(equalTo: repeatsTextField.centerYAnchor),
-            repeatsLabel.leadingAnchor.constraint(equalTo: repeatsTextField.trailingAnchor, constant: 8)])
+            repeatsLabel.centerYAnchor.constraint(equalTo: repeatsNumberLabel.centerYAnchor),
+            repeatsLabel.leadingAnchor.constraint(equalTo: repeatsNumberLabel.trailingAnchor, constant: 8)])
     }
 
     fileprivate func setupWeightTextField() {
-        weightTextField.text = "100"
-        weightTextField.textColor = .textColor
-        weightTextField.font = UIFont.boldSystemFont(ofSize: 32)
-        weightTextField.translatesAutoresizingMaskIntoConstraints = false
+        weightTextLabel.text = "100"
+        weightTextLabel.textColor = .textColor
+        weightTextLabel.font = UIFont.boldSystemFont(ofSize: 32)
+        weightTextLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            weightTextField.centerYAnchor.constraint(equalTo: repeatsLabel.centerYAnchor),
-            weightTextField.leadingAnchor.constraint(equalTo: repeatsLabel.trailingAnchor, constant: 24)])
+            weightTextLabel.centerYAnchor.constraint(equalTo: repeatsLabel.centerYAnchor),
+            weightTextLabel.leadingAnchor.constraint(equalTo: repeatsLabel.trailingAnchor, constant: 24)])
     }
 
     fileprivate func setupWeightLabel() {
@@ -130,8 +219,8 @@ extension DetailTableViewCell {
         weightLabel.font = UIFont.systemFont(ofSize: 24)
         weightLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            weightLabel.centerYAnchor.constraint(equalTo: weightTextField.centerYAnchor),
-            weightLabel.leadingAnchor.constraint(equalTo: weightTextField.trailingAnchor, constant: 8)])
+            weightLabel.centerYAnchor.constraint(equalTo: weightTextLabel.centerYAnchor),
+            weightLabel.leadingAnchor.constraint(equalTo: weightTextLabel.trailingAnchor, constant: 8)])
     }
 
     fileprivate func setupRestImageView() {
@@ -158,4 +247,15 @@ extension DetailTableViewCell {
             restLabel.centerYAnchor.constraint(equalTo: restImageView.centerYAnchor),
             restLabel.leadingAnchor.constraint(equalTo: restImageView.trailingAnchor, constant: 16)])
     }
+
+    fileprivate func setupPickerView() {
+        pickerView.tintColor = .gradientDarker
+        pickerView.layer.cornerRadius = 20
+        pickerView.contentMode = .center
+        pickerView.anchor(top: restLabel.bottomAnchor, leading: verticalStrokeView.trailingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 24, bottom: 8, right: 24))
+        pickerView.isHidden = true
+    }
 }
+
+
+
