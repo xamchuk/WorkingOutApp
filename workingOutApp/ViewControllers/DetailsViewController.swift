@@ -33,19 +33,23 @@ class DetailsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        tabBarController?.tabBar.isHidden = true
         navigationItem.title = "\(exercise?.name ?? "")"
         view.makeGradients()
         view.addSubview(tableView)
         setupTableView()
-        refreshCoData()
-        defaultCellData()
+        defaultCellData(item: exercise)
     }
-    func refreshCoData() {
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        tabBarController?.tabBar.isHidden = false
+    }
+    func refreshCoData(item: Item) {
         let request = Sets.fetchRequest() as NSFetchRequest<Sets>
         if query.isEmpty {
-            request.predicate = NSPredicate(format: "item = %@", exercise)
+            request.predicate = NSPredicate(format: "item = %@", item)
         } else {
-            request.predicate = NSPredicate(format: "name CONTAINS[cd] %@ AND item = %@", query, exercise)
+            request.predicate = NSPredicate(format: "name CONTAINS[cd] %@ AND item = %@", query, item)
         }
         let sort = NSSortDescriptor(key: #keyPath(Sets.date), ascending: true)
         request.sortDescriptors = [sort]
@@ -56,7 +60,8 @@ class DetailsViewController: UIViewController {
             print("Could not fetch. \(error), \(error.userInfo)")
         }
     }
-    func defaultCellData() {
+    func defaultCellData(item: Item) {
+        refreshCoData(item: item)
         guard let sets = fetchedRC.fetchedObjects else { return }
         if sets.count == 0 {
             for _ in 0...2 {
@@ -64,16 +69,16 @@ class DetailsViewController: UIViewController {
                 set.repeats = 8
                 set.weight = 20
                 set.date = NSDate()
-                set.item = exercise
+                set.item = item
                 appDelegate.saveContext()
-                refreshCoData()
+                refreshCoData(item: item)
                 tableView.reloadData()
             }
         }
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        refreshCoData()
+        refreshCoData(item: exercise)
     }
     @objc func hendleFooterAddButton() {
         let set = Sets(entity: Sets.entity(), insertInto: context)
@@ -82,7 +87,7 @@ class DetailsViewController: UIViewController {
         set.date = NSDate()
         set.item = exercise
         appDelegate.saveContext()
-        refreshCoData()
+        refreshCoData(item: exercise)
         tableView.reloadData()
     }
 }
@@ -106,7 +111,7 @@ extension DetailsViewController: UITableViewDataSource {
             let set = fetchedRC.object(at: indexPath)
             context.delete(set)
             appDelegate.saveContext()
-            refreshCoData()
+            refreshCoData(item: exercise)
             tableView.reloadData()
         }
     }

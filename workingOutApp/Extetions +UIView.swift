@@ -23,7 +23,7 @@ extension UIColor {
     static let gradientDarker = UIColor.rgb(r: 86, g: 113, b: 123)
     static let gradientLighter = UIColor.rgb(r: 53, g: 92, b: 97)
 
-    static let darckOrange = UIColor.rgb(r: 187, g: 147, b: 104)
+    static let darkOrange = UIColor.rgb(r: 187, g: 147, b: 104)
 
 
     static let linesColor = UIColor.rgb(r: 165, g: 162, b: 153)
@@ -87,14 +87,15 @@ extension UIView {
         path.addLine(to: CGPoint(x: self.frame.width, y: self.frame.height / 2))
 
         shapelayerOfView.path = path.cgPath
-        shapelayerOfView.lineWidth = self.frame.width
-        shapelayerOfView.strokeColor = UIColor.textColor.cgColor
+        shapelayerOfView.lineWidth = self.frame.height
+        shapelayerOfView.strokeColor = UIColor.darkOrange.cgColor
+        shapelayerOfView.strokeEnd = 0.5
         self.layer.addSublayer(shapelayerOfView)
 
         let fillStrokes = CAShapeLayer()
         fillStrokes.path = strokePath.cgPath
-        fillStrokes.lineWidth = 1
-        fillStrokes.strokeColor = UIColor.black.cgColor
+        fillStrokes.lineWidth = 2
+        fillStrokes.strokeColor = UIColor.gradientLighter.cgColor
         self.layer.addSublayer(fillStrokes)
     }
 }

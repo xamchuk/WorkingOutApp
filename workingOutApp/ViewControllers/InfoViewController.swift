@@ -46,9 +46,11 @@ class InfoViewController: UIViewController, WKUIDelegate {
         return stackview
     }()
 
+    let imageView = UIImageView()
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        let imageView = UIImageView()
+
         imageView.downloaded(from: item?.imageName ?? "")
         imageView.contentMode = .scaleAspectFill
         view.addSubview(imageView)
@@ -87,6 +89,7 @@ class InfoViewController: UIViewController, WKUIDelegate {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
         tabBarController?.tabBar.isHidden = false
+        imageView.image = nil
     }
 
     fileprivate func setUpContainerView() {

@@ -126,7 +126,7 @@ extension DetailTableViewCell: UIPickerViewDelegate, UIPickerViewDataSource {
             label.textAlignment = .center
             label.font = UIFont.boldSystemFont(ofSize: heightOfComponent - 2)
             label.adjustsFontSizeToFitWidth = true
-            label.textColor = .darckOrange
+            label.textColor = .darkOrange
             label.text = pickerData[component][row]
             numbersView.addSubview(label)
             return numbersView
@@ -225,7 +225,7 @@ extension DetailTableViewCell {
 
     fileprivate func setupRestImageView() {
         restImageView.image = UIImage(named: "timer")
-        restImageView.tintColor = .darckOrange
+        restImageView.tintColor = .darkOrange
         restImageView.contentMode = .scaleAspectFill
         restImageView.layer.masksToBounds = false
         restImageView.layer.cornerRadius = 18
@@ -241,7 +241,7 @@ extension DetailTableViewCell {
     fileprivate func setupRestLabel() {
         restLabel.text = "Rest 1:00"
         restLabel.font = UIFont.systemFont(ofSize: 16)
-        restLabel.textColor = .darckOrange
+        restLabel.textColor = .darkOrange
         restLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             restLabel.centerYAnchor.constraint(equalTo: restImageView.centerYAnchor),

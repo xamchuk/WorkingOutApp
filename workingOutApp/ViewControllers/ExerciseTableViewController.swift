@@ -38,6 +38,12 @@ class ExerciseTableViewController: UIViewController {
         super.viewDidLoad()
         setupTableView()
         setupNavigationController()
+
+
+        if let arrayOfTabBarItems = tabBarController?.tabBar.items as AnyObject as? NSArray,let
+            tabBarItem = arrayOfTabBarItems[1] as? UITabBarItem {
+            tabBarItem.isEnabled = true
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -70,9 +76,17 @@ class ExerciseTableViewController: UIViewController {
         if obj.count > 0 {
             tableLabel.isHidden = true
             navigationItem.title = "\(obj.count) exercises for today"
+            if let arrayOfTabBarItems = tabBarController?.tabBar.items as AnyObject as? NSArray,let
+                tabBarItem = arrayOfTabBarItems[1] as? UITabBarItem {
+                tabBarItem.isEnabled = true
+            }
         } else {
             navigationItem.title = "Lets's start with ADD"
             tableLabel.isHidden = false
+            if let arrayOfTabBarItems = tabBarController?.tabBar.items as AnyObject as? NSArray,let
+                tabBarItem = arrayOfTabBarItems[1] as? UITabBarItem {
+                tabBarItem.isEnabled = false
+            }
         }
     }
 
@@ -94,6 +108,7 @@ extension ExerciseTableViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! ExerciseCell
+        cell.selectionStyle = .none
         cell.delegate = self
         cell.item = fetchedRC.object(at: indexPath)
         
@@ -197,6 +212,8 @@ extension ExerciseTableViewController: SelectedItemFromCollectionView {
             exer.descriptions = item.description
             exer.videoString = item.videoString
             exer.group = item.group
+            let vc = DetailsViewController()
+            vc.defaultCellData(item: exer)
             appDelegate.saveContext()
         }
     }

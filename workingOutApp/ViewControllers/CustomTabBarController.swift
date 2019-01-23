@@ -26,11 +26,14 @@ class CustomTabBarController: UITabBarController {
         nc.tabBarItem.title = "Exercise"
         nc.tabBarItem.image = UIImage(named: "fitness")
         viewControllers = [nc, testMainController]
+
+        
     }
 
     fileprivate func setingsOfTebleView() {
         tabBar.barTintColor = .gradientLighter
         tabBar.tintColor = .textColor
+
     }
 }
 

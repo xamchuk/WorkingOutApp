@@ -15,13 +15,8 @@ protocol ExerciseCellDelegate: AnyObject {
 class ExerciseCell: UITableViewCell {
 
     let topVerticalLine = LineView()
-    let topHorizontalLine = LineView()
     let midleHorizontalFirstLine = LineView()
-    let midleVerticalLine = LineView()
     let midleHorizontalSecondLine = LineView()
-    let bottomVerticalFirstLine = LineView()
-
-
 
     let titleLabel = UILabel()
     let roundsLabel = UILabel()
@@ -45,7 +40,7 @@ class ExerciseCell: UITableViewCell {
     }
 
     fileprivate func loadImage() {
-        titleLabel.text = "\(item?.name ?? "No Name") "
+        titleLabel.text = " \(item?.name ?? "No Name") "
         roundsLabel.text = "\(item?.sets?.count ?? 0) reps"
         groupLabel.text = "\(item?.group ?? " Group is unknown")"
 
@@ -68,18 +63,12 @@ class ExerciseCell: UITableViewCell {
 extension ExerciseCell {
 
     fileprivate func setupViewsInCell() {
-
-        addSubview(topHorizontalLine)
-        setupTopHorizontalLine()
         addSubview(topVerticalLine)
         setupTopVerticlLine()
-
         addSubview(titleLabel)
         setupTitleLabel()
         addSubview(midleHorizontalFirstLine)
         setupMidleHorizontalFirstLine()
-        addSubview(midleVerticalLine)
-        setupMidleVerticalLine()
         addSubview(imageViewOfExersice)
         setupImageView()
         addSubview(midleHorizontalSecondLine)
@@ -88,45 +77,27 @@ extension ExerciseCell {
         setupRoundsLabel()
         addSubview(groupLabel)
         setupGroupLabel()
-        addSubview(bottomVerticalFirstLine)
-        setupBottomVerticalFirstLine()
     }
 
-    fileprivate func setupTopHorizontalLine() {
-        NSLayoutConstraint.activate([
-            topHorizontalLine.topAnchor.constraint(equalTo: topAnchor),
-            topHorizontalLine.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 58),
-            topHorizontalLine.heightAnchor.constraint(equalToConstant: 2),
-            topHorizontalLine.trailingAnchor.constraint(equalTo: centerXAnchor)
-            ])
-
-    }
     fileprivate func setupTopVerticlLine() {
         NSLayoutConstraint.activate([
-            topVerticalLine.topAnchor.constraint(equalTo: topHorizontalLine.topAnchor),
-            topVerticalLine.leadingAnchor.constraint(equalTo: topHorizontalLine.trailingAnchor),
-            topVerticalLine.widthAnchor.constraint(equalToConstant: 2),
-            topVerticalLine.heightAnchor.constraint(equalToConstant: 25)
+            topVerticalLine.topAnchor.constraint(equalTo: topAnchor),
+            topVerticalLine.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 58),
+            topVerticalLine.widthAnchor.constraint(equalToConstant: 4),
+            topVerticalLine.heightAnchor.constraint(equalToConstant: 50)
             ])
     }
-
-
 
     fileprivate func setupTitleLabel() {
         titleLabel.textAlignment = .center
-        titleLabel.backgroundColor = .linesColor
-        titleLabel.layer.cornerRadius = 10
-        titleLabel.layer.borderColor = UIColor.linesColor.cgColor
-        titleLabel.layer.borderWidth = 1
-        let style  = UIFont.TextStyle.title3
-        titleLabel.font = UIFont.preferredFont(forTextStyle: style)
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 20)
         titleLabel.adjustsFontSizeToFitWidth = true
-        titleLabel.textColor = .gradientDarker
+        titleLabel.textColor = .darkOrange
         titleLabel.layer.masksToBounds = true
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: topVerticalLine.bottomAnchor),
-            titleLabel.centerXAnchor.constraint(equalTo: topVerticalLine.centerXAnchor),
+            titleLabel.centerYAnchor.constraint(equalTo: topVerticalLine.bottomAnchor, constant: -15),
+            titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             ])
     }
 
@@ -134,30 +105,22 @@ extension ExerciseCell {
         NSLayoutConstraint.activate([
             midleHorizontalFirstLine.topAnchor.constraint(equalTo: titleLabel.centerYAnchor),
             midleHorizontalFirstLine.trailingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
-            midleHorizontalFirstLine.leadingAnchor.constraint(equalTo: topHorizontalLine.leadingAnchor),
+            midleHorizontalFirstLine.leadingAnchor.constraint(equalTo: topVerticalLine.leadingAnchor),
             midleHorizontalFirstLine.heightAnchor.constraint(equalToConstant: 2)
-            ])
-    }
-
-    fileprivate func setupMidleVerticalLine() {
-        NSLayoutConstraint.activate([
-            midleVerticalLine.topAnchor.constraint(equalTo: midleHorizontalFirstLine.bottomAnchor),
-            midleVerticalLine.leadingAnchor.constraint(equalTo: midleHorizontalFirstLine.leadingAnchor),
-            midleVerticalLine.widthAnchor.constraint(equalToConstant: 2),
-            midleVerticalLine.heightAnchor.constraint(equalToConstant: 10)
             ])
     }
 
     fileprivate func setupImageView() {
         imageViewOfExersice.contentMode = .scaleAspectFill
         imageViewOfExersice.layer.cornerRadius = 50
-        imageViewOfExersice.layer.borderColor = UIColor.darckOrange.cgColor
+        imageViewOfExersice.layer.borderColor = UIColor.linesColor.cgColor
         imageViewOfExersice.layer.borderWidth = 4
         imageViewOfExersice.layer.masksToBounds = true
         imageViewOfExersice.translatesAutoresizingMaskIntoConstraints = false
        NSLayoutConstraint.activate([
-        imageViewOfExersice.centerXAnchor.constraint(equalTo: midleVerticalLine.centerXAnchor),
-        imageViewOfExersice.topAnchor.constraint(equalTo: midleVerticalLine.bottomAnchor),
+        imageViewOfExersice.centerXAnchor.constraint(equalTo: topVerticalLine.centerXAnchor),
+        imageViewOfExersice.topAnchor.constraint(equalTo: topVerticalLine.bottomAnchor),
+        imageViewOfExersice.bottomAnchor.constraint(equalTo: bottomAnchor),
         imageViewOfExersice.heightAnchor.constraint(equalToConstant: 100),
         imageViewOfExersice.widthAnchor.constraint(equalToConstant: 100)
         ])
@@ -168,11 +131,9 @@ extension ExerciseCell {
             midleHorizontalSecondLine.centerYAnchor.constraint(equalTo: imageViewOfExersice.centerYAnchor),
             midleHorizontalSecondLine.leadingAnchor.constraint(equalTo: imageViewOfExersice.trailingAnchor),
             midleHorizontalSecondLine.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            midleHorizontalSecondLine.heightAnchor.constraint(equalToConstant: 2)
+            midleHorizontalSecondLine.heightAnchor.constraint(equalToConstant: 4)
             ])
     }
-
-
 
     fileprivate func setupRoundsLabel() {
         roundsLabel.textColor = .textColor
@@ -187,7 +148,7 @@ extension ExerciseCell {
     }
 
     fileprivate func setupGroupLabel() {
-        groupLabel.textColor = .textColor
+        groupLabel.textColor = .darkOrange
         let style = UIFont.TextStyle.headline
         groupLabel.font = UIFont.preferredFont(forTextStyle: style)
         groupLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -195,16 +156,6 @@ extension ExerciseCell {
         NSLayoutConstraint.activate([
             groupLabel.topAnchor.constraint(equalTo: midleHorizontalSecondLine.bottomAnchor, constant: 2),
             groupLabel.trailingAnchor.constraint(equalTo: midleHorizontalSecondLine.trailingAnchor, constant: 0)
-            ])
-    }
-
-    fileprivate func setupBottomVerticalFirstLine() {
-        NSLayoutConstraint.activate([
-            bottomVerticalFirstLine.topAnchor.constraint(equalTo: imageViewOfExersice.bottomAnchor),
-            bottomVerticalFirstLine.centerXAnchor.constraint(equalTo: imageViewOfExersice.centerXAnchor),
-            bottomVerticalFirstLine.bottomAnchor.constraint(equalTo: bottomAnchor),
-            bottomVerticalFirstLine.heightAnchor.constraint(equalToConstant: 5),
-            bottomVerticalFirstLine.widthAnchor.constraint(equalToConstant: 2)
             ])
     }
 }
