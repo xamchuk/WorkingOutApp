@@ -11,10 +11,6 @@ import UIKit
 class DetailTableViewCell: UITableViewCell {
 
     private let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    
-    //var index = 0
-    //var sets = [Sets]()
     var set: Sets? {
         didSet {
             guard let set = set else { return }
@@ -22,7 +18,6 @@ class DetailTableViewCell: UITableViewCell {
             weightTextLabel.text = "\(set.weight)"
         }
     }
-
     let verticalStrokeView = UIView()
     let numberLabel = UILabel()
     var repeatsNumberLabel = UILabel() 
@@ -31,62 +26,33 @@ class DetailTableViewCell: UITableViewCell {
     let weightLabel = UILabel()
     let restImageView = UIImageView()
     let restLabel = UILabel()
+    let pickerStackView = UIStackView()
     let pickerView = UIPickerView()
-
-
+    let editImageView = UIImageView()
     var repsIntegers: [String] = []
     var weightDoubles: [String] = []
     var pickerData: [[String]] = [[]]
     var heightOfComponent: CGFloat = 30
     var widthOfComponentsTitles: CGFloat = 80
     var widhtOfComponentsNumbers: CGFloat = 40
-
+    var bottomLine = UIView()
+    var heightOfPicker = NSLayoutConstraint()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUI()
-        pickerView.delegate = self
     }
 
-    fileprivate func setupUI() {
-        addSubview(verticalStrokeView)
-        setupVerticalStroke()
-        addSubview(numberLabel)
-        setupNumberOfSetLabel()
-        addSubview(repeatsNumberLabel)
-        setupRepeatsTextField()
-        addSubview(repeatsLabel)
-        setupRepeatsLabel()
-        addSubview(weightTextLabel)
-        setupWeightTextField()
-        addSubview(weightLabel)
-        setupWeightLabel()
-        addSubview(restImageView)
-        setupRestImageView()
-        addSubview(restLabel)
-        setupRestLabel()
-        addSubview(pickerView)
-        setupPickerView()
-
-        makeVarsForPicker()
-    }
     func makeVarsForPicker() {
         var reps: Int = 0
-        for _ in 0..<50 {
-            reps += 1
-            repsIntegers.append("\(reps)")
-        }
-
         var weight: Double = 0
         for _ in 0..<50 {
+            reps += 1
             weight += 2.5
+            repsIntegers.append("\(reps)")
             weightDoubles.append("\(weight)")
         }
         pickerData = [[" Reps"], repsIntegers, ["Weight"], weightDoubles]
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -102,11 +68,6 @@ extension DetailTableViewCell: UIPickerViewDelegate, UIPickerViewDataSource {
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return pickerData[component].count
-    }
-
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return pickerData[component][row]
-
     }
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
@@ -154,14 +115,39 @@ extension DetailTableViewCell: UIPickerViewDelegate, UIPickerViewDataSource {
 
 extension DetailTableViewCell {
 
+    fileprivate func setupUI() {
+        addSubview(verticalStrokeView)
+        setupVerticalStroke()
+        addSubview(numberLabel)
+        setupNumberOfSetLabel()
+        addSubview(repeatsNumberLabel)
+        setupRepeatsTextField()
+        addSubview(repeatsLabel)
+        setupRepeatsLabel()
+        addSubview(weightTextLabel)
+        setupWeightTextField()
+        addSubview(weightLabel)
+        setupWeightLabel()
+        addSubview(restImageView)
+        setupRestImageView()
+        addSubview(restLabel)
+        setupRestLabel()
+        addSubview(pickerStackView)
+        setupPickerView()
+        addSubview(editImageView)
+        setupBotomImageView()
+        addSubview(bottomLine)
+        setupBottomLine()
+        makeVarsForPicker()
+    }
+
     fileprivate func setupVerticalStroke() {
         verticalStrokeView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             verticalStrokeView.topAnchor.constraint(equalTo: topAnchor),
             verticalStrokeView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
             verticalStrokeView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            verticalStrokeView.widthAnchor.constraint(equalToConstant: 2)
-            ])
+            verticalStrokeView.widthAnchor.constraint(equalToConstant: 2)])
         verticalStrokeView.layer.borderWidth = 2
         verticalStrokeView.layer.borderColor = UIColor.linesColor.cgColor
     }
@@ -185,7 +171,7 @@ extension DetailTableViewCell {
     }
 
     fileprivate func setupRepeatsTextField() {
-        repeatsNumberLabel.font = UIFont.boldSystemFont(ofSize: 32)
+        repeatsNumberLabel.font = UIFont.boldSystemFont(ofSize: 30)
         repeatsNumberLabel.textColor = .textColor
         repeatsNumberLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -194,23 +180,24 @@ extension DetailTableViewCell {
     }
 
     fileprivate func setupRepeatsLabel() {
-        repeatsLabel.text = "repeats   /"
+        repeatsLabel.text = "repeats /"
         repeatsLabel.textColor = .textColor
         repeatsLabel.font = UIFont.systemFont(ofSize: 24)
         repeatsLabel.translatesAutoresizingMaskIntoConstraints = false
+        restLabel.adjustsFontSizeToFitWidth = true
         NSLayoutConstraint.activate([
             repeatsLabel.centerYAnchor.constraint(equalTo: repeatsNumberLabel.centerYAnchor),
             repeatsLabel.leadingAnchor.constraint(equalTo: repeatsNumberLabel.trailingAnchor, constant: 8)])
     }
 
     fileprivate func setupWeightTextField() {
-        weightTextLabel.text = "100"
         weightTextLabel.textColor = .textColor
-        weightTextLabel.font = UIFont.boldSystemFont(ofSize: 32)
+        weightTextLabel.font = UIFont.boldSystemFont(ofSize: 30)
+        weightTextLabel.adjustsFontSizeToFitWidth = true
         weightTextLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             weightTextLabel.centerYAnchor.constraint(equalTo: repeatsLabel.centerYAnchor),
-            weightTextLabel.leadingAnchor.constraint(equalTo: repeatsLabel.trailingAnchor, constant: 24)])
+            weightTextLabel.leadingAnchor.constraint(equalTo: repeatsLabel.trailingAnchor, constant: 12)])
     }
 
     fileprivate func setupWeightLabel() {
@@ -220,7 +207,7 @@ extension DetailTableViewCell {
         weightLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             weightLabel.centerYAnchor.constraint(equalTo: weightTextLabel.centerYAnchor),
-            weightLabel.leadingAnchor.constraint(equalTo: weightTextLabel.trailingAnchor, constant: 8)])
+            weightLabel.leadingAnchor.constraint(equalTo: weightTextLabel.trailingAnchor, constant: 8),])
     }
 
     fileprivate func setupRestImageView() {
@@ -249,11 +236,32 @@ extension DetailTableViewCell {
     }
 
     fileprivate func setupPickerView() {
+        pickerStackView.anchor(top: restLabel.bottomAnchor, leading: verticalStrokeView.trailingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: -6, left: 24, bottom: 0, right: 44))
+        pickerView.delegate = self
         pickerView.tintColor = .gradientDarker
         pickerView.layer.cornerRadius = 20
         pickerView.contentMode = .center
-        pickerView.anchor(top: restLabel.bottomAnchor, leading: verticalStrokeView.trailingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 24, bottom: 8, right: 24))
-        pickerView.isHidden = true
+        pickerStackView.addArrangedSubview(pickerView)
+        pickerStackView.isHidden = true
+    }
+
+    fileprivate func setupBotomImageView() {
+        editImageView.anchor(top: nil, leading: pickerView.trailingAnchor, bottom: bottomAnchor, trailing: nil, padding: .init(top: 0, left: 8, bottom: 8, right: 0), size: CGSize(width: 16, height: 16))
+        editImageView.image = UIImage(named: "edit")
+        editImageView.contentMode = .scaleAspectFit
+        editImageView.tintColor = .linesColor
+    }
+
+    fileprivate func setupBottomLine() {
+        bottomLine.alpha = 0.2
+        bottomLine.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            bottomLine.bottomAnchor.constraint(equalTo: bottomAnchor),
+            bottomLine.centerXAnchor.constraint(equalTo: centerXAnchor),
+            bottomLine.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 2 / 3),
+            bottomLine.heightAnchor.constraint(equalToConstant: 1)])
+        bottomLine.layer.borderWidth = 0.5
+        bottomLine.layer.borderColor = UIColor.linesColor.cgColor
     }
 }
 

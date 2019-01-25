@@ -9,6 +9,21 @@
 //import Foundation
 
 
+//override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+//    if UIDevice.current.orientation.isLandscape {
+//        portraitHeihtAnchor?.isActive = false
+//        landscapeHeihtAnchor = continerView?.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.86)
+//        landscapeHeihtAnchor?.isActive = true
+//        stackView.layoutIfNeeded()
+//        stackView.setNeedsLayout()
+//        stackView.setNeedsDisplay()
+//    }
+//    if UIDevice.current.orientation.isPortrait {
+//        landscapeHeihtAnchor?.isActive = false
+//        portraitHeihtAnchor?.isActive = true
+//    }
+//}
+//
 // MARK: Custom Exercise Controller
 
 //func createButton(button: UIButton, title: String, action: Selector) {

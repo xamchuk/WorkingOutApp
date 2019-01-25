@@ -208,7 +208,7 @@ extension ExerciseTableViewController: SelectedItemFromCollectionView {
             let exer = Item(entity: Item.entity(), insertInto: context)
             exer.name = item.name
             exer.imageURL = item.imageName
-            exer.imageName = item.imageLocalName
+            exer.imageData = item.imageData as NSData?
             exer.descriptions = item.description
             exer.videoString = item.videoString
             exer.group = item.group

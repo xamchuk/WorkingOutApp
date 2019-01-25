@@ -22,8 +22,6 @@ class SectionHeader: UICollectionReusableView {
         nameLabel.textAlignment = .center
         nameLabel.backgroundColor = .darkOrange
         nameLabel.layer.cornerRadius = 10
-        //nameLabel.layer.borderColor = UIColor.linesColor.cgColor
-       // nameLabel.layer.borderWidth = 1
         let style  = UIFont.TextStyle.headline
         nameLabel.font = UIFont.preferredFont(forTextStyle: style)
         nameLabel.adjustsFontSizeToFitWidth = true
@@ -31,8 +29,8 @@ class SectionHeader: UICollectionReusableView {
         nameLabel.layer.masksToBounds = true
         nameLabel.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 8, left: 8, bottom: 8, right: 8))
     }
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
 }

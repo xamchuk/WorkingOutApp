@@ -31,6 +31,16 @@ extension UIColor {
 
 }
 
+extension String {
+    func capitalizingFirstLetter() -> String {
+        return prefix(1).uppercased() + self.lowercased().dropFirst()
+    }
+
+    mutating func capitalizeFirstLetter() {
+        self = self.capitalizingFirstLetter()
+    }
+}
+
 extension UIView {
 
     func makeGradients() {
@@ -89,7 +99,7 @@ extension UIView {
         shapelayerOfView.path = path.cgPath
         shapelayerOfView.lineWidth = self.frame.height
         shapelayerOfView.strokeColor = UIColor.darkOrange.cgColor
-        shapelayerOfView.strokeEnd = 0.5
+        shapelayerOfView.strokeEnd = 0
         self.layer.addSublayer(shapelayerOfView)
 
         let fillStrokes = CAShapeLayer()

@@ -16,6 +16,7 @@ struct ItemJson: Equatable, Decodable {
     var name: String
     var imageName: String?
     var imageLocalName: String?
+    var imageData: Data?
     var rounds: Int?
     var amount: Int?
     var weight: Double?

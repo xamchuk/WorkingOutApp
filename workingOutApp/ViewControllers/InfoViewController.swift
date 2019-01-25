@@ -61,8 +61,13 @@ class InfoViewController: UIViewController, WKUIDelegate {
         visualEffectView.alpha = 0.9
         imageView.addSubview(visualEffectView)
         visualEffectView.fillSuperview()
+
+
         navigationController?.navigationBar.prefersLargeTitles = false
-        view.backgroundColor = .white
+        let backButton = UIBarButtonItem()
+        backButton.tintColor = .textColor
+        navigationController!.navigationBar.topItem!.backBarButtonItem = backButton
+
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -72,29 +77,20 @@ class InfoViewController: UIViewController, WKUIDelegate {
         setupWebView()
         setupStackView()
     }
-    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
-        if UIDevice.current.orientation.isLandscape {
-            portraitHeihtAnchor?.isActive = false
-            landscapeHeihtAnchor = continerView?.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.86)
-            landscapeHeihtAnchor?.isActive = true
-            stackView.layoutIfNeeded()
-            stackView.setNeedsLayout()
-            stackView.setNeedsDisplay()
-        }
-        if UIDevice.current.orientation.isPortrait {
-            landscapeHeihtAnchor?.isActive = false
-            portraitHeihtAnchor?.isActive = true
-        }
-    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
         tabBarController?.tabBar.isHidden = false
         imageView.image = nil
     }
 
+    fileprivate func configureWebView(videoString: String) {
+        guard let url = URL(string: "https://www.youtube.com/embed/\(videoString)?enablejsapi=0&rel=0&playsinline=1&autoplay=1") else { return }
+        webView.load(URLRequest(url: url))
+    }
+
     fileprivate func setUpContainerView() {
         continerView = UIView()
-        continerView?.layer.cornerRadius = 40
         continerView?.layer.masksToBounds = true
         view.addSubview(continerView!)
         continerView?.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor, size: CGSize(width: 0, height: 0))
@@ -121,20 +117,24 @@ class InfoViewController: UIViewController, WKUIDelegate {
     }
 
     fileprivate func setupStackView() {
+
+
+
+        let scrollView = UIScrollView()
+        view.addSubview(scrollView)
+        scrollView.anchor(top: continerView?.bottomAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor)
+        scrollView.contentSize = CGSize(width: 0, height: 1000)
+        scrollView.addSubview(stackView)
+        //stackView.fillSuperview()
+        stackView.anchor(top: scrollView.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor)
         [nameLabel, groupLabel, descriotionLabel].forEach { stackView.addArrangedSubview($0) }
-        let someView = UIView()
-        view.addSubview(someView)
 
 
-
-        someView.anchor(top: continerView?.bottomAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor)
-        someView.addSubview(stackView)
-        stackView.anchor(top: someView.topAnchor, leading: webView.leadingAnchor, bottom: nil, trailing: someView.trailingAnchor, padding: .init(top: 16, left: 8, bottom: 8, right: 8), size: CGSize(width: 0, height: 0))
+//        someView.anchor(top: continerView?.bottomAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor)
+//        someView.addSubview(stackView)
+      //  stackView.anchor(top: someView.topAnchor, leading: webView.leadingAnchor, bottom: nil, trailing: someView.trailingAnchor, padding: .init(top: 16, left: 8, bottom: 8, right: 8), size: CGSize(width: 0, height: 0))
     }
 
-    fileprivate func configureWebView(videoString: String) {
-        guard let url = URL(string: "https://www.youtube.com/embed/\(videoString)?enablejsapi=0&rel=0&playsinline=1&autoplay=1") else { return }
-        webView.load(URLRequest(url: url))
-    }
+
 }
 

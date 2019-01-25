@@ -18,14 +18,18 @@
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
-	<key>LSRequiresIPhoneOS</key>
-	<true/>
-	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>For your Excercise</string>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>For your Excercise</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+	</array>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

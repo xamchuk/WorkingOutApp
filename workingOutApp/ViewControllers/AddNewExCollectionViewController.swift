@@ -42,6 +42,9 @@ class AddNewExCollectionViewController: UIViewController {
         super.viewWillAppear(true)
         tabBarController?.tabBar.isHidden = true
     }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
@@ -114,6 +117,7 @@ extension AddNewExCollectionViewController: PassingItemFromCellToController {
 extension AddNewExCollectionViewController: CustomExerciseDelegate {
     func customItem(item: ItemJson) {
         delegate?.appendingItem(item: item)
+        
     }
 }
 
@@ -141,6 +145,10 @@ extension AddNewExCollectionViewController {
         doneButton.tintColor = .textColor
         navigationController?.navigationBar.barTintColor = .gradientDarker
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.textColor]
+
+        let backButton = UIBarButtonItem()
+        backButton.tintColor = .textColor
+        navigationController!.navigationBar.topItem!.backBarButtonItem = backButton
     }
 }
 

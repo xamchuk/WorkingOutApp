@@ -33,6 +33,7 @@
 		B0479A9421F3B7B900AC09A7 /* CustomExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0479A9321F3B7B900AC09A7 /* CustomExerciseViewController.swift */; };
 		B048CB2921F5E2020023B840 /* CustomClassUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B048CB2821F5E2020023B840 /* CustomClassUIView.swift */; };
 		B0F3985A21F651DB00A74F4F /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F3985921F651DB00A74F4F /* SectionHeader.swift */; };
+		B0FBC4FC21FA0A26000F0EBD /* CustomDropButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0FBC4FB21FA0A26000F0EBD /* CustomDropButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +66,7 @@
 		B0479A9521F5033600AC09A7 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		B048CB2821F5E2020023B840 /* CustomClassUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomClassUIView.swift; sourceTree = "<group>"; };
 		B0F3985921F651DB00A74F4F /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
+		B0FBC4FB21FA0A26000F0EBD /* CustomDropButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDropButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 				B0479A5E21DE555900AC09A7 /* tools */,
 				B0479A6321DEAE7100AC09A7 /* Extetions +UIView.swift */,
 				B048CB2821F5E2020023B840 /* CustomClassUIView.swift */,
+				B0FBC4FB21FA0A26000F0EBD /* CustomDropButton.swift */,
 			);
 			path = workingOutApp;
 			sourceTree = "<group>";
@@ -193,6 +196,11 @@
 				TargetAttributes = {
 					B0479A4021DE4D5500AC09A7 = {
 						CreatedOnToolsVersion = 10.1;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -245,6 +253,7 @@
 				B0479A7C21E61DBC00AC09A7 /* LocalJson.swift in Sources */,
 				B0479A8421EDE4C200AC09A7 /* Item.xcdatamodeld in Sources */,
 				B0479A8C21F3142300AC09A7 /* DetailsViewController.swift in Sources */,
+				B0FBC4FC21FA0A26000F0EBD /* CustomDropButton.swift in Sources */,
 				B0479A8121E9EDD600AC09A7 /* MainViewController.swift in Sources */,
 				B0479A7021E282DC00AC09A7 /* Item.swift in Sources */,
 				B0479A9421F3B7B900AC09A7 /* CustomExerciseViewController.swift in Sources */,

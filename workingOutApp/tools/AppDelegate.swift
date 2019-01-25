@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import UserNotifications
 
 @UIApplicationMain
  class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -45,6 +46,14 @@ import CoreData
 
 
         // Override point for customization after application launch.
+        let options: UNAuthorizationOptions = [.alert, .sound, .badge]
+        
+        UNUserNotificationCenter.current().requestAuthorization(options: options) {
+            (didAllow, error) in
+            if !didAllow {
+                print("User has declined notifications")
+            }
+        }
         return true
     }
 
