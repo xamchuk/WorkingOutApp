@@ -57,7 +57,7 @@ class ExerciceControllView: UIView {
         let style  = UIFont.TextStyle.largeTitle
         title.font = UIFont.preferredFont(forTextStyle: style)
         title.anchor(top: topAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor)
-        title.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 2 / 5).isActive = true
+        title.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 1 / 5).isActive = true
     }
 
 

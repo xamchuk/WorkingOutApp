@@ -20,6 +20,6 @@ extension Sets {
     @NSManaged public var repeats: Int16
     @NSManaged public var weight: Double
     @NSManaged public var date: NSDate?
-    @NSManaged public var item: Item?
+    @NSManaged public var item: Item
 
 }

@@ -61,7 +61,7 @@ class DetailsViewController: UIViewController {
         refreshCoData(item: item)
         guard let sets = fetchedRC.fetchedObjects else { return }
         if sets.count == 0 {
-            for _ in 0...2 {
+            for _ in 0...1 {
                 let set = Sets(entity: Sets.entity(), insertInto: context)
                 set.repeats = 8
                 set.weight = 20
@@ -69,7 +69,6 @@ class DetailsViewController: UIViewController {
                 set.item = item
                 appDelegate.saveContext()
                 refreshCoData(item: item)
-                tableView.reloadData()
             }
         }
     }
@@ -79,14 +78,17 @@ class DetailsViewController: UIViewController {
     }
 
     @objc func hendleFooterAddButton() {
+        guard let setsForIndex = fetchedRC.fetchedObjects else { return }
+        guard let lastIndex = setsForIndex.indices.last else { return }
         let set = Sets(entity: Sets.entity(), insertInto: context)
-        set.repeats = 8
-        set.weight = 80.5
+        set.repeats = setsForIndex[lastIndex].repeats
+        set.weight = setsForIndex[lastIndex].weight
         set.date = NSDate()
         set.item = exercise
         appDelegate.saveContext()
         refreshCoData(item: exercise)
-        tableView.reloadData()
+        guard let sets = fetchedRC.fetchedObjects else { return }
+        tableView.insertRows(at: [IndexPath(row: sets.count - 1, section: 0)], with: .middle)
     }
 }
 
@@ -99,20 +101,27 @@ extension DetailsViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! DetailTableViewCell
+        cell.delegate = self
+        cell.indexPath = indexPath
         cell.selectionStyle = .none
         cell.numberLabel.text = "\(indexPath.row + 1)"
         cell.set = fetchedRC.object(at: indexPath)
+        cell.layoutIfNeeded()
         return cell
     }
 
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            let set = fetchedRC.object(at: indexPath)
-            context.delete(set)
-            appDelegate.saveContext()
-            refreshCoData(item: exercise)
-            tableView.reloadData()
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let action = UITableViewRowAction(style: .default, title: "Delete") {
+            (delete, indexPath) in
+            self.selectedIndexPath = nil
+            let set = self.fetchedRC.object(at: indexPath)
+            self.context.delete(set)
+            self.appDelegate.saveContext()
+            self.refreshCoData(item: self.exercise)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
         }
+        action.backgroundColor = UIColor.darkOrange
+        return [action]
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -134,6 +143,23 @@ extension DetailsViewController: UITableViewDataSource {
         tableView.beginUpdates()
         tableView.layoutIfNeeded()
         tableView.endUpdates()
+    }
+}
+
+extension DetailsViewController: DetailCellDelegate {
+    func cellDidChanched(set: Sets, indexPath: IndexPath) {
+        var indexRow = indexPath.row
+        guard let sets = fetchedRC.fetchedObjects else { return }
+        for i in sets {
+            if sets.index(ofElement: i) > indexRow {
+                indexRow += 1
+                sets[indexRow].repeats = set.repeats
+                sets[indexRow].weight = set.weight
+            }
+        }
+        appDelegate.saveContext()
+        refreshCoData(item: exercise)
+        tableView.reloadData()
     }
 }
 

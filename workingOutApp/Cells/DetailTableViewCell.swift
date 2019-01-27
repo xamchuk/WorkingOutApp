@@ -8,14 +8,23 @@
 
 import UIKit
 
+protocol DetailCellDelegate: AnyObject {
+    func cellDidChanched(set: Sets, indexPath: IndexPath)
+}
+
 class DetailTableViewCell: UITableViewCell {
 
     private let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    var indexPath: IndexPath?
     var set: Sets? {
         didSet {
             guard let set = set else { return }
             repeatsNumberLabel.text = "\(set.repeats)"
             weightTextLabel.text = "\(set.weight)"
+
+            pickerView.selectRow(Int(set.repeats - 1), inComponent: 1, animated: true)
+            let weight = Double(set.weight) / 2.5
+            pickerView.selectRow(Int(weight - 1), inComponent: 3, animated: true)
         }
     }
     let verticalStrokeView = UIView()
@@ -38,6 +47,7 @@ class DetailTableViewCell: UITableViewCell {
     var bottomLine = UIView()
     var heightOfPicker = NSLayoutConstraint()
 
+    weak var delegate: DetailCellDelegate?
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUI()
@@ -53,6 +63,8 @@ class DetailTableViewCell: UITableViewCell {
             weightDoubles.append("\(weight)")
         }
         pickerData = [[" Reps"], repsIntegers, ["Weight"], weightDoubles]
+
+        //  pickerView.selectRow(pickerData[3][10], inComponent: 3, animated: true)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -78,6 +90,8 @@ extension DetailTableViewCell: UIPickerViewDelegate, UIPickerViewDataSource {
         }
         set?.repeats = Int16(repeatsNumberLabel.text!)!
         set?.weight = Double(weightTextLabel.text!)!
+        guard let set = set else { return }
+        delegate?.cellDidChanched(set: set, indexPath: indexPath!)
         appDelegate.saveContext()
     }
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
@@ -165,9 +179,11 @@ extension DetailTableViewCell {
         NSLayoutConstraint.activate([
             numberLabel.centerXAnchor.constraint(equalTo: verticalStrokeView.centerXAnchor),
             numberLabel.topAnchor.constraint(equalTo: verticalStrokeView.topAnchor, constant: 16),
-            numberLabel.widthAnchor.constraint(equalToConstant: 30),
-            numberLabel.heightAnchor.constraint(equalToConstant: 30)
+            numberLabel.widthAnchor.constraint(equalToConstant: 30)
             ])
+        let height = numberLabel.heightAnchor.constraint(equalToConstant: 30)
+        height.priority = .defaultLow
+        height.isActive = true
     }
 
     fileprivate func setupRepeatsTextField() {

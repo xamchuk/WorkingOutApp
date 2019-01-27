@@ -60,7 +60,7 @@ class ExerciseTableViewController: UIViewController {
         if !query.isEmpty {
             request.predicate = NSPredicate(format: "name CONTAINS[cd] %@", query)
         }
-        let sort = NSSortDescriptor(key: #keyPath(Item.group), ascending: true, selector: #selector(NSString.caseInsensitiveCompare(_:)))
+        let sort = NSSortDescriptor(key: #keyPath(Item.index), ascending: true, selector: #selector(NSString.caseInsensitiveCompare(_:)))
         request.sortDescriptors = [sort]
         do {
             fetchedRC = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
@@ -97,6 +97,13 @@ class ExerciseTableViewController: UIViewController {
         let navController = UINavigationController(rootViewController: addNewExCollectionViewController)
         present(navController, animated: true, completion: nil)
     }
+
+    @objc func handleEditButton(sender: UIBarButtonItem) {
+        tableView.isEditing.toggle()
+        sender.title = tableView.isEditing ? "Done" : "Edit"
+        sender.tintColor = tableView.isEditing ? UIColor.linesColor : UIColor.textColor
+
+    }
 }
 
 extension ExerciseTableViewController: UITableViewDataSource {
@@ -111,6 +118,7 @@ extension ExerciseTableViewController: UITableViewDataSource {
         cell.selectionStyle = .none
         cell.delegate = self
         cell.item = fetchedRC.object(at: indexPath)
+        cell.backgroundColor = .clear
         
         return cell
     }
@@ -134,6 +142,34 @@ extension ExerciseTableViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.backgroundColor = .clear
     }
+
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        if tableView.isEditing {
+            return .none
+        } else {
+            return .delete
+        }
+    }
+
+    func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
+        return false
+    }
+
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        fetchedRC.delegate = nil
+        var objects = fetchedRC.fetchedObjects!
+        let object = objects[sourceIndexPath.row]
+        objects.remove(at: sourceIndexPath.row)
+        objects.insert(object, at: destinationIndexPath.row)
+        for (index, object) in objects.enumerated() {
+            object.index = Int16(index)
+              }
+         self.appDelegate.saveContext()
+        fetchedRC.delegate = self
+    }
 }
 
 extension ExerciseTableViewController {
@@ -152,8 +188,11 @@ extension ExerciseTableViewController {
     }
 
     fileprivate func setupNavigationController() {
+        let editButton = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(handleEditButton(sender:)))
+        editButton.tintColor = UIColor.textColor
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(handeleAddButton))
         navigationItem.setRightBarButton(addButton, animated: true)
+        navigationItem.setLeftBarButton(editButton, animated: true)
         navigationItem.rightBarButtonItem?.tintColor = .textColor
         let backItem = UIBarButtonItem()
         backItem.tintColor = .textColor
@@ -211,6 +250,7 @@ extension ExerciseTableViewController: SelectedItemFromCollectionView {
             exer.imageData = item.imageData as NSData?
             exer.descriptions = item.description
             exer.videoString = item.videoString
+            exer.index = Int16(fetchedRC.fetchedObjects?.count ?? 10)
             exer.group = item.group
             let vc = DetailsViewController()
             vc.defaultCellData(item: exer)

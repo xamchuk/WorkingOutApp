@@ -42,6 +42,7 @@ class DropDownBtn: UIButton, DropDownProtocol {
         dropView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         dropView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
         height = dropView.heightAnchor.constraint(equalToConstant: 0)
+        height.isActive = true
     }
 
     var isOpen = false
@@ -50,7 +51,7 @@ class DropDownBtn: UIButton, DropDownProtocol {
 
             isOpen = true
 
-            NSLayoutConstraint.deactivate([self.height])
+          //  NSLayoutConstraint.deactivate([self.height])
 
             if dropView.tableView.contentSize.height > 260 {
                 height.constant = 260
@@ -59,7 +60,7 @@ class DropDownBtn: UIButton, DropDownProtocol {
             }
 
 
-            NSLayoutConstraint.activate([height])
+          //  NSLayoutConstraint.activate([height])
 
             UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseInOut, animations: {
                 self.dropView.layoutIfNeeded()
@@ -67,24 +68,25 @@ class DropDownBtn: UIButton, DropDownProtocol {
             }, completion: nil)
 
         } else {
-            isOpen = false
-
-            NSLayoutConstraint.deactivate([height])
-            height.constant = 0
-            NSLayoutConstraint.activate([self.height])
-            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.0, initialSpringVelocity: 0.5, options: .curveEaseInOut, animations: {
-                self.dropView.center.y -= self.dropView.frame.height / 2
-                self.dropView.layoutIfNeeded()
-            }, completion: nil)
+            dismissDropDown()
+//            isOpen = false
+//
+//          //  NSLayoutConstraint.deactivate([height])
+//            height.constant = 0
+//          //  NSLayoutConstraint.activate([self.height])
+//            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.0, initialSpringVelocity: 0.5, options: .curveEaseInOut, animations: {
+//                self.dropView.center.y -= self.dropView.frame.height / 2
+//                self.dropView.layoutIfNeeded()
+//            }, completion: nil)
 
         }
     }
 
     func dismissDropDown() {
         isOpen = false
-        NSLayoutConstraint.deactivate([height])
+      //  NSLayoutConstraint.deactivate([height])
         height.constant = 0
-        NSLayoutConstraint.activate([height])
+     //   NSLayoutConstraint.activate([height])
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.0, initialSpringVelocity: 0.0, options: .curveEaseInOut, animations: {
             self.dropView.center.y -= self.dropView.frame.height / 2
             self.dropView.layoutIfNeeded()

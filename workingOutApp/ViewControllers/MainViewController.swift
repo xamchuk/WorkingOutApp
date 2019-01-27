@@ -104,7 +104,7 @@ class MainViewController: UIViewController {
         if !queryExercise.isEmpty {
             requestExercise.predicate = NSPredicate(format: "name CONTAINS[cd] %@", queryExercise)
         }
-        let sortExercise = NSSortDescriptor(key: #keyPath(Item.group), ascending: true, selector: #selector(NSString.caseInsensitiveCompare(_:)))
+        let sortExercise = NSSortDescriptor(key: #keyPath(Item.index), ascending: true, selector: #selector(NSString.caseInsensitiveCompare(_:)))
         requestExercise.sortDescriptors = [sortExercise]
 
         do {
@@ -317,7 +317,7 @@ extension MainViewController {
     
     fileprivate func setupExerciseControllView() {
         view.addSubview(exerciseControllView)
-        exerciseControllView.anchor(top: allProgramLabel.bottomAnchor, leading: view.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: view.frame.height / 10, left: 8, bottom: 8, right: 8))
+        exerciseControllView.anchor(top: allProgramLabel.bottomAnchor, leading: view.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: view.frame.height / 5, left: 8, bottom: 8, right: 8))
         startButton = exerciseControllView.startButton
         nextButton = exerciseControllView.nextButton
         resetButton = exerciseControllView.resetButton

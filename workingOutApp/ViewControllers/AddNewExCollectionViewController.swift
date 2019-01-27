@@ -28,7 +28,6 @@ class AddNewExCollectionViewController: UIViewController {
         tabBarController?.tabBar.isHidden = true
         let json = LocalJson()
         items = json.loadJson()
-
         let groupD = Dictionary(grouping: items!) { (item) -> String? in
             return item.group
         }
@@ -117,7 +116,6 @@ extension AddNewExCollectionViewController: PassingItemFromCellToController {
 extension AddNewExCollectionViewController: CustomExerciseDelegate {
     func customItem(item: ItemJson) {
         delegate?.appendingItem(item: item)
-        
     }
 }
 

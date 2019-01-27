@@ -8,6 +8,18 @@
 
 import UIKit
 
+extension Array where Array.Element: AnyObject {
+
+    func index(ofElement element: Element) -> Int {
+        for (currentIndex, currentElement) in self.enumerated() {
+            if currentElement === element {
+                return currentIndex
+            }
+        }
+        return 0
+    }
+}
+
 extension UIColor {
 
     static func rgb(r: CGFloat, g: CGFloat, b: CGFloat) -> UIColor {
