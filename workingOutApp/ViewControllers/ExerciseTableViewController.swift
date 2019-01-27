@@ -119,7 +119,6 @@ extension ExerciseTableViewController: UITableViewDataSource {
         cell.delegate = self
         cell.item = fetchedRC.object(at: indexPath)
         cell.backgroundColor = .clear
-        
         return cell
     }
 
@@ -137,10 +136,6 @@ extension ExerciseTableViewController: UITableViewDelegate {
         let vc = DetailsViewController()
         vc.exercise = fetchedRC.object(at: indexPath)
         show(vc, sender: self)
-    }
-    
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.backgroundColor = .clear
     }
 
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
@@ -166,8 +161,8 @@ extension ExerciseTableViewController: UITableViewDelegate {
         objects.insert(object, at: destinationIndexPath.row)
         for (index, object) in objects.enumerated() {
             object.index = Int16(index)
-              }
-         self.appDelegate.saveContext()
+        }
+        self.appDelegate.saveContext()
         fetchedRC.delegate = self
     }
 }
@@ -204,7 +199,6 @@ extension ExerciseTableViewController {
 extension ExerciseTableViewController: NSFetchedResultsControllerDelegate {
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         refreshTableLable()
-
         let index = indexPath ?? (newIndexPath ?? nil)
         guard let cellIndex = index else {
             return
@@ -250,7 +244,9 @@ extension ExerciseTableViewController: SelectedItemFromCollectionView {
             exer.imageData = item.imageData as NSData?
             exer.descriptions = item.description
             exer.videoString = item.videoString
-            exer.index = Int16(fetchedRC.fetchedObjects?.count ?? 10)
+            guard let index = fetchedRC.fetchedObjects?.count else { return }
+            print(index)
+            exer.index = Int16(index)
             exer.group = item.group
             let vc = DetailsViewController()
             vc.defaultCellData(item: exer)

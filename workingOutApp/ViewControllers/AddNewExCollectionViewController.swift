@@ -138,12 +138,10 @@ extension AddNewExCollectionViewController {
         let addCustom = UIBarButtonItem(title: "Add Own Exercise", style: .plain, target: self, action: #selector(handleAddCustom))
         navigationItem.leftBarButtonItem = doneButton
         navigationItem.rightBarButtonItem = addCustom
-//        navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.rightBarButtonItem?.tintColor = .textColor
         doneButton.tintColor = .textColor
         navigationController?.navigationBar.barTintColor = .gradientDarker
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.textColor]
-
         let backButton = UIBarButtonItem()
         backButton.tintColor = .textColor
         navigationController!.navigationBar.topItem!.backBarButtonItem = backButton
