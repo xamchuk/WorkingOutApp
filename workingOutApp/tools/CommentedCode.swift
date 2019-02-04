@@ -8,6 +8,19 @@
 
 //import Foundation
 
+//extension ExerciseTableViewController: ExerciseCellDelegate {
+//    func passingSeconds(item: Item) {
+//        guard let obj = fetchedRC.fetchedObjects else { return }
+//        var array = obj
+//        for i in array {
+//            if i.name == item.name {
+//                guard let index = array.index(of: i) else { return }
+//                array[index] = item
+//                break
+//            }
+//        }
+//    }
+//}
 
 //override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
 //    if UIDevice.current.orientation.isLandscape {

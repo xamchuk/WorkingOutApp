@@ -2,7 +2,7 @@
 //  Sets+CoreDataProperties.swift
 //  workingOutApp
 //
-//  Created by Rusłan Chamski on 19/01/2019.
+//  Created by Rusłan Chamski on 01/02/2019.
 //  Copyright © 2019 Rusłan Chamski. All rights reserved.
 //
 //
@@ -17,9 +17,9 @@ extension Sets {
         return NSFetchRequest<Sets>(entityName: "Sets")
     }
 
+    @NSManaged public var date: NSDate?
     @NSManaged public var repeats: Int16
     @NSManaged public var weight: Double
-    @NSManaged public var date: NSDate?
-    @NSManaged public var item: Item
+    @NSManaged public var item: Item?
 
 }

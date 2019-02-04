@@ -24,7 +24,7 @@ class LineView : UIView {
 }
 
 class ExerciceControllView: UIView {
-    let title = CustomLabel()
+    let titleButton = UIButton(type: .system)
     let sets = CustomLabel()
     let repsAndweight = CustomLabel()
     let stackView = UIStackView()
@@ -53,11 +53,12 @@ class ExerciceControllView: UIView {
     }
     
     fileprivate func setupTitle() {
-        addSubview(title)
+        addSubview(titleButton)
         let style  = UIFont.TextStyle.largeTitle
-        title.font = UIFont.preferredFont(forTextStyle: style)
-        title.anchor(top: topAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor)
-        title.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 1 / 5).isActive = true
+        titleButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: style)
+        titleButton.backgroundColor = .blue
+        titleButton.anchor(top: topAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor)
+        titleButton.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 1 / 5).isActive = true
     }
 
 
@@ -98,7 +99,7 @@ class ExerciceControllView: UIView {
         addSubview(buttonStackView)
         buttonStackView.spacing = 6
         buttonStackView.distribution = .equalCentering
-        buttonStackView.anchor(top: title.bottomAnchor, leading: leadingAnchor, bottom: nil , trailing: trailingAnchor, padding: .init(top: 6, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: 100))
+        buttonStackView.anchor(top: titleButton.bottomAnchor, leading: leadingAnchor, bottom: nil , trailing: trailingAnchor, padding: .init(top: 6, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: 100))
         [resetButton, startButton, nextButton].forEach { buttonStackView.addArrangedSubview($0) }
     }
 

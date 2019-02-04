@@ -40,12 +40,12 @@ class DetailsViewController: UIViewController {
         tabBarController?.tabBar.isHidden = false
     }
 
-    func refreshCoData(item: Item) {
+    func refreshCoData() {
         let request = Sets.fetchRequest() as NSFetchRequest<Sets>
         if query.isEmpty {
-            request.predicate = NSPredicate(format: "item = %@", item)
+            request.predicate = NSPredicate(format: "item = %@", exercise)
         } else {
-            request.predicate = NSPredicate(format: "name CONTAINS[cd] %@ AND item = %@", query, item)
+            request.predicate = NSPredicate(format: "name CONTAINS[cd] %@ AND item = %@", query, exercise)
         }
         let sort = NSSortDescriptor(key: #keyPath(Sets.date), ascending: true)
         request.sortDescriptors = [sort]
@@ -58,23 +58,23 @@ class DetailsViewController: UIViewController {
     }
 
     func defaultCellData(item: Item) {
-        refreshCoData(item: item)
+        refreshCoData()
         guard let sets = fetchedRC.fetchedObjects else { return }
-        if sets.count == 0 {
+        if sets.isEmpty {
             for _ in 0...1 {
                 let set = Sets(entity: Sets.entity(), insertInto: context)
                 set.repeats = 8
                 set.weight = 20
                 set.date = NSDate()
-                set.item = item
+                set.item = exercise
                 appDelegate.saveContext()
-                refreshCoData(item: item)
+                refreshCoData()
             }
         }
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        refreshCoData(item: exercise)
+        refreshCoData()
     }
 
     @objc func hendleFooterAddButton() {
@@ -86,7 +86,7 @@ class DetailsViewController: UIViewController {
         set.date = NSDate()
         set.item = exercise
         appDelegate.saveContext()
-        refreshCoData(item: exercise)
+        refreshCoData()
         guard let sets = fetchedRC.fetchedObjects else { return }
         tableView.insertRows(at: [IndexPath(row: sets.count - 1, section: 0)], with: .middle)
     }
@@ -117,7 +117,7 @@ extension DetailsViewController: UITableViewDataSource {
             let set = self.fetchedRC.object(at: indexPath)
             self.context.delete(set)
             self.appDelegate.saveContext()
-            self.refreshCoData(item: self.exercise)
+            self.refreshCoData()
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
         action.backgroundColor = UIColor.darkOrange
@@ -158,7 +158,7 @@ extension DetailsViewController: DetailCellDelegate {
             }
         }
         appDelegate.saveContext()
-        refreshCoData(item: exercise)
+        refreshCoData()
         tableView.reloadData()
     }
 }

@@ -69,16 +69,6 @@ class DropDownBtn: UIButton, DropDownProtocol {
 
         } else {
             dismissDropDown()
-//            isOpen = false
-//
-//          //  NSLayoutConstraint.deactivate([height])
-//            height.constant = 0
-//          //  NSLayoutConstraint.activate([self.height])
-//            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.0, initialSpringVelocity: 0.5, options: .curveEaseInOut, animations: {
-//                self.dropView.center.y -= self.dropView.frame.height / 2
-//                self.dropView.layoutIfNeeded()
-//            }, completion: nil)
-
         }
     }
 
@@ -87,7 +77,7 @@ class DropDownBtn: UIButton, DropDownProtocol {
       //  NSLayoutConstraint.deactivate([height])
         height.constant = 0
      //   NSLayoutConstraint.activate([height])
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.0, initialSpringVelocity: 0.0, options: .curveEaseInOut, animations: {
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseInOut, animations: {
             self.dropView.center.y -= self.dropView.frame.height / 2
             self.dropView.layoutIfNeeded()
         }, completion: nil)

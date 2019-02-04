@@ -23,6 +23,7 @@ class CustomExerciseViewController: UIViewController, UITextFieldDelegate, UIIma
     let nameTextField = UITextField()
     var groupButton = DropDownBtn()
     let saveButton = UIButton(type: .system)
+    
     var item: ItemJson?
     weak var delegate: CustomExerciseDelegate?
 

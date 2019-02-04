@@ -41,8 +41,9 @@ import UserNotifications
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
 
-        let rootViewController = CustomTabBarController() as UITabBarController
-        window?.rootViewController = rootViewController
+        let collectionView = MainCollectionViewController()
+        let nc = UINavigationController(rootViewController: collectionView)
+        window?.rootViewController = nc
 
 
         // Override point for customization after application launch.

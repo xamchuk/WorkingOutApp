@@ -10,11 +10,9 @@
 		B0479A4521DE4D5500AC09A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0479A4421DE4D5500AC09A7 /* AppDelegate.swift */; };
 		B0479A4C21DE4D5800AC09A7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B0479A4B21DE4D5800AC09A7 /* Assets.xcassets */; };
 		B0479A4F21DE4D5800AC09A7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0479A4D21DE4D5800AC09A7 /* LaunchScreen.storyboard */; };
-		B0479A5721DE528600AC09A7 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0479A5621DE528600AC09A7 /* CustomTabBarController.swift */; };
-		B0479A5B21DE539B00AC09A7 /* ExerciseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0479A5A21DE539B00AC09A7 /* ExerciseTableViewController.swift */; };
+		B0479A5B21DE539B00AC09A7 /* ExerciseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0479A5A21DE539B00AC09A7 /* ExerciseCollectionViewCell.swift */; };
 		B0479A5D21DE553600AC09A7 /* ExerciseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0479A5C21DE553600AC09A7 /* ExerciseCell.swift */; };
 		B0479A6421DEAE7100AC09A7 /* Extetions +UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0479A6321DEAE7100AC09A7 /* Extetions +UIView.swift */; };
-		B0479A6C21E2136700AC09A7 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0479A6B21E2136700AC09A7 /* Protocols.swift */; };
 		B0479A7021E282DC00AC09A7 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0479A6F21E282DC00AC09A7 /* Item.swift */; };
 		B0479A7221E3485C00AC09A7 /* AddNewExCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0479A7121E3485C00AC09A7 /* AddNewExCollectionViewController.swift */; };
 		B0479A7421E34BD900AC09A7 /* AddNewExCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0479A7321E34BD900AC09A7 /* AddNewExCollectionViewCell.swift */; };
@@ -22,16 +20,19 @@
 		B0479A7821E6103700AC09A7 /* CommentedCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0479A7721E6103700AC09A7 /* CommentedCode.swift */; };
 		B0479A7A21E61CFA00AC09A7 /* excercises.json in Resources */ = {isa = PBXBuildFile; fileRef = B0479A7921E61CFA00AC09A7 /* excercises.json */; };
 		B0479A7C21E61DBC00AC09A7 /* LocalJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0479A7B21E61DBC00AC09A7 /* LocalJson.swift */; };
-		B0479A8121E9EDD600AC09A7 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0479A8021E9EDD600AC09A7 /* MainViewController.swift */; };
+		B0479A8121E9EDD600AC09A7 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0479A8021E9EDD600AC09A7 /* TimerViewController.swift */; };
 		B0479A8421EDE4C200AC09A7 /* Item.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B0479A8221EDE4C100AC09A7 /* Item.xcdatamodeld */; };
-		B0479A8721EDE6F000AC09A7 /* Item+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0479A8521EDE6F000AC09A7 /* Item+CoreDataClass.swift */; };
 		B0479A8C21F3142300AC09A7 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0479A8B21F3142300AC09A7 /* DetailsViewController.swift */; };
-		B0479A8F21F31BF500AC09A7 /* Sets+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0479A8D21F31BF500AC09A7 /* Sets+CoreDataClass.swift */; };
-		B0479A9021F31BF500AC09A7 /* Sets+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0479A8E21F31BF500AC09A7 /* Sets+CoreDataProperties.swift */; };
 		B0479A9221F33C8000AC09A7 /* DetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0479A9121F33C8000AC09A7 /* DetailTableViewCell.swift */; };
 		B0479A9421F3B7B900AC09A7 /* CustomExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0479A9321F3B7B900AC09A7 /* CustomExerciseViewController.swift */; };
 		B048CB2921F5E2020023B840 /* CustomClassUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B048CB2821F5E2020023B840 /* CustomClassUIView.swift */; };
-		B0EE443721FDD6A5003350CF /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0EE443521FDD6A5003350CF /* Item+CoreDataProperties.swift */; };
+		B0CDE8DA220437BC008DBB85 /* MainCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CDE8D9220437BC008DBB85 /* MainCollectionViewController.swift */; };
+		B0CDE90522044B59008DBB85 /* Workouts+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CDE8FF22044B59008DBB85 /* Workouts+CoreDataClass.swift */; };
+		B0CDE90622044B59008DBB85 /* Workouts+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CDE90022044B59008DBB85 /* Workouts+CoreDataProperties.swift */; };
+		B0CDE90722044B59008DBB85 /* Sets+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CDE90122044B59008DBB85 /* Sets+CoreDataClass.swift */; };
+		B0CDE90822044B59008DBB85 /* Sets+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CDE90222044B59008DBB85 /* Sets+CoreDataProperties.swift */; };
+		B0CDE90922044B59008DBB85 /* Item+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CDE90322044B59008DBB85 /* Item+CoreDataClass.swift */; };
+		B0CDE90A22044B59008DBB85 /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CDE90422044B59008DBB85 /* Item+CoreDataProperties.swift */; };
 		B0F3985A21F651DB00A74F4F /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F3985921F651DB00A74F4F /* SectionHeader.swift */; };
 		B0FBC4FC21FA0A26000F0EBD /* CustomDropButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0FBC4FB21FA0A26000F0EBD /* CustomDropButton.swift */; };
 /* End PBXBuildFile section */
@@ -41,11 +42,9 @@
 		B0479A4421DE4D5500AC09A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B0479A4B21DE4D5800AC09A7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B0479A4E21DE4D5800AC09A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		B0479A5621DE528600AC09A7 /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
-		B0479A5A21DE539B00AC09A7 /* ExerciseTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseTableViewController.swift; sourceTree = "<group>"; };
+		B0479A5A21DE539B00AC09A7 /* ExerciseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseCollectionViewCell.swift; sourceTree = "<group>"; };
 		B0479A5C21DE553600AC09A7 /* ExerciseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseCell.swift; sourceTree = "<group>"; };
 		B0479A6321DEAE7100AC09A7 /* Extetions +UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extetions +UIView.swift"; sourceTree = "<group>"; };
-		B0479A6B21E2136700AC09A7 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		B0479A6F21E282DC00AC09A7 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		B0479A7121E3485C00AC09A7 /* AddNewExCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewExCollectionViewController.swift; sourceTree = "<group>"; };
 		B0479A7321E34BD900AC09A7 /* AddNewExCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewExCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -54,16 +53,19 @@
 		B0479A7921E61CFA00AC09A7 /* excercises.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = excercises.json; path = workingOutApp/tools/excercises.json; sourceTree = SOURCE_ROOT; };
 		B0479A7B21E61DBC00AC09A7 /* LocalJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalJson.swift; sourceTree = "<group>"; };
 		B0479A7D21E6978700AC09A7 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B0479A8021E9EDD600AC09A7 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		B0479A8021E9EDD600AC09A7 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
 		B0479A8321EDE4C200AC09A7 /* Item.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Item.xcdatamodel; sourceTree = "<group>"; };
-		B0479A8521EDE6F000AC09A7 /* Item+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataClass.swift"; sourceTree = "<group>"; };
 		B0479A8B21F3142300AC09A7 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
-		B0479A8D21F31BF500AC09A7 /* Sets+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sets+CoreDataClass.swift"; sourceTree = "<group>"; };
-		B0479A8E21F31BF500AC09A7 /* Sets+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sets+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B0479A9121F33C8000AC09A7 /* DetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewCell.swift; sourceTree = "<group>"; };
 		B0479A9321F3B7B900AC09A7 /* CustomExerciseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomExerciseViewController.swift; sourceTree = "<group>"; };
 		B048CB2821F5E2020023B840 /* CustomClassUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomClassUIView.swift; sourceTree = "<group>"; };
-		B0EE443521FDD6A5003350CF /* Item+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		B0CDE8D9220437BC008DBB85 /* MainCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewController.swift; sourceTree = "<group>"; };
+		B0CDE8FF22044B59008DBB85 /* Workouts+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Workouts+CoreDataClass.swift"; sourceTree = "<group>"; };
+		B0CDE90022044B59008DBB85 /* Workouts+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Workouts+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		B0CDE90122044B59008DBB85 /* Sets+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sets+CoreDataClass.swift"; sourceTree = "<group>"; };
+		B0CDE90222044B59008DBB85 /* Sets+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sets+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		B0CDE90322044B59008DBB85 /* Item+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataClass.swift"; sourceTree = "<group>"; };
+		B0CDE90422044B59008DBB85 /* Item+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B0F3985921F651DB00A74F4F /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
 		B0FBC4FB21FA0A26000F0EBD /* CustomDropButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDropButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -116,7 +118,6 @@
 				B0479A4421DE4D5500AC09A7 /* AppDelegate.swift */,
 				B0479A4B21DE4D5800AC09A7 /* Assets.xcassets */,
 				B0479A4D21DE4D5800AC09A7 /* LaunchScreen.storyboard */,
-				B0479A6B21E2136700AC09A7 /* Protocols.swift */,
 				B0479A7721E6103700AC09A7 /* CommentedCode.swift */,
 				B0479A7921E61CFA00AC09A7 /* excercises.json */,
 			);
@@ -126,9 +127,9 @@
 		B0479A5F21DE558500AC09A7 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				B0479A5621DE528600AC09A7 /* CustomTabBarController.swift */,
-				B0479A8021E9EDD600AC09A7 /* MainViewController.swift */,
-				B0479A5A21DE539B00AC09A7 /* ExerciseTableViewController.swift */,
+				B0479A8021E9EDD600AC09A7 /* TimerViewController.swift */,
+				B0CDE8D9220437BC008DBB85 /* MainCollectionViewController.swift */,
+				B0479A5A21DE539B00AC09A7 /* ExerciseCollectionViewCell.swift */,
 				B0479A7121E3485C00AC09A7 /* AddNewExCollectionViewController.swift */,
 				B0479A7521E36C5700AC09A7 /* InfoViewController.swift */,
 				B0479A8B21F3142300AC09A7 /* DetailsViewController.swift */,
@@ -151,13 +152,15 @@
 		B0479A6721E0A42900AC09A7 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				B0CDE8FF22044B59008DBB85 /* Workouts+CoreDataClass.swift */,
+				B0CDE90022044B59008DBB85 /* Workouts+CoreDataProperties.swift */,
+				B0CDE90122044B59008DBB85 /* Sets+CoreDataClass.swift */,
+				B0CDE90222044B59008DBB85 /* Sets+CoreDataProperties.swift */,
+				B0CDE90322044B59008DBB85 /* Item+CoreDataClass.swift */,
+				B0CDE90422044B59008DBB85 /* Item+CoreDataProperties.swift */,
 				B0479A6F21E282DC00AC09A7 /* Item.swift */,
 				B0479A7B21E61DBC00AC09A7 /* LocalJson.swift */,
 				B0479A8221EDE4C100AC09A7 /* Item.xcdatamodeld */,
-				B0479A8D21F31BF500AC09A7 /* Sets+CoreDataClass.swift */,
-				B0EE443521FDD6A5003350CF /* Item+CoreDataProperties.swift */,
-				B0479A8E21F31BF500AC09A7 /* Sets+CoreDataProperties.swift */,
-				B0479A8521EDE6F000AC09A7 /* Item+CoreDataClass.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -240,26 +243,27 @@
 			files = (
 				B0479A7421E34BD900AC09A7 /* AddNewExCollectionViewCell.swift in Sources */,
 				B0479A7621E36C5700AC09A7 /* InfoViewController.swift in Sources */,
+				B0CDE90722044B59008DBB85 /* Sets+CoreDataClass.swift in Sources */,
 				B0479A4521DE4D5500AC09A7 /* AppDelegate.swift in Sources */,
 				B0479A5D21DE553600AC09A7 /* ExerciseCell.swift in Sources */,
 				B0F3985A21F651DB00A74F4F /* SectionHeader.swift in Sources */,
-				B0479A6C21E2136700AC09A7 /* Protocols.swift in Sources */,
+				B0CDE90622044B59008DBB85 /* Workouts+CoreDataProperties.swift in Sources */,
 				B0479A7821E6103700AC09A7 /* CommentedCode.swift in Sources */,
-				B0479A8F21F31BF500AC09A7 /* Sets+CoreDataClass.swift in Sources */,
-				B0479A8721EDE6F000AC09A7 /* Item+CoreDataClass.swift in Sources */,
 				B048CB2921F5E2020023B840 /* CustomClassUIView.swift in Sources */,
 				B0479A7C21E61DBC00AC09A7 /* LocalJson.swift in Sources */,
+				B0CDE90822044B59008DBB85 /* Sets+CoreDataProperties.swift in Sources */,
+				B0CDE90522044B59008DBB85 /* Workouts+CoreDataClass.swift in Sources */,
 				B0479A8421EDE4C200AC09A7 /* Item.xcdatamodeld in Sources */,
 				B0479A8C21F3142300AC09A7 /* DetailsViewController.swift in Sources */,
+				B0CDE8DA220437BC008DBB85 /* MainCollectionViewController.swift in Sources */,
 				B0FBC4FC21FA0A26000F0EBD /* CustomDropButton.swift in Sources */,
-				B0479A8121E9EDD600AC09A7 /* MainViewController.swift in Sources */,
+				B0479A8121E9EDD600AC09A7 /* TimerViewController.swift in Sources */,
 				B0479A7021E282DC00AC09A7 /* Item.swift in Sources */,
+				B0CDE90A22044B59008DBB85 /* Item+CoreDataProperties.swift in Sources */,
 				B0479A9421F3B7B900AC09A7 /* CustomExerciseViewController.swift in Sources */,
-				B0479A9021F31BF500AC09A7 /* Sets+CoreDataProperties.swift in Sources */,
-				B0EE443721FDD6A5003350CF /* Item+CoreDataProperties.swift in Sources */,
 				B0479A7221E3485C00AC09A7 /* AddNewExCollectionViewController.swift in Sources */,
-				B0479A5721DE528600AC09A7 /* CustomTabBarController.swift in Sources */,
-				B0479A5B21DE539B00AC09A7 /* ExerciseTableViewController.swift in Sources */,
+				B0CDE90922044B59008DBB85 /* Item+CoreDataClass.swift in Sources */,
+				B0479A5B21DE539B00AC09A7 /* ExerciseCollectionViewCell.swift in Sources */,
 				B0479A9221F33C8000AC09A7 /* DetailTableViewCell.swift in Sources */,
 				B0479A6421DEAE7100AC09A7 /* Extetions +UIView.swift in Sources */,
 			);

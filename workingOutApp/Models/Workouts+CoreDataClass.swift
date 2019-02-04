@@ -1,5 +1,5 @@
 //
-//  Sets+CoreDataClass.swift
+//  Workouts+CoreDataClass.swift
 //  workingOutApp
 //
 //  Created by Rusłan Chamski on 01/02/2019.
@@ -11,6 +11,6 @@ import Foundation
 import CoreData
 
 
-public class Sets: NSManagedObject {
+public class Workouts: NSManagedObject {
 
 }

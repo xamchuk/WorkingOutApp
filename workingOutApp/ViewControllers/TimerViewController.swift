@@ -12,14 +12,14 @@ import AudioToolbox
 import UserNotifications
 
 
-class MainViewController: UIViewController {
+class TimerViewController: UIViewController {
     private let appDelegate = UIApplication.shared.delegate as! AppDelegate
     private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     private var fetchedExercisesRC: NSFetchedResultsController<Item>!
     private var fetchedSetsRC: NSFetchedResultsController<Sets>?
     private let notificationCenter = UNUserNotificationCenter.current()
     private var backgroundTask: UIBackgroundTaskIdentifier = .invalid
-
+    var workout: Workouts?
     let statusView = UIView()
     let progressOfExercise = CAShapeLayer()
     let cyrcleStatusView = UIView()
@@ -55,11 +55,23 @@ class MainViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(handleDoneButton))
 
+        navigationItem.leftBarButtonItem = doneButton
+        navigationItem.rightBarButtonItem?.tintColor = .textColor
+        doneButton.tintColor = .textColor
+        navigationController?.navigationBar.barTintColor = .gradientDarker
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.textColor]
+        let backButton = UIBarButtonItem()
+        backButton.tintColor = .textColor
+        navigationController!.navigationBar.topItem!.backBarButtonItem = backButton
         view.backgroundColor = .white
 
         setupVisualEffects()
         setupAllViews()
+    }
+    @objc func handleDoneButton() {
+        navigationController?.popToRootViewController(animated: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -71,6 +83,9 @@ class MainViewController: UIViewController {
         } else {
             switchNextExerciseOrSet()
         }
+    }
+    deinit {
+        print("deinited")
     }
 
     override func viewDidLayoutSubviews() {
@@ -84,7 +99,6 @@ class MainViewController: UIViewController {
     }
 
     func registerBackgroundTask() {
-        print("Background task Started...")
         backgroundTask = UIApplication.shared.beginBackgroundTask { [weak self] in
             self?.endBackgroundTask()
         }
@@ -92,41 +106,33 @@ class MainViewController: UIViewController {
     }
 
     func endBackgroundTask() {
-        print("Background task ended.")
         UIApplication.shared.endBackgroundTask(backgroundTask)
         backgroundTask = .invalid
     }
 
     func refreshExercises() {
         let requestExercise = Item.fetchRequest() as NSFetchRequest<Item>
-        //       MARK: Filtering coreData
-        let queryExercise = ""
-        if !queryExercise.isEmpty {
-            requestExercise.predicate = NSPredicate(format: "name CONTAINS[cd] %@", queryExercise)
-        }
-        let sortExercise = NSSortDescriptor(key: #keyPath(Item.index), ascending: true, selector: #selector(NSString.caseInsensitiveCompare(_:)))
+        guard let workout = workout else { return }
+            requestExercise.predicate = NSPredicate(format: "owner= %@", workout)
+        let sortExercise = NSSortDescriptor(key: #keyPath(Item.index), ascending: true)
         requestExercise.sortDescriptors = [sortExercise]
-
         do {
             fetchedExercisesRC = NSFetchedResultsController(fetchRequest: requestExercise, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
             try fetchedExercisesRC.performFetch()
         } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
         }
-
     }
 
     func refreshSetsAt(exerciseIndex: Int) {
         let requestSets = Sets.fetchRequest() as NSFetchRequest<Sets>
-
         guard let fetched = fetchedExercisesRC.fetchedObjects else { return }
             requestSets.predicate = NSPredicate(format: "item = %@", fetched[exerciseIndex])
-            let sortSets = NSSortDescriptor(key: #keyPath(Sets.date), ascending: true, selector: #selector(NSString.caseInsensitiveCompare(_:)))
+            let sortSets = NSSortDescriptor(key: #keyPath(Sets.date), ascending: true)
             requestSets.sortDescriptors = [sortSets]
             do {
                 fetchedSetsRC = NSFetchedResultsController(fetchRequest: requestSets, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
                 try fetchedSetsRC?.performFetch()
-
             } catch let error as NSError {
                 print("Could not fetch. \(error), \(error.userInfo)")
             }
@@ -138,7 +144,7 @@ class MainViewController: UIViewController {
         progressOfExercise.strokeEnd = CGFloat((Double(indexOfExercise) / Double(strokesCount)) / 2)
         if indexOfExercise < items.count {
             let item = items[indexOfExercise]
-            exerciseControllView.title.text = item.name
+            exerciseControllView.titleButton.setTitle(item.name, for: .normal)
 
             refreshSetsAt(exerciseIndex: indexOfExercise)
             guard let sets = fetchedSetsRC?.fetchedObjects else { return }
@@ -164,11 +170,12 @@ class MainViewController: UIViewController {
             registerBackgroundTask()
             timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(updateTimer)), userInfo: nil, repeats: true)
             startButton.setTitle("Pause", for: .normal)
+            nameOfExcercise.text = "Do your first set, then press next"
         } else if secondsTimer > 0 {
             timer.invalidate()
             isRunning = false
             endBackgroundTask()
-            startButton.setTitle("Start", for: .normal)
+            startButton.setTitle("Resume", for: .normal)
         }
     }
 
@@ -194,11 +201,19 @@ class MainViewController: UIViewController {
         startButton.setTitle("Start", for: .normal)
     }
 
+    @objc func handleTitleButton() {
+       // let vc = TimerViewController()
+        dismiss(animated: true) {
+            
+        }
+    }
+
     @objc func updateTimer() {
          if secondsTimer >= 0 {
             if seconds == 1 && !isBreak {
                 notificationCentrer()
                 breakLabel.text = "WORK"
+                singleTimerLabel.text = ""
                 nextButton.isEnabled = true
                 AudioServicesPlayAlertSound(1304)
             } else  if seconds == 0 && isBreak {
@@ -210,7 +225,11 @@ class MainViewController: UIViewController {
             if seconds > 0 {
                 seconds -= 1
             }
-            singleTimerLabel.text = "\(seconds)"
+            if seconds == 0 {
+                singleTimerLabel.text = ""
+            } else {
+                singleTimerLabel.text = "\(seconds)"
+            }
             allTimerLabel.text = timeString(time: TimeInterval(secondsTimer))
             if secondsTimer > 10800 {
                 timer.invalidate()
@@ -236,7 +255,7 @@ class MainViewController: UIViewController {
     func notificationCentrer() {
         let content = UNMutableNotificationContent()
         content.title = "Break has finished"
-        content.subtitle = "NEXT EXERCISE: \(exerciseControllView.title.text ?? "finish")"
+        content.subtitle = "NEXT EXERCISE: \(exerciseControllView.titleButton.title(for: .normal) ?? "finish")"
         content.body = "\(exerciseControllView.sets.text ?? "0"), \(exerciseControllView.repsAndweight.text ?? "0")"
         content.sound = UNNotificationSound.default
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.1, repeats: false)
@@ -245,10 +264,11 @@ class MainViewController: UIViewController {
     }
 }
 
-extension MainViewController {
+extension TimerViewController {
 
     fileprivate func makeLabel(label: UILabel, text: String, size: CGFloat ) {
         label.font = UIFont.boldSystemFont(ofSize: size)
+        label.adjustsFontSizeToFitWidth = true
         label.textAlignment = .center
         label.text = text
         label.textColor = .textColor
@@ -303,7 +323,7 @@ extension MainViewController {
         cyrcleStatusView.addSubview(singleTimerLabel)
         singleTimerLabel.anchor(top: breakLabel.bottomAnchor, leading: nil, bottom: nil, trailing: nil, padding: .init(top: 0, left: 0, bottom: 0, right: 0))
         singleTimerLabel.centerXAnchor.constraint(equalTo: cyrcleStatusView.centerXAnchor).isActive = true
-        makeLabel(label: singleTimerLabel, text: "00:00", size: 30)
+        makeLabel(label: singleTimerLabel, text: "", size: 30)
         cyrcleStatusView.addSubview(allTimerLabel)
         allTimerLabel.anchor(top: nil, leading: nil, bottom: cyrcleStatusView.bottomAnchor, trailing: nil, padding: .init(top: 0, left: 0, bottom: 40, right: 0))
         allTimerLabel.centerXAnchor.constraint(equalTo: cyrcleStatusView.centerXAnchor).isActive = true
@@ -317,10 +337,12 @@ extension MainViewController {
     
     fileprivate func setupExerciseControllView() {
         view.addSubview(exerciseControllView)
-        exerciseControllView.anchor(top: allProgramLabel.bottomAnchor, leading: view.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: view.frame.height / 5, left: 8, bottom: 8, right: 8))
+        exerciseControllView.anchor(top: allProgramLabel.bottomAnchor, leading: view.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: view.frame.height / 9, left: 8, bottom: 8, right: 8))
         startButton = exerciseControllView.startButton
         nextButton = exerciseControllView.nextButton
         resetButton = exerciseControllView.resetButton
+        let titleButton = exerciseControllView.titleButton
+        titleButton.addTarget(self, action: #selector(handleTitleButton), for: .touchUpInside)
         startButton.addTarget(self, action: #selector(handleStartButton), for: .touchUpInside)
         nextButton.addTarget(self, action: #selector(handleNextButton), for: .touchUpInside)
         resetButton.addTarget(self, action: #selector(handleResetButton), for: .touchUpInside)
