@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AB4D6DB2220A3B5C0054F682 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4D6DB1220A3B5C0054F682 /* CoreDataStack.swift */; };
 		B0479A4521DE4D5500AC09A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0479A4421DE4D5500AC09A7 /* AppDelegate.swift */; };
 		B0479A4C21DE4D5800AC09A7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B0479A4B21DE4D5800AC09A7 /* Assets.xcassets */; };
 		B0479A4F21DE4D5800AC09A7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0479A4D21DE4D5800AC09A7 /* LaunchScreen.storyboard */; };
@@ -40,6 +41,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AB4D6DB1220A3B5C0054F682 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		B0479A4121DE4D5500AC09A7 /* workingOutApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = workingOutApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0479A4421DE4D5500AC09A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B0479A4B21DE4D5800AC09A7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				B0479A4421DE4D5500AC09A7 /* AppDelegate.swift */,
+				AB4D6DB1220A3B5C0054F682 /* CoreDataStack.swift */,
 				B0479A4B21DE4D5800AC09A7 /* Assets.xcassets */,
 				B0479A4D21DE4D5800AC09A7 /* LaunchScreen.storyboard */,
 				B0479A7721E6103700AC09A7 /* CommentedCode.swift */,
@@ -262,6 +265,7 @@
 				B0479A5D21DE553600AC09A7 /* ExerciseCell.swift in Sources */,
 				B0F3985A21F651DB00A74F4F /* SectionHeader.swift in Sources */,
 				B0CDE90622044B59008DBB85 /* Workouts+CoreDataProperties.swift in Sources */,
+				AB4D6DB2220A3B5C0054F682 /* CoreDataStack.swift in Sources */,
 				B0479A7821E6103700AC09A7 /* CommentedCode.swift in Sources */,
 				B048CB2921F5E2020023B840 /* TimerCustomLabel.swift in Sources */,
 				B0479A7C21E61DBC00AC09A7 /* LocalJson.swift in Sources */,

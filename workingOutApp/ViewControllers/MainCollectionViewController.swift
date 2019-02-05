@@ -9,14 +9,25 @@
 import UIKit
 import CoreData
 
+// Singleton -> Dependency Injection
+
 class MainCollectionViewController: UIViewController {
 
-    private let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     private var fetchedWorkouts: NSFetchedResultsController<Workouts>!
     private let cellId = "Cell"
     var collectionView: UICollectionView?
     var posionOfItemIndexPath = IndexPath(item: 0, section: 0)
+
+    var coreDataStack: CoreDataStack
+
+    init(coreDataStack: CoreDataStack) {
+        self.coreDataStack = coreDataStack
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     override func viewDidLoad() {
         view.makeGradients()
         refreshCoreData()
@@ -46,8 +57,8 @@ class MainCollectionViewController: UIViewController {
         let alertActionCell = UIAlertController(title: "Action Exercises Cell", message: "Choose an action for the selected list", preferredStyle: .actionSheet)
         let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: { action in
             let obj = self.fetchedWorkouts.object(at: self.posionOfItemIndexPath)
-            self.context.delete(obj)
-            self.appDelegate.saveContext()
+            self.coreDataStack.context.delete(obj)
+            self.coreDataStack.saveContext()
             self.refreshCoreData()
             self.collectionView!.deleteItems(at: [self.posionOfItemIndexPath])
             if self.posionOfItemIndexPath.item == (self.fetchedWorkouts.fetchedObjects?.count)! {
@@ -89,7 +100,7 @@ class MainCollectionViewController: UIViewController {
     }
 
     @objc func handeleAddButton() {
-        let workout = Workouts(entity: Workouts.entity(), insertInto: context)
+        let workout = Workouts(entity: Workouts.entity(), insertInto: coreDataStack?.context)
         let title = "Write name of Workout"
         let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
         alert.addTextField(configurationHandler: { (textField) in
