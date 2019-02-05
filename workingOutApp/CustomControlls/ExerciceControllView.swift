@@ -1,38 +1,23 @@
 //
-//  CustomClassUIView.swift
+//  File.swift
 //  workingOutApp
 //
-//  Created by Rusłan Chamski on 21/01/2019.
+//  Created by Rusłan Chamski on 04/02/2019.
 //  Copyright © 2019 Rusłan Chamski. All rights reserved.
 //
 
 import UIKit
 
-class LineView : UIView {
-
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        layer.borderColor = UIColor.linesColor.cgColor
-        layer.borderWidth = 3
-        translatesAutoresizingMaskIntoConstraints = false
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-}
-
 class ExerciceControllView: UIView {
-    let titleButton = UIButton(type: .system)
-    let sets = CustomLabel()
-    let repsAndweight = CustomLabel()
-    let stackView = UIStackView()
 
+    let titleLabel = UILabel()
+    let sets = TimerCustomLabel()
+    let repsAndweight = TimerCustomLabel()
+    let stackView = UIStackView()
     let buttonStackView = UIStackView()
     let startButton = UIButton(type: .system)
     let nextButton = UIButton(type: .system)
-    let resetButton = UIButton(type: .system)
+    let stopButton = UIButton(type: .system)
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -44,23 +29,24 @@ class ExerciceControllView: UIView {
         setupButtonsStackView()
         setupStartButton()
         setupNextButton()
-        setupResetButton()
+        setupStopButton()
         setupStackView()
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    fileprivate func setupTitle() {
-        addSubview(titleButton)
-        let style  = UIFont.TextStyle.largeTitle
-        titleButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: style)
-        titleButton.backgroundColor = .blue
-        titleButton.anchor(top: topAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor)
-        titleButton.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 1 / 5).isActive = true
-    }
 
+    fileprivate func setupTitle() {
+        addSubview(titleLabel)
+        let style  = UIFont.TextStyle.title1
+        titleLabel.font = UIFont.preferredFont(forTextStyle: style)
+        titleLabel.backgroundColor = .gradientDarker
+        titleLabel.textColor = .textColor
+        titleLabel.textAlignment = .center
+        titleLabel.anchor(top: topAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor)
+        titleLabel.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 1 / 5).isActive = true
+    }
 
     fileprivate  func setupStartButton() {
         startButton.translatesAutoresizingMaskIntoConstraints = false
@@ -83,27 +69,25 @@ class ExerciceControllView: UIView {
         nextButton.widthAnchor.constraint(equalTo: buttonStackView.widthAnchor, multiplier: 1 / 5).isActive = true
     }
 
-    fileprivate func setupResetButton() {
-        resetButton.translatesAutoresizingMaskIntoConstraints = false
-        resetButton.setTitle("Reset", for: .normal)
-        resetButton.titleLabel?.textAlignment = .center
-        resetButton.titleLabel?.numberOfLines = 0
-        resetButton.setTitleColor(.textColor, for: .normal)
-        resetButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
-        resetButton.titleLabel?.adjustsFontSizeToFitWidth = true
-        resetButton.backgroundColor = UIColor.gradientDarker
-        resetButton.widthAnchor.constraint(equalTo: buttonStackView.widthAnchor, multiplier: 1 / 5).isActive = true
+    fileprivate func setupStopButton() {
+        stopButton.translatesAutoresizingMaskIntoConstraints = false
+        stopButton.setTitle("Stop", for: .normal)
+        stopButton.titleLabel?.textAlignment = .center
+        stopButton.titleLabel?.numberOfLines = 0
+        stopButton.setTitleColor(.textColor, for: .normal)
+        stopButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+        stopButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        stopButton.backgroundColor = UIColor.red
+        stopButton.widthAnchor.constraint(equalTo: buttonStackView.widthAnchor, multiplier: 1 / 5).isActive = true
     }
 
     fileprivate func setupButtonsStackView() {
         addSubview(buttonStackView)
         buttonStackView.spacing = 6
         buttonStackView.distribution = .equalCentering
-        buttonStackView.anchor(top: titleButton.bottomAnchor, leading: leadingAnchor, bottom: nil , trailing: trailingAnchor, padding: .init(top: 6, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: 100))
-        [resetButton, startButton, nextButton].forEach { buttonStackView.addArrangedSubview($0) }
+        buttonStackView.anchor(top: titleLabel.bottomAnchor, leading: leadingAnchor, bottom: nil , trailing: trailingAnchor, padding: .init(top: 6, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: 100))
+        [stopButton, startButton, nextButton].forEach { buttonStackView.addArrangedSubview($0) }
     }
-
-
 
     fileprivate func setupStackView() {
         addSubview(stackView)
@@ -113,24 +97,5 @@ class ExerciceControllView: UIView {
         stackView.spacing = 6
         stackView.distribution = .fillProportionally
         [sets, repsAndweight].forEach { (i) in stackView.addArrangedSubview(i)}
-    }
-}
-
-class CustomLabel: UILabel {
-
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        textAlignment = .center
-        textColor = .textColor
-        adjustsFontSizeToFitWidth = true
-        let style  = UIFont.TextStyle.body
-        font = UIFont.preferredFont(forTextStyle: style)
-        backgroundColor = .gradientDarker
-        layer.borderColor = UIColor.clear.cgColor
-        layer.borderWidth = 2
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }

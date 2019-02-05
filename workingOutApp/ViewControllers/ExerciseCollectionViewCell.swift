@@ -30,6 +30,7 @@ class ExerciseCollectionViewCell: UICollectionViewCell {
     var tableView = UITableView()
     var tableHeaderView = UIView()
     let headerAddButton = UIButton(type: .system)
+    let headerTittleLabel = UILabel()
     var isLoaded = false
     var imageView = UIImageView()
     weak var delegate: PassDataFromTableControllerToTabBar?
@@ -54,6 +55,19 @@ class ExerciseCollectionViewCell: UICollectionViewCell {
         delegateCell?.passingAddNewExerciseAction(vc: addNewExCollectionViewController)
     }
 
+    fileprivate func refreshHeaderAndButtons() {
+        if fetchedRC != nil {
+            if fetchedRC.fetchedObjects?.count == 0 {
+                startButton.isEnabled = false
+                headerTittleLabel.text = "Add new exercises"
+            } else {
+                startButton.isEnabled = true
+                headerTittleLabel.text = "You have \(fetchedRC.fetchedObjects?.count ?? 0 ) exercise(s)"
+            }
+        }
+        tableView.reloadData()
+    }
+
     func refreshCoreData() {
         let request = Item.fetchRequest() as NSFetchRequest<Item>
         if workout != nil {
@@ -68,14 +82,7 @@ class ExerciseCollectionViewCell: UICollectionViewCell {
                 print("Could not fetch. \(error), \(error.userInfo)")
             }
         }
-        if fetchedRC != nil {
-            if fetchedRC.fetchedObjects?.count == 0 {
-                startButton.isEnabled = false
-            } else {
-                startButton.isEnabled = true
-            }
-        }
-        tableView.reloadData()
+        refreshHeaderAndButtons()
     }
 }
 
@@ -157,7 +164,9 @@ extension ExerciseCollectionViewCell {
         tableView.register(ExerciseCell.self, forCellReuseIdentifier: cellId)
         tableView.backgroundColor = .clear
         tableHeaderView.addSubview(headerAddButton)
+        tableHeaderView.addSubview(headerTittleLabel)
         setupAddButtonOfHeader()
+        setupHeaderTitleLabel()
     }
 
     fileprivate func setupAddButtonOfHeader() {
@@ -168,8 +177,16 @@ extension ExerciseCollectionViewCell {
         headerAddButton.backgroundColor = .clear
         headerAddButton.setImage(UIImage(named: "plus"), for: .normal)
         headerAddButton.addTarget(self, action: #selector(handleAddButton), for: .touchUpInside)
-        headerAddButton.anchor(top: tableHeaderView.topAnchor, leading: nil, bottom: tableHeaderView.bottomAnchor, trailing: nil, padding: .init(top: 5, left: 0, bottom: 5, right: 0), size: CGSize(width: 40, height: 0))
+        headerAddButton.anchor(top: tableHeaderView.topAnchor, leading: nil, bottom: tableHeaderView.bottomAnchor, trailing: nil, padding: .init(top: 5, left: 0, bottom: 0, right: 0), size: CGSize(width: 45, height: 0))
         headerAddButton.centerXAnchor.constraint(equalTo: tableHeaderView.leadingAnchor, constant: 60).isActive = true
+    }
+
+    fileprivate func setupHeaderTitleLabel() {
+        headerTittleLabel.textColor = .textColor
+        let style = UIFont.TextStyle.body
+        headerTittleLabel.font = UIFont.preferredFont(forTextStyle: style)
+        headerTittleLabel.adjustsFontSizeToFitWidth = true
+        headerTittleLabel.anchor(top: headerAddButton.topAnchor, leading: headerAddButton.trailingAnchor, bottom: headerAddButton.bottomAnchor, trailing: nil, padding: .init(top: 0, left: 4, bottom: 0, right: 0))
     }
 
     fileprivate func setupStartButton() {
@@ -192,7 +209,7 @@ extension ExerciseCollectionViewCell: NSFetchedResultsControllerDelegate {
         case .insert:
             tableView.insertRows(at: [cellIndex], with: .automatic)
         case .delete:
-            tableView.reloadData() //deleteRows(at: [cellIndex], with: .automatic)
+             refreshHeaderAndButtons()
         default:
             break
         }

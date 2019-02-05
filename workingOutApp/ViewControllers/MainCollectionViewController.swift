@@ -17,7 +17,6 @@ class MainCollectionViewController: UIViewController {
     private let cellId = "Cell"
     var collectionView: UICollectionView?
     var posionOfItemIndexPath = IndexPath(item: 0, section: 0)
-    var timerVC: TimerViewController?
     override func viewDidLoad() {
         view.makeGradients()
         refreshCoreData()
@@ -34,7 +33,7 @@ class MainCollectionViewController: UIViewController {
         collectionView?.reloadData()
     }
 
-     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         let x = targetContentOffset.pointee.x
         posionOfItemIndexPath = IndexPath(item: Int(x / view.frame.width), section: 0)
         refreshNavTitle()
@@ -55,7 +54,7 @@ class MainCollectionViewController: UIViewController {
                 self.posionOfItemIndexPath.item = indexPath.item - 1
             } else if self.posionOfItemIndexPath.item != 0 {
                 self.posionOfItemIndexPath.item = indexPath.item
-                }
+            }
             self.refreshNavTitle()
         })
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
@@ -90,26 +89,34 @@ class MainCollectionViewController: UIViewController {
     }
 
     @objc func handeleAddButton() {
-            let workout = Workouts(entity: Workouts.entity(), insertInto: context)
-        workout.name = "\(Date())"
-            appDelegate.saveContext()
-            refreshCoreData()
-            collectionView?.reloadData()
-        guard let objs = fetchedWorkouts.fetchedObjects else { return }
-        let indexPath = IndexPath(item: objs.count - 1, section: 0)
-            collectionView?.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-        posionOfItemIndexPath.item = objs.count - 1
-        refreshNavTitle()
+        let workout = Workouts(entity: Workouts.entity(), insertInto: context)
+        let title = "Write name of Workout"
+        let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
+        alert.addTextField(configurationHandler: { (textField) in
+            textField.placeholder = "Workout 1"
+        })
+        let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.cancel) {
+            UIAlertAction in
+            let firstTextField = alert.textFields![0] as UITextField
+            workout.name = firstTextField.text
+            self.appDelegate.saveContext()
+            self.refreshCoreData()
+            self.collectionView?.reloadData()
+            guard let objs = self.fetchedWorkouts.fetchedObjects else { return }
+            let indexPath = IndexPath(item: objs.count - 1, section: 0)
+            self.collectionView?.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+            self.posionOfItemIndexPath.item = objs.count - 1
+            self.refreshNavTitle()
+        }
+        alert.addAction(okAction)
+        present(alert, animated: true, completion: nil)
     }
 
     @objc func handleStartButtonAction() {
         let workout = fetchedWorkouts.object(at: posionOfItemIndexPath)
         let timerVC = TimerViewController()
         timerVC.workout = workout
-       // let nc = UINavigationController(rootViewController: timerVC)
-        self.timerVC = timerVC
-       // nc.modalTransitionStyle = .flipHorizontal
-        navigationController?.pushViewController(self.timerVC!, animated: true)
+        present(timerVC, animated: true, completion: nil)
     }
 }
 extension MainCollectionViewController {
@@ -143,7 +150,7 @@ extension MainCollectionViewController {
 extension MainCollectionViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-            return fetchedWorkouts.fetchedObjects?.count ?? 0
+        return fetchedWorkouts.fetchedObjects?.count ?? 0
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
