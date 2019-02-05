@@ -14,7 +14,7 @@ protocol DetailCellDelegate: AnyObject {
 
 class DetailTableViewCell: UITableViewCell {
 
-    private let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    var coreDataStack: CoreDataStack!
     var indexPath: IndexPath?
     var set: Sets? {
         didSet {
@@ -92,7 +92,7 @@ extension DetailTableViewCell: UIPickerViewDelegate, UIPickerViewDataSource {
         set?.weight = Double(weightTextLabel.text!)!
         guard let set = set else { return }
         delegate?.cellDidChanched(set: set, indexPath: indexPath!)
-        appDelegate.saveContext()
+        coreDataStack.saveContext()
     }
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         if component == 1 || component == 3 {

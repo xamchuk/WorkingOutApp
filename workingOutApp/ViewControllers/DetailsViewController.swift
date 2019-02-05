@@ -11,8 +11,7 @@ import CoreData
 
 class DetailsViewController: UIViewController {
 
-    private let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    var coreDataStack: CoreDataStack!
     private let cellId = "cell"
     var tableView = UITableView()
     var footerView = UIView()
@@ -50,7 +49,7 @@ class DetailsViewController: UIViewController {
         let sort = NSSortDescriptor(key: #keyPath(Sets.date), ascending: true)
         request.sortDescriptors = [sort]
         do {
-            fetchedRC = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+            fetchedRC = NSFetchedResultsController(fetchRequest: request, managedObjectContext: coreDataStack.viewContext, sectionNameKeyPath: nil, cacheName: nil)
             try fetchedRC.performFetch()
         } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
@@ -62,12 +61,12 @@ class DetailsViewController: UIViewController {
         guard let sets = fetchedRC.fetchedObjects else { return }
         if sets.isEmpty {
             for _ in 0...1 {
-                let set = Sets(entity: Sets.entity(), insertInto: context)
+                let set = Sets(entity: Sets.entity(), insertInto: coreDataStack.viewContext)
                 set.repeats = 8
                 set.weight = 20
                 set.date = NSDate()
                 set.item = exercise
-                appDelegate.saveContext()
+                coreDataStack.saveContext()
                 refreshCoData()
             }
         }
@@ -80,12 +79,12 @@ class DetailsViewController: UIViewController {
     @objc func hendleFooterAddButton() {
         guard let setsForIndex = fetchedRC.fetchedObjects else { return }
         guard let lastIndex = setsForIndex.indices.last else { return }
-        let set = Sets(entity: Sets.entity(), insertInto: context)
+        let set = Sets(entity: Sets.entity(), insertInto: coreDataStack.viewContext)
         set.repeats = setsForIndex[lastIndex].repeats
         set.weight = setsForIndex[lastIndex].weight
         set.date = NSDate()
         set.item = exercise
-        appDelegate.saveContext()
+        coreDataStack.saveContext()
         refreshCoData()
         guard let sets = fetchedRC.fetchedObjects else { return }
         tableView.insertRows(at: [IndexPath(row: sets.count - 1, section: 0)], with: .middle)
@@ -101,6 +100,7 @@ extension DetailsViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! DetailTableViewCell
+        cell.coreDataStack = coreDataStack
         cell.delegate = self
         cell.indexPath = indexPath
         cell.selectionStyle = .none
@@ -115,8 +115,8 @@ extension DetailsViewController: UITableViewDataSource {
             (delete, indexPath) in
             self.selectedIndexPath = nil
             let set = self.fetchedRC.object(at: indexPath)
-            self.context.delete(set)
-            self.appDelegate.saveContext()
+            self.coreDataStack.viewContext.delete(set)
+            self.coreDataStack.saveContext()
             self.refreshCoData()
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
@@ -157,7 +157,7 @@ extension DetailsViewController: DetailCellDelegate {
                 sets[indexRow].weight = set.weight
             }
         }
-        appDelegate.saveContext()
+        coreDataStack.saveContext()
         refreshCoData()
         tableView.reloadData()
     }

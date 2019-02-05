@@ -11,10 +11,10 @@ import CoreData
 
 class MainCollectionViewController: UIViewController {
 
-    private let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+
     private var fetchedWorkouts: NSFetchedResultsController<Workouts>!
     private let cellId = "Cell"
+    var coreDataStack: CoreDataStack!
     var collectionView: UICollectionView?
     var posionOfItemIndexPath = IndexPath(item: 0, section: 0)
     override func viewDidLoad() {
@@ -46,8 +46,8 @@ class MainCollectionViewController: UIViewController {
         let alertActionCell = UIAlertController(title: "Action Exercises Cell", message: "Choose an action for the selected list", preferredStyle: .actionSheet)
         let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: { action in
             let obj = self.fetchedWorkouts.object(at: self.posionOfItemIndexPath)
-            self.context.delete(obj)
-            self.appDelegate.saveContext()
+            self.coreDataStack.viewContext.delete(obj)
+            self.coreDataStack.saveContext()
             self.refreshCoreData()
             self.collectionView!.deleteItems(at: [self.posionOfItemIndexPath])
             if self.posionOfItemIndexPath.item == (self.fetchedWorkouts.fetchedObjects?.count)! {
@@ -73,7 +73,7 @@ class MainCollectionViewController: UIViewController {
         let sort = NSSortDescriptor(key: #keyPath(Workouts.name), ascending: true)
         request.sortDescriptors = [sort]
         do {
-            fetchedWorkouts = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+            fetchedWorkouts = NSFetchedResultsController(fetchRequest: request, managedObjectContext: coreDataStack.viewContext, sectionNameKeyPath: nil, cacheName: nil)
             try fetchedWorkouts.performFetch()
         } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
@@ -89,7 +89,7 @@ class MainCollectionViewController: UIViewController {
     }
 
     @objc func handeleAddButton() {
-        let workout = Workouts(entity: Workouts.entity(), insertInto: context)
+        let workout = Workouts(entity: Workouts.entity(), insertInto: coreDataStack.viewContext)
         let title = "Write name of Workout"
         let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
         alert.addTextField(configurationHandler: { (textField) in
@@ -99,7 +99,7 @@ class MainCollectionViewController: UIViewController {
             UIAlertAction in
             let firstTextField = alert.textFields![0] as UITextField
             workout.name = firstTextField.text
-            self.appDelegate.saveContext()
+            self.coreDataStack.saveContext()
             self.refreshCoreData()
             self.collectionView?.reloadData()
             guard let objs = self.fetchedWorkouts.fetchedObjects else { return }
@@ -116,6 +116,7 @@ class MainCollectionViewController: UIViewController {
         let workout = fetchedWorkouts.object(at: posionOfItemIndexPath)
         let timerVC = TimerViewController()
         timerVC.workout = workout
+        timerVC.coreDataStack = coreDataStack
         present(timerVC, animated: true, completion: nil)
     }
 }
@@ -156,6 +157,7 @@ extension MainCollectionViewController: UICollectionViewDataSource, UICollection
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! ExerciseCollectionViewCell
         cell.delegateCell = self
+        cell.coreDataStack = coreDataStack
         cell.workout = fetchedWorkouts.object(at: indexPath)
         cell.refreshCoreData()
         cell.startButton.addTarget(self, action: #selector(handleStartButtonAction), for: .touchUpInside)
@@ -179,6 +181,7 @@ extension MainCollectionViewController: ExerciseCellDelegate {
 
     func passingViewControllerForSelectedCell(exercise: Item) {
         let vc = DetailsViewController()
+        vc.coreDataStack = coreDataStack
         vc.exercise = exercise
         show(vc, sender: self)
     }

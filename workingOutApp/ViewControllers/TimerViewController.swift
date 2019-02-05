@@ -12,8 +12,8 @@ import AudioToolbox
 import UserNotifications
 
 class TimerViewController: UIViewController {
-    private let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+
+    var coreDataStack: CoreDataStack!
     private var fetchedExercisesRC: NSFetchedResultsController<Item>!
     private var fetchedSetsRC: NSFetchedResultsController<Sets>?
     private let notificationCenter = UNUserNotificationCenter.current()
@@ -52,7 +52,6 @@ class TimerViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         setupVisualEffects()
         setupAllViews()
     }
@@ -96,7 +95,7 @@ class TimerViewController: UIViewController {
         let sortExercise = NSSortDescriptor(key: #keyPath(Item.index), ascending: true)
         requestExercise.sortDescriptors = [sortExercise]
         do {
-            fetchedExercisesRC = NSFetchedResultsController(fetchRequest: requestExercise, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+            fetchedExercisesRC = NSFetchedResultsController(fetchRequest: requestExercise, managedObjectContext: coreDataStack.viewContext, sectionNameKeyPath: nil, cacheName: nil)
             try fetchedExercisesRC.performFetch()
         } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
@@ -110,7 +109,7 @@ class TimerViewController: UIViewController {
         let sortSets = NSSortDescriptor(key: #keyPath(Sets.date), ascending: true)
         requestSets.sortDescriptors = [sortSets]
         do {
-            fetchedSetsRC = NSFetchedResultsController(fetchRequest: requestSets, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+            fetchedSetsRC = NSFetchedResultsController(fetchRequest: requestSets, managedObjectContext: coreDataStack.viewContext, sectionNameKeyPath: nil, cacheName: nil)
             try fetchedSetsRC?.performFetch()
         } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")

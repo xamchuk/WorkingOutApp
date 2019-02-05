@@ -20,8 +20,7 @@ protocol ExerciseCellDelegate: AnyObject {
 
 class ExerciseCollectionViewCell: UICollectionViewCell {
 
-    private let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    var coreDataStack: CoreDataStack!
     private var fetchedRC: NSFetchedResultsController<Item>!
 
     var workout: Workouts!
@@ -75,7 +74,7 @@ class ExerciseCollectionViewCell: UICollectionViewCell {
             let sort = NSSortDescriptor(key: #keyPath(Item.index), ascending: true)
             request.sortDescriptors = [sort]
             do {
-                fetchedRC = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+                fetchedRC = NSFetchedResultsController(fetchRequest: request, managedObjectContext: coreDataStack.viewContext, sectionNameKeyPath: nil, cacheName: nil)
                 try fetchedRC.performFetch()
                 fetchedRC.delegate = self
             } catch let error as NSError {
@@ -106,8 +105,8 @@ extension ExerciseCollectionViewCell: UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let exercise = fetchedRC.object(at: indexPath)
-            context.delete(exercise)
-            appDelegate.saveContext()
+            coreDataStack.viewContext.delete(exercise)
+            coreDataStack.saveContext()
         }
     }
 }
@@ -142,7 +141,7 @@ extension ExerciseCollectionViewCell: UITableViewDelegate {
         for (index, object) in objects.enumerated() {
             object.index = Int16(index)
         }
-        self.appDelegate.saveContext()
+        self.coreDataStack.saveContext()
         fetchedRC.delegate = self
     }
 }
@@ -221,7 +220,7 @@ extension ExerciseCollectionViewCell: SelectedItemFromCollectionView {
         guard let fetchedRC = fetchedRC.fetchedObjects else { return }
         let itemExist = fetchedRC.contains { $0.name == item.name}
         if !itemExist {
-            let exer = Item(entity: Item.entity(), insertInto: context)
+            let exer = Item(entity: Item.entity(), insertInto: coreDataStack.viewContext)
             exer.name = item.name
             exer.imageURL = item.imageName
             exer.imageData = item.imageData as NSData?
@@ -231,13 +230,13 @@ extension ExerciseCollectionViewCell: SelectedItemFromCollectionView {
             exer.group = item.group
             exer.owner = workout
             for _ in 0...2 {
-                let set = Sets(entity: Sets.entity(), insertInto: context)
+                let set = Sets(entity: Sets.entity(), insertInto: coreDataStack.viewContext)
                 set.repeats = 8
                 set.weight = 20
                 set.date = NSDate()
                 set.item = exer
             }
-            appDelegate.saveContext()
+            coreDataStack.saveContext()
         }
     }
 }
