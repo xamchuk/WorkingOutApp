@@ -114,7 +114,7 @@ class MainCollectionViewController: UIViewController {
 
     @objc func handleStartButtonAction() {
         let workout = fetchedWorkouts.object(at: posionOfItemIndexPath)
-        let timerVC = TimerViewController()
+        let timerVC = TimerVCtrial() //TimerViewController()
         timerVC.workout = workout
         timerVC.coreDataStack = coreDataStack
         present(timerVC, animated: true, completion: nil)

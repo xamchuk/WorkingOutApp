@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B0029772220CD870009207A6 /* TimerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0029771220CD870009207A6 /* TimerModel.swift */; };
+		B0029775220CDF15009207A6 /* TimerVCtrial.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0029774220CDF15009207A6 /* TimerVCtrial.swift */; };
 		B0479A4521DE4D5500AC09A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0479A4421DE4D5500AC09A7 /* AppDelegate.swift */; };
 		B0479A4C21DE4D5800AC09A7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B0479A4B21DE4D5800AC09A7 /* Assets.xcassets */; };
 		B0479A4F21DE4D5800AC09A7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0479A4D21DE4D5800AC09A7 /* LaunchScreen.storyboard */; };
@@ -41,6 +43,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B0029771220CD870009207A6 /* TimerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerModel.swift; sourceTree = "<group>"; };
+		B0029774220CDF15009207A6 /* TimerVCtrial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerVCtrial.swift; sourceTree = "<group>"; };
 		B0479A4121DE4D5500AC09A7 /* workingOutApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = workingOutApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0479A4421DE4D5500AC09A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B0479A4B21DE4D5800AC09A7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -87,6 +91,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B0029773220CDEEE009207A6 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B0029774220CDF15009207A6 /* TimerVCtrial.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		B0479A3821DE4D5500AC09A7 = {
 			isa = PBXGroup;
 			children = (
@@ -106,6 +118,7 @@
 		B0479A4321DE4D5500AC09A7 /* workingOutApp */ = {
 			isa = PBXGroup;
 			children = (
+				B0029773220CDEEE009207A6 /* Views */,
 				B0479A7D21E6978700AC09A7 /* Info.plist */,
 				B0479A6721E0A42900AC09A7 /* Models */,
 				B0479A5F21DE558500AC09A7 /* ViewControllers */,
@@ -167,6 +180,7 @@
 				B0479A7B21E61DBC00AC09A7 /* LocalJson.swift */,
 				B0479A8221EDE4C100AC09A7 /* Item.xcdatamodeld */,
 				B04EF66B220A460C00BE2C67 /* CoreDataStack.swift */,
+				B0029771220CD870009207A6 /* TimerModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -284,8 +298,10 @@
 				B0CDE90922044B59008DBB85 /* Item+CoreDataClass.swift in Sources */,
 				B0479A5B21DE539B00AC09A7 /* ExerciseCollectionViewCell.swift in Sources */,
 				B04EF6682208EE5A00BE2C67 /* LineView.swift in Sources */,
+				B0029772220CD870009207A6 /* TimerModel.swift in Sources */,
 				B0479A9221F33C8000AC09A7 /* DetailTableViewCell.swift in Sources */,
 				B0479A6421DEAE7100AC09A7 /* Extetions +UIView.swift in Sources */,
+				B0029775220CDF15009207A6 /* TimerVCtrial.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
