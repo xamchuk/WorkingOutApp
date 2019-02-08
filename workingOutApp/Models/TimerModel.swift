@@ -27,7 +27,6 @@ class TimerModel {
     var startSeconds = 0
     var isRunning = false
     var timer = Timer()
-    var vc: TimerVCtrial?
     
     weak var delegate: TimerDelegate?
 

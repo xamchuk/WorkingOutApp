@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AB4D6DB4220D9E130054F682 /* MyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4D6DB3220D9E130054F682 /* MyLabel.swift */; };
+		AB4D6DB6220DA3360054F682 /* TimerTrackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4D6DB5220DA3360054F682 /* TimerTrackView.swift */; };
 		B0029772220CD870009207A6 /* TimerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0029771220CD870009207A6 /* TimerModel.swift */; };
 		B0029775220CDF15009207A6 /* TimerVCtrial.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0029774220CDF15009207A6 /* TimerVCtrial.swift */; };
 		B0479A4521DE4D5500AC09A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0479A4421DE4D5500AC09A7 /* AppDelegate.swift */; };
@@ -43,6 +45,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AB4D6DB3220D9E130054F682 /* MyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLabel.swift; sourceTree = "<group>"; };
+		AB4D6DB5220DA3360054F682 /* TimerTrackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerTrackView.swift; sourceTree = "<group>"; };
 		B0029771220CD870009207A6 /* TimerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerModel.swift; sourceTree = "<group>"; };
 		B0029774220CDF15009207A6 /* TimerVCtrial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerVCtrial.swift; sourceTree = "<group>"; };
 		B0479A4121DE4D5500AC09A7 /* workingOutApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = workingOutApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -95,6 +99,8 @@
 			isa = PBXGroup;
 			children = (
 				B0029774220CDF15009207A6 /* TimerVCtrial.swift */,
+				AB4D6DB3220D9E130054F682 /* MyLabel.swift */,
+				AB4D6DB5220DA3360054F682 /* TimerTrackView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -272,6 +278,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB4D6DB6220DA3360054F682 /* TimerTrackView.swift in Sources */,
 				B0479A7421E34BD900AC09A7 /* AddNewExCollectionViewCell.swift in Sources */,
 				B0479A7621E36C5700AC09A7 /* InfoViewController.swift in Sources */,
 				B0CDE90722044B59008DBB85 /* Sets+CoreDataClass.swift in Sources */,
@@ -283,6 +290,7 @@
 				B0479A7821E6103700AC09A7 /* CommentedCode.swift in Sources */,
 				B048CB2921F5E2020023B840 /* TimerCustomLabel.swift in Sources */,
 				B0479A7C21E61DBC00AC09A7 /* LocalJson.swift in Sources */,
+				AB4D6DB4220D9E130054F682 /* MyLabel.swift in Sources */,
 				B0CDE90822044B59008DBB85 /* Sets+CoreDataProperties.swift in Sources */,
 				B0CDE90522044B59008DBB85 /* Workouts+CoreDataClass.swift in Sources */,
 				B0479A8421EDE4C200AC09A7 /* Item.xcdatamodeld in Sources */,
