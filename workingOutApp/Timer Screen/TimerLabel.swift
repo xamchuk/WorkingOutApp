@@ -5,7 +5,14 @@
 
 import UIKit
 
-class MyLabel: UILabel {
+class TimerLabel: UILabel {
+
+    var style = UIFont.TextStyle.body {
+        didSet {
+            font = UIFont.preferredFont(forTextStyle: style)
+        }
+    }
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -19,10 +26,10 @@ class MyLabel: UILabel {
         adjustsFontSizeToFitWidth = true
         textAlignment = .center
         textColor = .textColor
+        font = UIFont.preferredFont(forTextStyle: style)
         layer.shadowColor = UIColor.gradientLighter.cgColor
         layer.shadowRadius = 3.0
         layer.shadowOpacity = 1.0
         layer.shadowOffset = CGSize(width: 4, height: 4)
-        adjustsFontSizeToFitWidth = true
     }
 }

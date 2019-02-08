@@ -12,6 +12,9 @@ class CoreDataStack {
     var viewContext: NSManagedObjectContext {
         return persistentContainer.viewContext
     }
+//    var container: NSPersistentContainer {
+//        return persistentContainer
+//    }
     lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "Item")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in

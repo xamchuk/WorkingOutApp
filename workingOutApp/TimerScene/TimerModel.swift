@@ -71,7 +71,9 @@ class TimerModel {
                 seconds -= 1
             }
             if seconds == 0 {
+
             } else {
+                
             }
             print(secondsTimer)
             if secondsTimer > 10800 {

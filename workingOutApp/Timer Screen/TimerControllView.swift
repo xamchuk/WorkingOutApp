@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ExerciceControllView: UIView {
+class TimerControllView: UIView {
 
     let titleLabel = UILabel()
     let sets = TimerCustomLabel()

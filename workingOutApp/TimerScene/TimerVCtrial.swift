@@ -14,18 +14,18 @@ import UserNotifications
 class TimerVCtrial: UIViewController {
 
     var coreDataStack: CoreDataStack!
-    private var fetchedExercisesRC: NSFetchedResultsController<Item>!
-    private var fetchedSetsRC: NSFetchedResultsController<Sets>?
+    private var fetchedExercisesRC: NSFetchedResultsController<Item>! //view model
+    private var fetchedSetsRC: NSFetchedResultsController<Sets>? // view model
     private let notificationCenter = UNUserNotificationCenter.current()
     private var backgroundTask: UIBackgroundTaskIdentifier = .invalid
     var workout: Workouts?
     let statusView = UIView()
     let progressOfExercise = CAShapeLayer()
-    let circleStatusView = CircleStatusView()
-//    let cyrcleShapeStrokeStatus = CAShapeLayer()
-//    let trackLayer = CAShapeLayer()
+    let cyrcleStatusView = UIView()
+    let cyrcleShapeStrokeStatus = CAShapeLayer()
+    let trackLayer = CAShapeLayer()
     let screenImage = UIImageView()
-    let titleLabel = MyLabel()
+    let titleLabel = UILabel()
     let breakLabel = UILabel()
     let singleTimerLabel = UILabel()
     let allProgramLabel = UILabel()
@@ -39,7 +39,7 @@ class TimerVCtrial: UIViewController {
     var resetButton = UIButton(type: .system)
 
     let exerciseControllView = ExerciceControllView()
-//    var isLaunched = 0
+    var isLaunched = 0
 
     var timerModel = TimerModel()
     var timer = Timer()
@@ -66,10 +66,10 @@ class TimerVCtrial: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
-//        if isLaunched < 2 {
-//            setupLayerOfCyrcleView()
-//            isLaunched += 1
-//        }
+        if isLaunched < 2 {
+            setupLayerOfCyrcleView()
+            isLaunched += 1
+        }
         statusView.setupSabLayer(shapelayerOfView: progressOfExercise, cornerRadius: statusView.frame.height / 2, strokes: strokesCount, direction: .horizontal)
     }
     
@@ -115,7 +115,7 @@ class TimerVCtrial: UIViewController {
         }
     }
 
-    func switchNextExerciseOrSet() {
+    func switchNextExerciseOrSet() { // strokeend, text item, texts
         guard let items = fetchedExercisesRC.fetchedObjects else { return }
         strokesCount =  items.count
         progressOfExercise.strokeEnd = CGFloat((Double(indexOfExercise) / Double(strokesCount)) / 2)
@@ -142,7 +142,6 @@ class TimerVCtrial: UIViewController {
         timerModel.handleStartButton(button: startButton, label: titleLabel)
         timer = timerModel.timer
         uploadUI()
-        circleStatusView.value = 0.5
     }
 
     @objc func handleNextButton() {
@@ -151,7 +150,6 @@ class TimerVCtrial: UIViewController {
         timerModel.isBreak = true
         nextButton.isEnabled = false
         titleLabel.isHidden = true
-        circleStatusView.value = 0.5
     }
 
     @objc func handleStopButton() {
@@ -168,6 +166,19 @@ class TimerVCtrial: UIViewController {
 }
 
 extension TimerVCtrial {
+
+    fileprivate func makeLabel(label: UILabel, text: String, size: CGFloat ) {
+        label.font = UIFont.boldSystemFont(ofSize: size)
+        label.adjustsFontSizeToFitWidth = true
+        label.textAlignment = .center
+        label.text = text
+        label.textColor = .textColor
+        label.layer.shadowColor = UIColor.gradientLighter.cgColor
+        label.layer.shadowRadius = 3.0
+        label.layer.shadowOpacity = 1.0
+        label.layer.shadowOffset = CGSize(width: 4, height: 4)
+        label.adjustsFontSizeToFitWidth = true
+    }
 
     fileprivate func setupVisualEffects() {
         view.addSubview(screenImage)
@@ -195,30 +206,29 @@ extension TimerVCtrial {
     fileprivate  func setupTitleLabel() {
         view.addSubview(titleLabel)
         titleLabel.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: .init(top: 16, left: 8, bottom: 0, right: 8), size: CGSize(width: 0, height: 32))
-        titleLabel.text = ""
-        titleLabel.font = UIFont.boldSystemFont(ofSize: 12)
+        makeLabel(label: titleLabel, text: "Press Start", size: 32)
     }
 
     fileprivate func setupCyrcleStatusView() {
-        view.addSubview(circleStatusView)
-        circleStatusView.anchor(top: titleLabel.bottomAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: .init(top: 16, left: 24, bottom: 0, right: 24))
-        circleStatusView.heightAnchor.constraint(lessThanOrEqualTo: circleStatusView.widthAnchor, multiplier: 1).isActive = true
-        circleStatusView.addSubview(breakLabel)
-        breakLabel.anchor(top: circleStatusView.topAnchor, leading: nil, bottom: nil, trailing: nil, padding: .init(top: 28, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: 0))
-        breakLabel.centerXAnchor.constraint(equalTo: circleStatusView.centerXAnchor).isActive = true
-//        makeLabel(label: breakLabel, text: "WORK", size: 30)
-        circleStatusView.addSubview(singleTimerLabel)
+        view.addSubview(cyrcleStatusView)
+        cyrcleStatusView.anchor(top: titleLabel.bottomAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: .init(top: 16, left: 24, bottom: 0, right: 24))
+        cyrcleStatusView.heightAnchor.constraint(lessThanOrEqualTo: cyrcleStatusView.widthAnchor, multiplier: 1).isActive = true
+        cyrcleStatusView.addSubview(breakLabel)
+        breakLabel.anchor(top: cyrcleStatusView.topAnchor, leading: nil, bottom: nil, trailing: nil, padding: .init(top: 28, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: 0))
+        breakLabel.centerXAnchor.constraint(equalTo: cyrcleStatusView.centerXAnchor).isActive = true
+        makeLabel(label: breakLabel, text: "WORK", size: 30)
+        cyrcleStatusView.addSubview(singleTimerLabel)
         singleTimerLabel.anchor(top: breakLabel.bottomAnchor, leading: nil, bottom: nil, trailing: nil, padding: .init(top: 0, left: 0, bottom: 0, right: 0))
-        singleTimerLabel.centerXAnchor.constraint(equalTo: circleStatusView.centerXAnchor).isActive = true
-//        makeLabel(label: singleTimerLabel, text: "", size: 30)
-        circleStatusView.addSubview(allTimerLabel)
-        allTimerLabel.anchor(top: nil, leading: nil, bottom: circleStatusView.bottomAnchor, trailing: nil, padding: .init(top: 0, left: 0, bottom: 40, right: 0))
-        allTimerLabel.centerXAnchor.constraint(equalTo: circleStatusView.centerXAnchor).isActive = true
-//        makeLabel(label: allTimerLabel, text: "00:00:00", size: 36)
-        circleStatusView.addSubview(allProgramLabel)
+        singleTimerLabel.centerXAnchor.constraint(equalTo: cyrcleStatusView.centerXAnchor).isActive = true
+        makeLabel(label: singleTimerLabel, text: "", size: 30)
+        cyrcleStatusView.addSubview(allTimerLabel)
+        allTimerLabel.anchor(top: nil, leading: nil, bottom: cyrcleStatusView.bottomAnchor, trailing: nil, padding: .init(top: 0, left: 0, bottom: 40, right: 0))
+        allTimerLabel.centerXAnchor.constraint(equalTo: cyrcleStatusView.centerXAnchor).isActive = true
+        makeLabel(label: allTimerLabel, text: "00:00:00", size: 36)
+        cyrcleStatusView.addSubview(allProgramLabel)
         allProgramLabel.anchor(top: nil, leading: nil, bottom: allTimerLabel.topAnchor, trailing: nil, padding: .init(top: 0, left: 0, bottom: 0, right: 0))
-        allProgramLabel.centerXAnchor.constraint(equalTo: circleStatusView.centerXAnchor).isActive = true
-//        makeLabel(label: allProgramLabel, text: "Full Program", size: 30)
+        allProgramLabel.centerXAnchor.constraint(equalTo: cyrcleStatusView.centerXAnchor).isActive = true
+        makeLabel(label: allProgramLabel, text: "Full Program", size: 30)
     }
 
     fileprivate func setupExerciseControllView() {
@@ -233,22 +243,21 @@ extension TimerVCtrial {
         resetButton.addTarget(self, action: #selector(handleStopButton), for: .touchUpInside)
     }
 
-//    fileprivate func setupLayerOfCyrcleView() {
-//        createCircleShapeLayer(viewOfSetup: cyrcleStatusView, shapeLayer: trackLayer, strokeColor: .textColor, fillColor: .clear)
-//        createCircleShapeLayer(viewOfSetup: cyrcleStatusView, shapeLayer: cyrcleShapeStrokeStatus, strokeColor: .darkOrange, fillColor: .clear)
-//        circleStatusView.trackStrokeColor = .textColor
-//    }
+    fileprivate func setupLayerOfCyrcleView() {
+        createCircleShapeLayer(viewOfSetup: cyrcleStatusView, shapeLayer: trackLayer, strokeColor: .textColor, fillColor: .clear)
+        createCircleShapeLayer(viewOfSetup: cyrcleStatusView, shapeLayer: cyrcleShapeStrokeStatus, strokeColor: .darkOrange, fillColor: .clear)
+    }
 
-//    fileprivate func createCircleShapeLayer(viewOfSetup: UIView , shapeLayer: CAShapeLayer, strokeColor: UIColor, fillColor: UIColor) {
-//        shapeLayer.strokeColor = strokeColor.cgColor
-//        shapeLayer.lineWidth = 20
-//        shapeLayer.fillColor = fillColor.cgColor
-//        shapeLayer.lineCap = CAShapeLayerLineCap.round
-//        shapeLayer.position = CGPoint(x: viewOfSetup.bounds.midX, y: viewOfSetup.bounds.midY)
-//        let circularPath = UIBezierPath(arcCenter: .zero, radius: viewOfSetup.frame.height / 2 - (shapeLayer.lineWidth / 2), startAngle: (3 * CGFloat.pi / 4), endAngle: (CGFloat.pi / 4), clockwise: true)
-//        shapeLayer.path = circularPath.cgPath
-//        viewOfSetup.layer.addSublayer(shapeLayer)
-//    }
+    fileprivate func createCircleShapeLayer(viewOfSetup: UIView , shapeLayer: CAShapeLayer, strokeColor: UIColor, fillColor: UIColor) {
+        shapeLayer.strokeColor = strokeColor.cgColor
+        shapeLayer.lineWidth = 20
+        shapeLayer.fillColor = fillColor.cgColor
+        shapeLayer.lineCap = CAShapeLayerLineCap.round
+        shapeLayer.position = CGPoint(x: viewOfSetup.bounds.midX, y: viewOfSetup.bounds.midY)
+        let circularPath = UIBezierPath(arcCenter: .zero, radius: viewOfSetup.frame.height / 2 - (shapeLayer.lineWidth / 2), startAngle: (3 * CGFloat.pi / 4), endAngle: (CGFloat.pi / 4), clockwise: true)
+        shapeLayer.path = circularPath.cgPath
+        viewOfSetup.layer.addSublayer(shapeLayer)
+    }
 }
 
 extension TimerVCtrial: TimerDelegate {

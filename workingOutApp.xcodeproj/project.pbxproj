@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AB4D6DB4220D9E130054F682 /* MyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4D6DB3220D9E130054F682 /* MyLabel.swift */; };
+		AB4D6DB4220D9E130054F682 /* TimerLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4D6DB3220D9E130054F682 /* TimerLabel.swift */; };
 		AB4D6DB6220DA3360054F682 /* TimerTrackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4D6DB5220DA3360054F682 /* TimerTrackView.swift */; };
 		B0029772220CD870009207A6 /* TimerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0029771220CD870009207A6 /* TimerModel.swift */; };
-		B0029775220CDF15009207A6 /* TimerVCtrial.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0029774220CDF15009207A6 /* TimerVCtrial.swift */; };
+		B0029775220CDF15009207A6 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0029774220CDF15009207A6 /* TimerViewController.swift */; };
 		B0479A4521DE4D5500AC09A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0479A4421DE4D5500AC09A7 /* AppDelegate.swift */; };
 		B0479A4C21DE4D5800AC09A7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B0479A4B21DE4D5800AC09A7 /* Assets.xcassets */; };
 		B0479A4F21DE4D5800AC09A7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0479A4D21DE4D5800AC09A7 /* LaunchScreen.storyboard */; };
@@ -24,14 +24,13 @@
 		B0479A7821E6103700AC09A7 /* CommentedCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0479A7721E6103700AC09A7 /* CommentedCode.swift */; };
 		B0479A7A21E61CFA00AC09A7 /* excercises.json in Resources */ = {isa = PBXBuildFile; fileRef = B0479A7921E61CFA00AC09A7 /* excercises.json */; };
 		B0479A7C21E61DBC00AC09A7 /* LocalJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0479A7B21E61DBC00AC09A7 /* LocalJson.swift */; };
-		B0479A8121E9EDD600AC09A7 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0479A8021E9EDD600AC09A7 /* TimerViewController.swift */; };
 		B0479A8421EDE4C200AC09A7 /* Item.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B0479A8221EDE4C100AC09A7 /* Item.xcdatamodeld */; };
 		B0479A8C21F3142300AC09A7 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0479A8B21F3142300AC09A7 /* DetailsViewController.swift */; };
 		B0479A9221F33C8000AC09A7 /* DetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0479A9121F33C8000AC09A7 /* DetailTableViewCell.swift */; };
 		B0479A9421F3B7B900AC09A7 /* CustomExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0479A9321F3B7B900AC09A7 /* CustomExerciseViewController.swift */; };
 		B048CB2921F5E2020023B840 /* TimerCustomLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B048CB2821F5E2020023B840 /* TimerCustomLabel.swift */; };
 		B04EF6682208EE5A00BE2C67 /* LineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04EF6672208EE5A00BE2C67 /* LineView.swift */; };
-		B04EF66A2208EE9C00BE2C67 /* ExerciceControllView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04EF6692208EE9C00BE2C67 /* ExerciceControllView.swift */; };
+		B04EF66A2208EE9C00BE2C67 /* TimerControllView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04EF6692208EE9C00BE2C67 /* TimerControllView.swift */; };
 		B04EF66C220A460C00BE2C67 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04EF66B220A460C00BE2C67 /* CoreDataStack.swift */; };
 		B0CDE8DA220437BC008DBB85 /* MainCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CDE8D9220437BC008DBB85 /* MainCollectionViewController.swift */; };
 		B0CDE90522044B59008DBB85 /* Workouts+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CDE8FF22044B59008DBB85 /* Workouts+CoreDataClass.swift */; };
@@ -45,10 +44,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		AB4D6DB3220D9E130054F682 /* MyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLabel.swift; sourceTree = "<group>"; };
+		AB4D6DB3220D9E130054F682 /* TimerLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerLabel.swift; sourceTree = "<group>"; };
 		AB4D6DB5220DA3360054F682 /* TimerTrackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerTrackView.swift; sourceTree = "<group>"; };
 		B0029771220CD870009207A6 /* TimerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerModel.swift; sourceTree = "<group>"; };
-		B0029774220CDF15009207A6 /* TimerVCtrial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerVCtrial.swift; sourceTree = "<group>"; };
+		B0029774220CDF15009207A6 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
 		B0479A4121DE4D5500AC09A7 /* workingOutApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = workingOutApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0479A4421DE4D5500AC09A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B0479A4B21DE4D5800AC09A7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -64,14 +63,13 @@
 		B0479A7921E61CFA00AC09A7 /* excercises.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = excercises.json; path = workingOutApp/tools/excercises.json; sourceTree = SOURCE_ROOT; };
 		B0479A7B21E61DBC00AC09A7 /* LocalJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalJson.swift; sourceTree = "<group>"; };
 		B0479A7D21E6978700AC09A7 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B0479A8021E9EDD600AC09A7 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
 		B0479A8321EDE4C200AC09A7 /* Item.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Item.xcdatamodel; sourceTree = "<group>"; };
 		B0479A8B21F3142300AC09A7 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		B0479A9121F33C8000AC09A7 /* DetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewCell.swift; sourceTree = "<group>"; };
 		B0479A9321F3B7B900AC09A7 /* CustomExerciseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomExerciseViewController.swift; sourceTree = "<group>"; };
 		B048CB2821F5E2020023B840 /* TimerCustomLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerCustomLabel.swift; sourceTree = "<group>"; };
 		B04EF6672208EE5A00BE2C67 /* LineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineView.swift; sourceTree = "<group>"; };
-		B04EF6692208EE9C00BE2C67 /* ExerciceControllView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciceControllView.swift; sourceTree = "<group>"; };
+		B04EF6692208EE9C00BE2C67 /* TimerControllView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerControllView.swift; sourceTree = "<group>"; };
 		B04EF66B220A460C00BE2C67 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		B0CDE8D9220437BC008DBB85 /* MainCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewController.swift; sourceTree = "<group>"; };
 		B0CDE8FF22044B59008DBB85 /* Workouts+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Workouts+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -98,11 +96,24 @@
 		B0029773220CDEEE009207A6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				B0029774220CDF15009207A6 /* TimerVCtrial.swift */,
-				AB4D6DB3220D9E130054F682 /* MyLabel.swift */,
-				AB4D6DB5220DA3360054F682 /* TimerTrackView.swift */,
+				B0FBC4FB21FA0A26000F0EBD /* CustomDropButton.swift */,
+				B04EF6672208EE5A00BE2C67 /* LineView.swift */,
+				B0479A6321DEAE7100AC09A7 /* Extetions +UIView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		B0029777220DDC61009207A6 /* Timer Screen */ = {
+			isa = PBXGroup;
+			children = (
+				B0029774220CDF15009207A6 /* TimerViewController.swift */,
+				B0029771220CD870009207A6 /* TimerModel.swift */,
+				AB4D6DB5220DA3360054F682 /* TimerTrackView.swift */,
+				AB4D6DB3220D9E130054F682 /* TimerLabel.swift */,
+				B048CB2821F5E2020023B840 /* TimerCustomLabel.swift */,
+				B04EF6692208EE9C00BE2C67 /* TimerControllView.swift */,
+			);
+			path = "Timer Screen";
 			sourceTree = "<group>";
 		};
 		B0479A3821DE4D5500AC09A7 = {
@@ -124,14 +135,13 @@
 		B0479A4321DE4D5500AC09A7 /* workingOutApp */ = {
 			isa = PBXGroup;
 			children = (
+				B0029777220DDC61009207A6 /* Timer Screen */,
 				B0029773220CDEEE009207A6 /* Views */,
 				B0479A7D21E6978700AC09A7 /* Info.plist */,
 				B0479A6721E0A42900AC09A7 /* Models */,
 				B0479A5F21DE558500AC09A7 /* ViewControllers */,
 				B0479A6021DE559500AC09A7 /* Cells */,
 				B0479A5E21DE555900AC09A7 /* tools */,
-				B0479A6321DEAE7100AC09A7 /* Extetions +UIView.swift */,
-				B04EF6662208EE2F00BE2C67 /* CustomControlls */,
 			);
 			path = workingOutApp;
 			sourceTree = "<group>";
@@ -152,7 +162,6 @@
 			isa = PBXGroup;
 			children = (
 				B0CDE8D9220437BC008DBB85 /* MainCollectionViewController.swift */,
-				B0479A8021E9EDD600AC09A7 /* TimerViewController.swift */,
 				B0479A5A21DE539B00AC09A7 /* ExerciseCollectionViewCell.swift */,
 				B0479A7121E3485C00AC09A7 /* AddNewExCollectionViewController.swift */,
 				B0479A7521E36C5700AC09A7 /* InfoViewController.swift */,
@@ -186,20 +195,8 @@
 				B0479A7B21E61DBC00AC09A7 /* LocalJson.swift */,
 				B0479A8221EDE4C100AC09A7 /* Item.xcdatamodeld */,
 				B04EF66B220A460C00BE2C67 /* CoreDataStack.swift */,
-				B0029771220CD870009207A6 /* TimerModel.swift */,
 			);
 			path = Models;
-			sourceTree = "<group>";
-		};
-		B04EF6662208EE2F00BE2C67 /* CustomControlls */ = {
-			isa = PBXGroup;
-			children = (
-				B0FBC4FB21FA0A26000F0EBD /* CustomDropButton.swift */,
-				B048CB2821F5E2020023B840 /* TimerCustomLabel.swift */,
-				B04EF6672208EE5A00BE2C67 /* LineView.swift */,
-				B04EF6692208EE9C00BE2C67 /* ExerciceControllView.swift */,
-			);
-			path = CustomControlls;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -290,15 +287,14 @@
 				B0479A7821E6103700AC09A7 /* CommentedCode.swift in Sources */,
 				B048CB2921F5E2020023B840 /* TimerCustomLabel.swift in Sources */,
 				B0479A7C21E61DBC00AC09A7 /* LocalJson.swift in Sources */,
-				AB4D6DB4220D9E130054F682 /* MyLabel.swift in Sources */,
+				AB4D6DB4220D9E130054F682 /* TimerLabel.swift in Sources */,
 				B0CDE90822044B59008DBB85 /* Sets+CoreDataProperties.swift in Sources */,
 				B0CDE90522044B59008DBB85 /* Workouts+CoreDataClass.swift in Sources */,
 				B0479A8421EDE4C200AC09A7 /* Item.xcdatamodeld in Sources */,
 				B0479A8C21F3142300AC09A7 /* DetailsViewController.swift in Sources */,
 				B0CDE8DA220437BC008DBB85 /* MainCollectionViewController.swift in Sources */,
 				B0FBC4FC21FA0A26000F0EBD /* CustomDropButton.swift in Sources */,
-				B04EF66A2208EE9C00BE2C67 /* ExerciceControllView.swift in Sources */,
-				B0479A8121E9EDD600AC09A7 /* TimerViewController.swift in Sources */,
+				B04EF66A2208EE9C00BE2C67 /* TimerControllView.swift in Sources */,
 				B0479A7021E282DC00AC09A7 /* Item.swift in Sources */,
 				B0CDE90A22044B59008DBB85 /* Item+CoreDataProperties.swift in Sources */,
 				B0479A9421F3B7B900AC09A7 /* CustomExerciseViewController.swift in Sources */,
@@ -309,7 +305,7 @@
 				B0029772220CD870009207A6 /* TimerModel.swift in Sources */,
 				B0479A9221F33C8000AC09A7 /* DetailTableViewCell.swift in Sources */,
 				B0479A6421DEAE7100AC09A7 /* Extetions +UIView.swift in Sources */,
-				B0029775220CDF15009207A6 /* TimerVCtrial.swift in Sources */,
+				B0029775220CDF15009207A6 /* TimerViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
