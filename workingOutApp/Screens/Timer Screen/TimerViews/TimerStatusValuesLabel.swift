@@ -35,7 +35,7 @@ class TimerStatusValuesLabel: UILabel {
         backgroundColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.2)
         translatesAutoresizingMaskIntoConstraints = false
         widthAnchor.constraint(equalToConstant: 50).isActive = true
-        heightAnchor.constraint(equalToConstant: 50).isActive = true
+        heightAnchor.constraint(equalToConstant: 25).isActive = true
         layer.cornerRadius = 12.5
     }
 }

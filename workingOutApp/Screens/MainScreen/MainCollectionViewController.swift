@@ -17,6 +17,7 @@ class MainCollectionViewController: UIViewController {
     var coreDataStack: CoreDataStack!
     var collectionView: UICollectionView?
     var posionOfItemIndexPath = IndexPath(item: 0, section: 0)
+
     override func viewDidLoad() {
         view.makeGradients()
         refreshCoreData()
@@ -49,7 +50,7 @@ class MainCollectionViewController: UIViewController {
             self.coreDataStack.viewContext.delete(obj)
             self.coreDataStack.saveContext()
             self.refreshCoreData()
-            self.collectionView!.deleteItems(at: [self.posionOfItemIndexPath])
+           // self.collectionView!.deleteItems(at: [self.posionOfItemIndexPath])
             if self.posionOfItemIndexPath.item == (self.fetchedWorkouts.fetchedObjects?.count)! {
                 self.posionOfItemIndexPath.item = indexPath.item - 1
             } else if self.posionOfItemIndexPath.item != 0 {
@@ -75,6 +76,7 @@ class MainCollectionViewController: UIViewController {
         do {
             fetchedWorkouts = NSFetchedResultsController(fetchRequest: request, managedObjectContext: coreDataStack.viewContext, sectionNameKeyPath: nil, cacheName: nil)
             try fetchedWorkouts.performFetch()
+            fetchedWorkouts.delegate = self
         } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
         }
@@ -170,6 +172,23 @@ extension MainCollectionViewController: UICollectionViewDataSource, UICollection
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
+    }
+}
+
+extension MainCollectionViewController: NSFetchedResultsControllerDelegate {
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        let index = indexPath ?? (newIndexPath ?? nil)
+        guard let cellIndex = index else {
+            return
+        }
+        switch type {
+        case .insert:
+            collectionView?.insertItems(at: [cellIndex])
+        case .delete:
+            collectionView?.deleteItems(at: [cellIndex])
+        default:
+            break
+        }
     }
 }
 

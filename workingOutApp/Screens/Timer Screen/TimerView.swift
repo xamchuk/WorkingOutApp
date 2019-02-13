@@ -66,7 +66,7 @@ class TimerView: UIView {
 
 extension TimerView {
     fileprivate func setupBackgroundImage() {
-        backgroundImage.image = UIImage(named: "screen-1")
+        backgroundImage.image = UIImage(named: "screen")
         backgroundImage.contentMode = .scaleAspectFill
         backgroundImage.fillSuperview()
         let blurEffect = UIBlurEffect(style: .regular)
@@ -89,7 +89,6 @@ extension TimerView {
         titleLabel.font = UIFont.preferredFont(forTextStyle: style)
         layer.shadowColor = UIColor.gradientLighter.cgColor
         titleLabel.anchor(top: safeAreaLayoutGuide.topAnchor, leading: safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: safeAreaLayoutGuide.trailingAnchor, padding: .init(top: 8, left: 8, bottom: 0, right: 8), size: .init(width: 0, height: 50))
-        titleLabel.text = "AAAAAAAAAAA"
     }
 
     fileprivate func setupStatusStackView() {
@@ -104,7 +103,7 @@ extension TimerView {
         weightLabel.text = "Kilos"
 
         statusStackView.distribution = .equalSpacing
-        statusStackView.anchor(top: titleLabel.bottomAnchor, leading: titleLabel.leadingAnchor, bottom: nil, trailing: titleLabel.trailingAnchor, padding: .init(top: 4, left: 40, bottom: 0, right: 40), size: .init(width: 0, height: 65))
+        statusStackView.anchor(top: titleLabel.bottomAnchor, leading: titleLabel.leadingAnchor, bottom: nil, trailing: titleLabel.trailingAnchor, padding: .init(top: 4, left: 40, bottom: 0, right: 40), size: .init(width: 0, height: 45))
 
         let exerciseRow = stack(fisrtL: exerciseLabel, secondL: exerciseValue)
         let setsRow = stack(fisrtL: setsLabel, secondL: setsValue)
@@ -167,13 +166,14 @@ extension TimerView {
     }
 
     fileprivate func setupNextButton() {
+        nextButton.isEnabled = false
         nextButton.setTitle("Next", for: .normal)
         nextButton.anchor(top: allTimerCounterLabel.bottomAnchor, leading: allProgramTitleLabel.trailingAnchor, bottom: nil, trailing: nil, padding: .init(top: 24, left: 8, bottom: 0, right: 0), size: .init(width: 75, height: 75))
     }
 
     fileprivate func setupStopButton() {
         stopButton.setTitle("", for: .normal)
-        stopButton.tintColor = .red
+        stopButton.tintColor = .gray
         stopButton.setImage(UIImage(named: "stop"), for: .normal)
         stopButton.imageEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         stopButton.anchor(top: allTimerCounterLabel.bottomAnchor, leading: nil, bottom: nil, trailing: allProgramTitleLabel.leadingAnchor, padding: .init(top: 24, left: 0, bottom: 0, right: 8), size: .init(width: 75, height: 75))

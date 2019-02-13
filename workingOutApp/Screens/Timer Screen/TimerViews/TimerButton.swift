@@ -36,13 +36,11 @@ class TimerButton: UIButton {
         titleLabel?.textAlignment = .center
         titleLabel?.numberOfLines = 0
         setTitleColor(.white, for: .normal)
-        titleLabel?.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.largeTitle)
         backgroundColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.5)
     }
     
      private func setupLayer(frame: CGRect) {
         layer.cornerRadius = frame.width / 2
-        layer.borderColor = UIColor.white.cgColor
-        layer.borderWidth = 2
+        titleLabel?.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.title2)
     }
 }

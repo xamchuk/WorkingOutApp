@@ -7,7 +7,7 @@
 //
 
 import UIKit
-// excercises
+
 class LocalJson {
     func loadJson() -> [ItemJson]? {
         if let url = Bundle.main.url(forResource: "excercises", withExtension: "json") {

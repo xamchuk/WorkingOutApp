@@ -13,7 +13,7 @@ import CoreData
 
 protocol TimerDelegate: AnyObject {
     func refresh(titleOfExercise: String)
-    func refresh(sets: String, reps: String, weight: String)
+    func refresh(exerice: String, sets: String, reps: String, weight: String)
     func refresh(title: String, startButtonTitle: String)
     func refresh(breakTitle: String)
     func refresh(singleSeconds: String)
@@ -79,7 +79,7 @@ class TimerModel {
             refreshSetsAt(exerciseIndex: indexOfExercise)
             guard let sets = sets else { return }
             if indexOfSets < sets.count {
-                delegate?.refresh(sets: "Sets: \(indexOfSets + 1) / \(item.sets?.count ?? 0)", reps: "Reps: \(sets[indexOfSets].repeats)", weight: "/ Weight: \(sets[indexOfSets].weight)")
+                delegate?.refresh(exerice: "\(indexOfExercise + 1 )/\(items.count)", sets: "\(indexOfSets + 1)/ \(item.sets?.count ?? 0)", reps: "\(sets[indexOfSets].repeats)", weight: "\(sets[indexOfSets].weight)")
             } else {
                 indexOfSets = 0
                 indexOfExercise += 1
@@ -94,11 +94,8 @@ class TimerModel {
     func notificationCentrer() {
         let content = UNMutableNotificationContent()
         guard let items = items else { return }
-
         if indexOfExercise < items.count {
-             let item = items[indexOfExercise]
-
-
+        let item = items[indexOfExercise]
         guard let sets = sets else { return }
         content.title = "Break has finished"
         content.subtitle = "Current exercise: \(item.name)"
@@ -107,9 +104,6 @@ class TimerModel {
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.1, repeats: false)
         let request = UNNotificationRequest(identifier: "TimerDone", content: content, trigger: trigger)
         notificationCenter.add(request, withCompletionHandler: nil)
-
-        } else {
-            print("finish")
         }
     }
 
@@ -127,7 +121,6 @@ class TimerModel {
 
     @objc func updateTimer() {
         if secondsTimer >= 0 {
-///////////////////
             if seconds == 1 && !isBreak {
                 notificationCentrer()
                 delegate?.refresh(breakTitle: "WORK")
@@ -135,13 +128,10 @@ class TimerModel {
                 delegate?.nextButton(isEnabled: true)
             } else  if seconds == 0 && isBreak {
                 delegate?.refresh(breakTitle: "REST")
-                seconds = 3
+                seconds = 60
                 isBreak = false
                 startValue = 100 / Double(seconds)
             }
-
-
-
 
             if seconds > 0 {
                 seconds -= 1
@@ -149,19 +139,12 @@ class TimerModel {
                 let strokeEnd = CGFloat(startValue * Double(seconds - 1) / 100)
                 delegate?.refresh(strokeEnd: strokeEnd)
                 if seconds == 0 {
-
-                      //  AudioServicesPlayAlertSound(1304)
-
+                        AudioServicesPlayAlertSound(1304)
                 }
-
             }
-
             if seconds == 0 {
                 delegate?.refresh(singleSeconds: "")
             }
-
-
-
             delegate?.refreshAllSeconds(seconds: secondsTimer)
             if secondsTimer > 10800 {
                 timer.invalidate()
@@ -171,9 +154,6 @@ class TimerModel {
             if secondsTimer == 1 {
                 delegate?.nextButton(isEnabled: true)
             }
-
-
-
         } else {
             timer.invalidate()
             delegate?.refresh(title: "Training completed", startButtonTitle: "Start")
