@@ -26,9 +26,21 @@ class CircleStatusView: UIView {
         }
     }
 
-    var value: CGFloat = 0 {
+    var value: CGFloat = 1 {
         didSet {
-            circleStrokeStatusLayer.strokeEnd = value
+            let fromValue = circleStrokeStatusLayer.strokeEnd
+            let toValue = value
+            let animation = CABasicAnimation(keyPath: "strokeEnd")
+            animation.fromValue = fromValue
+            animation.toValue = toValue
+            if fromValue == 0 {
+                animation.duration = 0
+            } else {
+                animation.duration = 1
+            }
+
+            circleStrokeStatusLayer.strokeEnd = toValue
+            circleStrokeStatusLayer.add(animation, forKey: "stroke")
         }
     }
 
@@ -41,7 +53,7 @@ class CircleStatusView: UIView {
         }
     }
 
-    private func setupLayers(_ frame: CGRect) {
+     func setupLayers(_ frame: CGRect) {
         [trackLayer, circleStrokeStatusLayer].forEach {
             $0.lineWidth = 20
             $0.fillColor = UIColor.clear.cgColor
@@ -51,7 +63,7 @@ class CircleStatusView: UIView {
             $0.path = circularPath.cgPath
             layer.addSublayer($0)
         }
-        value = 0
+        value = 1
         trackStrokeColor = Defaults.trackStrokeColor
         circleStrokeStatusColor = Defaults.circleStrokeStatusColor
     }

@@ -28,10 +28,13 @@
 		B0479A8C21F3142300AC09A7 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0479A8B21F3142300AC09A7 /* DetailsViewController.swift */; };
 		B0479A9221F33C8000AC09A7 /* DetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0479A9121F33C8000AC09A7 /* DetailTableViewCell.swift */; };
 		B0479A9421F3B7B900AC09A7 /* CustomExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0479A9321F3B7B900AC09A7 /* CustomExerciseViewController.swift */; };
-		B048CB2921F5E2020023B840 /* TimerCustomLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B048CB2821F5E2020023B840 /* TimerCustomLabel.swift */; };
 		B04EF6682208EE5A00BE2C67 /* LineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04EF6672208EE5A00BE2C67 /* LineView.swift */; };
 		B04EF66A2208EE9C00BE2C67 /* TimerControllView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04EF6692208EE9C00BE2C67 /* TimerControllView.swift */; };
 		B04EF66C220A460C00BE2C67 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04EF66B220A460C00BE2C67 /* CoreDataStack.swift */; };
+		B0CB148D22145B300057E5DD /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CB148C22145B300057E5DD /* TimerView.swift */; };
+		B0CB148F22145FF80057E5DD /* TimerStatusTitlesLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CB148E22145FF80057E5DD /* TimerStatusTitlesLabel.swift */; };
+		B0CB1491221465B90057E5DD /* TimerStatusValuesLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CB1490221465B90057E5DD /* TimerStatusValuesLabel.swift */; };
+		B0CB1493221481880057E5DD /* TimerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CB1492221481880057E5DD /* TimerButton.swift */; };
 		B0CDE8DA220437BC008DBB85 /* MainCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CDE8D9220437BC008DBB85 /* MainCollectionViewController.swift */; };
 		B0CDE90522044B59008DBB85 /* Workouts+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CDE8FF22044B59008DBB85 /* Workouts+CoreDataClass.swift */; };
 		B0CDE90622044B59008DBB85 /* Workouts+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CDE90022044B59008DBB85 /* Workouts+CoreDataProperties.swift */; };
@@ -67,10 +70,13 @@
 		B0479A8B21F3142300AC09A7 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		B0479A9121F33C8000AC09A7 /* DetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewCell.swift; sourceTree = "<group>"; };
 		B0479A9321F3B7B900AC09A7 /* CustomExerciseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomExerciseViewController.swift; sourceTree = "<group>"; };
-		B048CB2821F5E2020023B840 /* TimerCustomLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerCustomLabel.swift; sourceTree = "<group>"; };
 		B04EF6672208EE5A00BE2C67 /* LineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineView.swift; sourceTree = "<group>"; };
 		B04EF6692208EE9C00BE2C67 /* TimerControllView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerControllView.swift; sourceTree = "<group>"; };
 		B04EF66B220A460C00BE2C67 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		B0CB148C22145B300057E5DD /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
+		B0CB148E22145FF80057E5DD /* TimerStatusTitlesLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerStatusTitlesLabel.swift; sourceTree = "<group>"; };
+		B0CB1490221465B90057E5DD /* TimerStatusValuesLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerStatusValuesLabel.swift; sourceTree = "<group>"; };
+		B0CB1492221481880057E5DD /* TimerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerButton.swift; sourceTree = "<group>"; };
 		B0CDE8D9220437BC008DBB85 /* MainCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewController.swift; sourceTree = "<group>"; };
 		B0CDE8FF22044B59008DBB85 /* Workouts+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Workouts+CoreDataClass.swift"; sourceTree = "<group>"; };
 		B0CDE90022044B59008DBB85 /* Workouts+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Workouts+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -110,8 +116,11 @@
 				B0029771220CD870009207A6 /* TimerModel.swift */,
 				AB4D6DB5220DA3360054F682 /* TimerTrackView.swift */,
 				AB4D6DB3220D9E130054F682 /* TimerLabel.swift */,
-				B048CB2821F5E2020023B840 /* TimerCustomLabel.swift */,
 				B04EF6692208EE9C00BE2C67 /* TimerControllView.swift */,
+				B0CB148C22145B300057E5DD /* TimerView.swift */,
+				B0CB148E22145FF80057E5DD /* TimerStatusTitlesLabel.swift */,
+				B0CB1490221465B90057E5DD /* TimerStatusValuesLabel.swift */,
+				B0CB1492221481880057E5DD /* TimerButton.swift */,
 			);
 			path = "Timer Screen";
 			sourceTree = "<group>";
@@ -277,19 +286,22 @@
 			files = (
 				AB4D6DB6220DA3360054F682 /* TimerTrackView.swift in Sources */,
 				B0479A7421E34BD900AC09A7 /* AddNewExCollectionViewCell.swift in Sources */,
+				B0CB1491221465B90057E5DD /* TimerStatusValuesLabel.swift in Sources */,
 				B0479A7621E36C5700AC09A7 /* InfoViewController.swift in Sources */,
 				B0CDE90722044B59008DBB85 /* Sets+CoreDataClass.swift in Sources */,
+				B0CB148F22145FF80057E5DD /* TimerStatusTitlesLabel.swift in Sources */,
 				B0479A4521DE4D5500AC09A7 /* AppDelegate.swift in Sources */,
 				B0479A5D21DE553600AC09A7 /* ExerciseCell.swift in Sources */,
+				B0CB148D22145B300057E5DD /* TimerView.swift in Sources */,
 				B0F3985A21F651DB00A74F4F /* SectionHeader.swift in Sources */,
 				B0CDE90622044B59008DBB85 /* Workouts+CoreDataProperties.swift in Sources */,
 				B04EF66C220A460C00BE2C67 /* CoreDataStack.swift in Sources */,
 				B0479A7821E6103700AC09A7 /* CommentedCode.swift in Sources */,
-				B048CB2921F5E2020023B840 /* TimerCustomLabel.swift in Sources */,
 				B0479A7C21E61DBC00AC09A7 /* LocalJson.swift in Sources */,
 				AB4D6DB4220D9E130054F682 /* TimerLabel.swift in Sources */,
 				B0CDE90822044B59008DBB85 /* Sets+CoreDataProperties.swift in Sources */,
 				B0CDE90522044B59008DBB85 /* Workouts+CoreDataClass.swift in Sources */,
+				B0CB1493221481880057E5DD /* TimerButton.swift in Sources */,
 				B0479A8421EDE4C200AC09A7 /* Item.xcdatamodeld in Sources */,
 				B0479A8C21F3142300AC09A7 /* DetailsViewController.swift in Sources */,
 				B0CDE8DA220437BC008DBB85 /* MainCollectionViewController.swift in Sources */,

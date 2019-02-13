@@ -15,6 +15,10 @@ class TimerViewController: UIViewController {
 
     var coreDataStack: CoreDataStack!
     var workout: Workouts?
+    var timerView = TimerView()
+    var timerModel = TimerModel()
+
+
     let circleStatusView = CircleStatusView()
     let screenImage = UIImageView()
     let titleLabel = TimerLabel()
@@ -27,16 +31,20 @@ class TimerViewController: UIViewController {
     var nextButton = UIButton(type: .system)
     var stopButton = UIButton(type: .system)
     let timerControllView = TimerControllView()
-    var timerModel = TimerModel()
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupVisualEffects()
-        setupAllViews()
+       // setupVisualEffects()
+       // setupAllViews()
         timerModel.coreDataStack = coreDataStack
         timerModel.workout = workout
         timerModel.delegate = self
         timerModel.refreshExercises()
+
+        view.addSubview(timerView)
+        timerView.fillSuperview()
+        timerView.setupSubViews()
     }
 
     @objc func handleStartButton(_ sender: UIButton) {
@@ -49,6 +57,7 @@ class TimerViewController: UIViewController {
         timerModel.isBreak = true
         nextButton.isEnabled = false
         titleLabel.isHidden = true
+        circleStatusView.value = 1
     }
 
     @objc func handleStopButton() {

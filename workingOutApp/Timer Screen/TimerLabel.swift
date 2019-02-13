@@ -25,11 +25,7 @@ class TimerLabel: UILabel {
     private func setup() {
         adjustsFontSizeToFitWidth = true
         textAlignment = .center
-        textColor = .textColor
+        textColor = .white
         font = UIFont.preferredFont(forTextStyle: style)
-        layer.shadowColor = UIColor.gradientLighter.cgColor
-        layer.shadowRadius = 3.0
-        layer.shadowOpacity = 1.0
-        layer.shadowOffset = CGSize(width: 4, height: 4)
     }
 }

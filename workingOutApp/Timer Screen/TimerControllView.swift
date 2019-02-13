@@ -11,8 +11,8 @@ import UIKit
 class TimerControllView: UIView {
 
     let titleLabel = UILabel()
-    let sets = TimerCustomLabel()
-    let repsAndweight = TimerCustomLabel()
+    let sets = TimerStatusTitlesLabel()
+    let repsAndweight = TimerStatusTitlesLabel()
     let stackView = UIStackView()
     let buttonStackView = UIStackView()
     let startButton = UIButton(type: .system)

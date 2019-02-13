@@ -76,7 +76,6 @@ class TimerModel {
         if indexOfExercise < items.count {
             let item = items[indexOfExercise]
             delegate?.refresh(titleOfExercise: item.name)
-            print(item.name)
             refreshSetsAt(exerciseIndex: indexOfExercise)
             guard let sets = sets else { return }
             if indexOfSets < sets.count {
@@ -87,6 +86,7 @@ class TimerModel {
                 switchNextExerciseOrSet()
             }
         } else {
+           // delegate?.refresh(title: "Training completed", startButtonTitle: "Done")
             timer.invalidate()
         }
     }
@@ -94,15 +94,23 @@ class TimerModel {
     func notificationCentrer() {
         let content = UNMutableNotificationContent()
         guard let items = items else { return }
-        let item = items[indexOfExercise + 1]
+
+        if indexOfExercise < items.count {
+             let item = items[indexOfExercise]
+
+
         guard let sets = sets else { return }
         content.title = "Break has finished"
-        content.subtitle = "NEXT EXERCISE: \(item.name)"
+        content.subtitle = "Current exercise: \(item.name)"
         content.body = "Sets: \(indexOfSets + 1) / \(item.sets?.count ?? 0) Reps: \(sets[indexOfSets].repeats) Weight: \(sets[indexOfSets].weight)"
         content.sound = UNNotificationSound.default
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.1, repeats: false)
         let request = UNNotificationRequest(identifier: "TimerDone", content: content, trigger: trigger)
         notificationCenter.add(request, withCompletionHandler: nil)
+
+        } else {
+            print("finish")
+        }
     }
 
     func registerBackgroundTask() {
@@ -119,25 +127,41 @@ class TimerModel {
 
     @objc func updateTimer() {
         if secondsTimer >= 0 {
+///////////////////
             if seconds == 1 && !isBreak {
                 notificationCentrer()
-                AudioServicesPlayAlertSound(1304)
                 delegate?.refresh(breakTitle: "WORK")
                 delegate?.refresh(singleSeconds: "")
+                delegate?.nextButton(isEnabled: true)
             } else  if seconds == 0 && isBreak {
                 delegate?.refresh(breakTitle: "REST")
-                seconds = 60
+                seconds = 3
                 isBreak = false
                 startValue = 100 / Double(seconds)
             }
+
+
+
+
             if seconds > 0 {
                 seconds -= 1
+                delegate?.refresh(singleSeconds: "\(seconds)")
+                let strokeEnd = CGFloat(startValue * Double(seconds - 1) / 100)
+                delegate?.refresh(strokeEnd: strokeEnd)
+                if seconds == 0 {
+
+                      //  AudioServicesPlayAlertSound(1304)
+
+                }
+
             }
+
             if seconds == 0 {
                 delegate?.refresh(singleSeconds: "")
-            } else {
-                delegate?.refresh(singleSeconds: "\(seconds)")
             }
+
+
+
             delegate?.refreshAllSeconds(seconds: secondsTimer)
             if secondsTimer > 10800 {
                 timer.invalidate()
@@ -147,12 +171,12 @@ class TimerModel {
             if secondsTimer == 1 {
                 delegate?.nextButton(isEnabled: true)
             }
-            let strokeEnd = CGFloat(startValue * Double(seconds) / 100)
-            delegate?.refresh(strokeEnd: strokeEnd)
+
+
 
         } else {
             timer.invalidate()
-            delegate?.refresh(title: "Finished", startButtonTitle: "Start")
+            delegate?.refresh(title: "Training completed", startButtonTitle: "Start")
             isRunning = false
             AudioServicesPlayAlertSound(1304)
         }
