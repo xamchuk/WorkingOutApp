@@ -174,14 +174,14 @@
 			path = TimerViews;
 			sourceTree = "<group>";
 		};
-		B0CB14972214BF420057E5DD /* MainScreen */ = {
+		B0CB14972214BF420057E5DD /* Main */ = {
 			isa = PBXGroup;
 			children = (
 				B0CDE8D9220437BC008DBB85 /* MainCollectionViewController.swift */,
 				B0479A5A21DE539B00AC09A7 /* ExerciseCollectionViewCell.swift */,
 				B0479A5C21DE553600AC09A7 /* ExerciseCell.swift */,
 			);
-			path = MainScreen;
+			path = Main;
 			sourceTree = "<group>";
 		};
 		B0CB14992214C2400057E5DD /* SetsScreen */ = {
@@ -224,7 +224,7 @@
 		B0CB149D2214C3E10057E5DD /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				B0CB14972214BF420057E5DD /* MainScreen */,
+				B0CB14972214BF420057E5DD /* Main */,
 				B0CB14992214C2400057E5DD /* SetsScreen */,
 				B0CB149A2214C28F0057E5DD /* AddExerciseScreen */,
 				B0CB149B2214C2DE0057E5DD /* CreateExerciseScreen */,

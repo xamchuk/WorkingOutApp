@@ -78,7 +78,10 @@ extension TimerViewController: TimerDelegate {
     }
 
 
-    func refresh(title: String, startButtonTitle: String) {
+    func refresh(infoTitle: String) {
+        timerView.infoLabel.text = infoTitle
+    }
+    func refresh(startButtonTitle: String) {
         timerView.startButton.setTitle(startButtonTitle, for: .normal)
     }
 

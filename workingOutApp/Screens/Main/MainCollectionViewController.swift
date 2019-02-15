@@ -17,9 +17,18 @@ class MainCollectionViewController: UIViewController {
     var coreDataStack: CoreDataStack!
     var collectionView: UICollectionView?
     var posionOfItemIndexPath = IndexPath(item: 0, section: 0)
+    var firstTextField = UITextField()
 
     override func viewDidLoad() {
-        view.makeGradients()
+        let backgroundImage = UIImageView(image: UIImage(named: "screen-1"))
+        backgroundImage.contentMode = .scaleAspectFill
+        view.addSubview(backgroundImage)
+        backgroundImage.fillSuperview()
+        let blurEffect = UIBlurEffect(style: .regular)
+        let visualEffectView = UIVisualEffectView(effect: blurEffect)
+        visualEffectView.alpha = 0.9
+        view.addSubview(visualEffectView)
+        visualEffectView.fillSuperview()
         refreshCoreData()
         setupNavigationController()
         setupCollectionView()
@@ -71,7 +80,7 @@ class MainCollectionViewController: UIViewController {
         if !query.isEmpty {
             request.predicate = NSPredicate(format: "name CONTAINS[cd] %@", query)
         }
-        let sort = NSSortDescriptor(key: #keyPath(Workouts.name), ascending: true)
+        let sort = NSSortDescriptor(key: #keyPath(Workouts.index), ascending: true)
         request.sortDescriptors = [sort]
         do {
             fetchedWorkouts = NSFetchedResultsController(fetchRequest: request, managedObjectContext: coreDataStack.viewContext, sectionNameKeyPath: nil, cacheName: nil)
@@ -91,25 +100,40 @@ class MainCollectionViewController: UIViewController {
     }
 
     @objc func handeleAddButton() {
-        let workout = Workouts(entity: Workouts.entity(), insertInto: coreDataStack.viewContext)
+
         let title = "Write name of Workout"
         let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
         alert.addTextField(configurationHandler: { (textField) in
             textField.placeholder = "Workout 1"
         })
-        let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.cancel) {
+        firstTextField.delegate = self
+        firstTextField = alert.textFields![0] as UITextField
+
+        let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) {
             UIAlertAction in
-            let firstTextField = alert.textFields![0] as UITextField
-            workout.name = firstTextField.text
-            self.coreDataStack.saveContext()
-            self.refreshCoreData()
-            self.collectionView?.reloadData()
-            guard let objs = self.fetchedWorkouts.fetchedObjects else { return }
-            let indexPath = IndexPath(item: objs.count - 1, section: 0)
-            self.collectionView?.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-            self.posionOfItemIndexPath.item = objs.count - 1
-            self.refreshNavTitle()
+
+            if !(self.firstTextField.text?.isEmpty)! {
+                let workout = Workouts(entity: Workouts.entity(), insertInto: self.coreDataStack.viewContext)
+                workout.name = self.firstTextField.text
+                workout.index = Int16(self.fetchedWorkouts.fetchedObjects?.count ?? 0)
+                self.coreDataStack.saveContext()
+                self.refreshCoreData()
+                // self.collectionView?.reloadData()
+                guard let objs = self.fetchedWorkouts.fetchedObjects else { return }
+                let indexPath = IndexPath(item: objs.count - 1, section: 0)
+                self.collectionView?.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+                self.posionOfItemIndexPath.item = objs.count - 1
+                self.refreshNavTitle()
+            } else {
+                return
+            }
         }
+        if (firstTextField.text?.isEmpty)! {
+            okAction.isEnabled = false
+        } else {
+            okAction.isEnabled = true
+        }
+
         alert.addAction(okAction)
         present(alert, animated: true, completion: nil)
     }
@@ -122,6 +146,15 @@ class MainCollectionViewController: UIViewController {
         present(timerVC, animated: true, completion: nil)
     }
 }
+
+extension MainCollectionViewController: UITextFieldDelegate {
+
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        print("ddwdwd")
+        return true
+    }
+}
+
 extension MainCollectionViewController {
 
     fileprivate func setupCollectionView() {

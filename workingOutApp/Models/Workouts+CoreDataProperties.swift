@@ -2,7 +2,7 @@
 //  Workouts+CoreDataProperties.swift
 //  workingOutApp
 //
-//  Created by Rusłan Chamski on 01/02/2019.
+//  Created by Rusłan Chamski on 15/02/2019.
 //  Copyright © 2019 Rusłan Chamski. All rights reserved.
 //
 //
@@ -18,6 +18,7 @@ extension Workouts {
     }
 
     @NSManaged public var name: String?
+    @NSManaged public var index: Int16
     @NSManaged public var items: NSSet?
 
 }

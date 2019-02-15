@@ -14,7 +14,8 @@ import CoreData
 protocol TimerDelegate: AnyObject {
     func refresh(titleOfExercise: String)
     func refresh(exerice: String, sets: String, reps: String, weight: String)
-    func refresh(title: String, startButtonTitle: String)
+    func refresh(startButtonTitle: String)
+    func refresh(infoTitle: String)
     func refresh(breakTitle: String)
     func refresh(singleSeconds: String)
     func refreshAllSeconds(seconds: Int)
@@ -124,10 +125,12 @@ class TimerModel {
             if seconds == 1 && !isBreak {
                 notificationCentrer()
                 delegate?.refresh(breakTitle: "WORK")
+                delegate?.refresh(infoTitle: "Finish your set and press next")
                 delegate?.refresh(singleSeconds: "")
                 delegate?.nextButton(isEnabled: true)
             } else  if seconds == 0 && isBreak {
                 delegate?.refresh(breakTitle: "REST")
+                delegate?.refresh(infoTitle: "Prepeare for next set, your braek will finish in:")
                 seconds = 60
                 isBreak = false
                 startValue = 100 / Double(seconds)
@@ -156,7 +159,8 @@ class TimerModel {
             }
         } else {
             timer.invalidate()
-            delegate?.refresh(title: "Training completed", startButtonTitle: "Start")
+            delegate?.refresh(startButtonTitle: "Start")
+            delegate?.refresh(infoTitle: "Training completed")
             isRunning = false
             AudioServicesPlayAlertSound(1304)
         }
@@ -167,12 +171,19 @@ class TimerModel {
             isRunning = true
             registerBackgroundTask()
             timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(updateTimer)), userInfo: nil, repeats: true)
-            delegate?.refresh(title: "Do your first set, then press next", startButtonTitle: "Pause")
+            delegate?.refresh(startButtonTitle: "Pause")
+            if indexOfSets == 0 {
+                delegate?.refresh(infoTitle: "Do your first set, then press next")
+            } else {
+                delegate?.refresh(infoTitle: "Finish your set and press next")
+            }
+
         } else if secondsTimer > 0 {
             timer.invalidate()
             isRunning = false
             endBackgroundTask()
-            delegate?.refresh(title: "", startButtonTitle: "Resume")
+            delegate?.refresh(infoTitle: "Press Resume")
+            delegate?.refresh(startButtonTitle: "Resume")
         }
     }
 }

@@ -11,26 +11,19 @@ import UIKit
 class TimerView: UIView {
 
     let backgroundImage = UIImageView()
-
     let titleLabel = UILabel()
-
     let statusStackView = UIStackView()
     let rowStackView = UIStackView()
-
-
     let exerciseValue = TimerStatusValuesLabel()
     let setsValue = TimerStatusValuesLabel()
     let repsValue = TimerStatusValuesLabel()
     let weightValue = TimerStatusValuesLabel()
-
     let circleStatusView = CircleStatusView()
-
-
     let breakLabel = TimerLabel()
     let singleTimerLabel = TimerLabel()
     let allProgramTitleLabel = TimerLabel()
     let allTimerCounterLabel = TimerLabel()
-
+    let infoLabel = TimerLabel()
     var startButton = TimerButton(type: .system)
     var nextButton = TimerButton(type: .system)
     var stopButton = TimerButton(type: .system)
@@ -48,6 +41,8 @@ class TimerView: UIView {
         setupStatusStackView()
         addSubview(circleStatusView)
         setupCircleView()
+        addSubview(infoLabel)
+        setupInfoLabel()
         addSubview(allProgramTitleLabel)
         setupAllProgramTitleLabel()
         addSubview(allTimerCounterLabel)
@@ -150,12 +145,19 @@ extension TimerView {
         startButton.layer.masksToBounds = true
     }
 
+    fileprivate func setupInfoLabel() {
+        infoLabel.text = "Press Start"
+        infoLabel.anchor(top: nil, leading: circleStatusView.leadingAnchor, bottom: circleStatusView.topAnchor, trailing: circleStatusView.trailingAnchor, padding: .init(top: 0, left: 0, bottom: 8, right: 0))
+    }
+
+
     fileprivate func setupAllProgramTitleLabel() {
         allProgramTitleLabel.anchor(top: nil, leading: nil, bottom: circleStatusView.bottomAnchor, trailing: nil, padding: .init(top: 0, left: 0, bottom: -8, right: 0))
         allProgramTitleLabel.centerXAnchor.constraint(equalTo: circleStatusView.centerXAnchor).isActive = true
         allProgramTitleLabel.text = "Full Program"
         allProgramTitleLabel.style = UIFont.TextStyle.title2
     }
+
 
     fileprivate func setupAllTimerCounterLabel() {
 
