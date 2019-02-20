@@ -23,7 +23,9 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>For your Excercise</string>
+	<string>Picture for your Workouts</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Picture for your Workouts</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>

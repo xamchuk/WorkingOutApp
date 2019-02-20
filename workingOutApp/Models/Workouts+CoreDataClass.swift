@@ -1,9 +1,8 @@
 //
 //  Workouts+CoreDataClass.swift
-//  workingOutApp
+//  
 //
-//  Created by Rusłan Chamski on 01/02/2019.
-//  Copyright © 2019 Rusłan Chamski. All rights reserved.
+//  Created by Rusłan Chamski on 20/02/2019.
 //
 //
 

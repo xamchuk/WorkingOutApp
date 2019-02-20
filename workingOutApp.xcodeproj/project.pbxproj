@@ -7,19 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		52E7876E00D017B52F996699 /* Pods_workingOutApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07EB7DABBD6C5B16889C10B6 /* Pods_workingOutApp.framework */; };
 		AB4D6DB4220D9E130054F682 /* TimerLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4D6DB3220D9E130054F682 /* TimerLabel.swift */; };
 		AB4D6DB6220DA3360054F682 /* TimerTrackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4D6DB5220DA3360054F682 /* TimerTrackView.swift */; };
 		B0029772220CD870009207A6 /* TimerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0029771220CD870009207A6 /* TimerModel.swift */; };
 		B0029775220CDF15009207A6 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0029774220CDF15009207A6 /* TimerViewController.swift */; };
 		B0479A4521DE4D5500AC09A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0479A4421DE4D5500AC09A7 /* AppDelegate.swift */; };
-		B0479A5B21DE539B00AC09A7 /* ExerciseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0479A5A21DE539B00AC09A7 /* ExerciseCollectionViewCell.swift */; };
 		B0479A5D21DE553600AC09A7 /* ExerciseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0479A5C21DE553600AC09A7 /* ExerciseCell.swift */; };
 		B0479A6421DEAE7100AC09A7 /* Extetions +UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0479A6321DEAE7100AC09A7 /* Extetions +UIView.swift */; };
 		B0479A7021E282DC00AC09A7 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0479A6F21E282DC00AC09A7 /* Item.swift */; };
 		B0479A7221E3485C00AC09A7 /* AddNewExCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0479A7121E3485C00AC09A7 /* AddNewExCollectionViewController.swift */; };
 		B0479A7421E34BD900AC09A7 /* AddNewExCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0479A7321E34BD900AC09A7 /* AddNewExCollectionViewCell.swift */; };
 		B0479A7621E36C5700AC09A7 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0479A7521E36C5700AC09A7 /* InfoViewController.swift */; };
-		B0479A7A21E61CFA00AC09A7 /* excercises.json in Resources */ = {isa = PBXBuildFile; fileRef = B0479A7921E61CFA00AC09A7 /* excercises.json */; };
 		B0479A7C21E61DBC00AC09A7 /* LocalJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0479A7B21E61DBC00AC09A7 /* LocalJson.swift */; };
 		B0479A8421EDE4C200AC09A7 /* Item.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B0479A8221EDE4C100AC09A7 /* Item.xcdatamodeld */; };
 		B0479A8C21F3142300AC09A7 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0479A8B21F3142300AC09A7 /* DetailsViewController.swift */; };
@@ -27,15 +26,32 @@
 		B0479A9421F3B7B900AC09A7 /* CustomExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0479A9321F3B7B900AC09A7 /* CustomExerciseViewController.swift */; };
 		B04EF6682208EE5A00BE2C67 /* LineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04EF6672208EE5A00BE2C67 /* LineView.swift */; };
 		B04EF66C220A460C00BE2C67 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04EF66B220A460C00BE2C67 /* CoreDataStack.swift */; };
+		B062F0B3221D5CA000497783 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B062F0B2221D5CA000497783 /* LoginView.swift */; };
+		B062F0B7221D5CBA00497783 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B062F0B6221D5CBA00497783 /* LoginViewController.swift */; };
+		B062F0B9221D727900497783 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B062F0B8221D727900497783 /* GoogleService-Info.plist */; };
+		B062F0BC221D7BDC00497783 /* LoginTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B062F0BB221D7BDC00497783 /* LoginTextField.swift */; };
+		B062F0BE221D7BE700497783 /* LoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B062F0BD221D7BE700497783 /* LoginButton.swift */; };
+		B062F0C0221D7F2200497783 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B062F0BF221D7F2200497783 /* RegisterViewController.swift */; };
+		B062F0C4221D99AA00497783 /* ErrorLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B062F0C3221D99AA00497783 /* ErrorLabel.swift */; };
+		B062F0C6221D9F7600497783 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B062F0C5221D9F7600497783 /* ResetPasswordViewController.swift */; };
+		B062F0D0221DE0AB00497783 /* Workouts+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B062F0CF221DE0AA00497783 /* Workouts+CoreDataClass.swift */; };
 		B0CB148D22145B300057E5DD /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CB148C22145B300057E5DD /* TimerView.swift */; };
 		B0CB148F22145FF80057E5DD /* TimerStatusTitlesLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CB148E22145FF80057E5DD /* TimerStatusTitlesLabel.swift */; };
 		B0CB1491221465B90057E5DD /* TimerStatusValuesLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CB1490221465B90057E5DD /* TimerStatusValuesLabel.swift */; };
 		B0CB1493221481880057E5DD /* TimerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CB1492221481880057E5DD /* TimerButton.swift */; };
 		B0CB14962214ACEA0057E5DD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B0CB14952214ACEA0057E5DD /* Assets.xcassets */; };
 		B0CB149F2214C4A30057E5DD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0CB149E2214C4A30057E5DD /* LaunchScreen.storyboard */; };
-		B0CDE8DA220437BC008DBB85 /* MainCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CDE8D9220437BC008DBB85 /* MainCollectionViewController.swift */; };
-		B0CDE90522044B59008DBB85 /* Workouts+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CDE8FF22044B59008DBB85 /* Workouts+CoreDataClass.swift */; };
-		B0CDE90622044B59008DBB85 /* Workouts+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CDE90022044B59008DBB85 /* Workouts+CoreDataProperties.swift */; };
+		B0CB14A6221C07B00057E5DD /* MainCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CB14A5221C07B00057E5DD /* MainCollectionViewCell.swift */; };
+		B0CB14AA221C1D570057E5DD /* ExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CB14A9221C1D570057E5DD /* ExerciseViewController.swift */; };
+		B0CB14AC221C52980057E5DD /* Main+UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CB14AB221C52980057E5DD /* Main+UICollectionView.swift */; };
+		B0CB14AE221C53650057E5DD /* Main+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CB14AD221C53650057E5DD /* Main+CoreData.swift */; };
+		B0CB14B0221C56400057E5DD /* Main+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CB14AF221C56400057E5DD /* Main+UIView.swift */; };
+		B0CB14B2221C576C0057E5DD /* Exercise+UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CB14B1221C576C0057E5DD /* Exercise+UITableView.swift */; };
+		B0CB14B4221C57DF0057E5DD /* Exercise+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CB14B3221C57DF0057E5DD /* Exercise+CoreData.swift */; };
+		B0CB14B6221C5A430057E5DD /* Exercise+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CB14B5221C5A430057E5DD /* Exercise+UIView.swift */; };
+		B0CD59B4221E79B500244139 /* excercises.json in Resources */ = {isa = PBXBuildFile; fileRef = B0CD59B3221E79B400244139 /* excercises.json */; };
+		B0CD59B7221EAE2E00244139 /* Workouts+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CD59B6221EAE2E00244139 /* Workouts+CoreDataProperties.swift */; };
+		B0CDE8DA220437BC008DBB85 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CDE8D9220437BC008DBB85 /* MainViewController.swift */; };
 		B0CDE90722044B59008DBB85 /* Sets+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CDE90122044B59008DBB85 /* Sets+CoreDataClass.swift */; };
 		B0CDE90822044B59008DBB85 /* Sets+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CDE90222044B59008DBB85 /* Sets+CoreDataProperties.swift */; };
 		B0CDE90922044B59008DBB85 /* Item+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CDE90322044B59008DBB85 /* Item+CoreDataClass.swift */; };
@@ -45,20 +61,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		07EB7DABBD6C5B16889C10B6 /* Pods_workingOutApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_workingOutApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		48DD62CCB58DAEF3D3F7EE78 /* Pods-workingOutApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-workingOutApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-workingOutApp/Pods-workingOutApp.debug.xcconfig"; sourceTree = "<group>"; };
 		AB4D6DB3220D9E130054F682 /* TimerLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerLabel.swift; sourceTree = "<group>"; };
 		AB4D6DB5220DA3360054F682 /* TimerTrackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerTrackView.swift; sourceTree = "<group>"; };
 		B0029771220CD870009207A6 /* TimerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerModel.swift; sourceTree = "<group>"; };
 		B0029774220CDF15009207A6 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
 		B0479A4121DE4D5500AC09A7 /* workingOutApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = workingOutApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0479A4421DE4D5500AC09A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B0479A5A21DE539B00AC09A7 /* ExerciseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseCollectionViewCell.swift; sourceTree = "<group>"; };
 		B0479A5C21DE553600AC09A7 /* ExerciseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseCell.swift; sourceTree = "<group>"; };
 		B0479A6321DEAE7100AC09A7 /* Extetions +UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extetions +UIView.swift"; sourceTree = "<group>"; };
 		B0479A6F21E282DC00AC09A7 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		B0479A7121E3485C00AC09A7 /* AddNewExCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewExCollectionViewController.swift; sourceTree = "<group>"; };
 		B0479A7321E34BD900AC09A7 /* AddNewExCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewExCollectionViewCell.swift; sourceTree = "<group>"; };
 		B0479A7521E36C5700AC09A7 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
-		B0479A7921E61CFA00AC09A7 /* excercises.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = excercises.json; path = workingOutApp/tools/excercises.json; sourceTree = SOURCE_ROOT; };
 		B0479A7B21E61DBC00AC09A7 /* LocalJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalJson.swift; sourceTree = "<group>"; };
 		B0479A7D21E6978700AC09A7 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B0479A8321EDE4C200AC09A7 /* Item.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Item.xcdatamodel; sourceTree = "<group>"; };
@@ -67,21 +83,39 @@
 		B0479A9321F3B7B900AC09A7 /* CustomExerciseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomExerciseViewController.swift; sourceTree = "<group>"; };
 		B04EF6672208EE5A00BE2C67 /* LineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineView.swift; sourceTree = "<group>"; };
 		B04EF66B220A460C00BE2C67 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		B062F0B2221D5CA000497783 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		B062F0B6221D5CBA00497783 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		B062F0B8221D727900497783 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B062F0BB221D7BDC00497783 /* LoginTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTextField.swift; sourceTree = "<group>"; };
+		B062F0BD221D7BE700497783 /* LoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginButton.swift; sourceTree = "<group>"; };
+		B062F0BF221D7F2200497783 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		B062F0C3221D99AA00497783 /* ErrorLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorLabel.swift; sourceTree = "<group>"; };
+		B062F0C5221D9F7600497783 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
+		B062F0CF221DE0AA00497783 /* Workouts+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Workouts+CoreDataClass.swift"; path = "/Users/ruslanchamski/Desktop/Programming/PortfolioApps/workingOutApp/workingOutApp/Models/Workouts+CoreDataClass.swift"; sourceTree = "<absolute>"; };
 		B0CB148C22145B300057E5DD /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		B0CB148E22145FF80057E5DD /* TimerStatusTitlesLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerStatusTitlesLabel.swift; sourceTree = "<group>"; };
 		B0CB1490221465B90057E5DD /* TimerStatusValuesLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerStatusValuesLabel.swift; sourceTree = "<group>"; };
 		B0CB1492221481880057E5DD /* TimerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerButton.swift; sourceTree = "<group>"; };
 		B0CB14952214ACEA0057E5DD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = workingOutApp/Assets.xcassets; sourceTree = SOURCE_ROOT; };
 		B0CB149E2214C4A30057E5DD /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
-		B0CDE8D9220437BC008DBB85 /* MainCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewController.swift; sourceTree = "<group>"; };
-		B0CDE8FF22044B59008DBB85 /* Workouts+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Workouts+CoreDataClass.swift"; sourceTree = "<group>"; };
-		B0CDE90022044B59008DBB85 /* Workouts+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Workouts+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		B0CB14A5221C07B00057E5DD /* MainCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewCell.swift; sourceTree = "<group>"; };
+		B0CB14A9221C1D570057E5DD /* ExerciseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseViewController.swift; sourceTree = "<group>"; };
+		B0CB14AB221C52980057E5DD /* Main+UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Main+UICollectionView.swift"; sourceTree = "<group>"; };
+		B0CB14AD221C53650057E5DD /* Main+CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Main+CoreData.swift"; sourceTree = "<group>"; };
+		B0CB14AF221C56400057E5DD /* Main+UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Main+UIView.swift"; sourceTree = "<group>"; };
+		B0CB14B1221C576C0057E5DD /* Exercise+UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Exercise+UITableView.swift"; sourceTree = "<group>"; };
+		B0CB14B3221C57DF0057E5DD /* Exercise+CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Exercise+CoreData.swift"; sourceTree = "<group>"; };
+		B0CB14B5221C5A430057E5DD /* Exercise+UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Exercise+UIView.swift"; sourceTree = "<group>"; };
+		B0CD59B3221E79B400244139 /* excercises.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = excercises.json; sourceTree = "<group>"; };
+		B0CD59B6221EAE2E00244139 /* Workouts+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Workouts+CoreDataProperties.swift"; path = "/Users/ruslanchamski/Desktop/Programming/PortfolioApps/workingOutApp/workingOutApp/Models/Workouts+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
+		B0CDE8D9220437BC008DBB85 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		B0CDE90122044B59008DBB85 /* Sets+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sets+CoreDataClass.swift"; sourceTree = "<group>"; };
 		B0CDE90222044B59008DBB85 /* Sets+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sets+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B0CDE90322044B59008DBB85 /* Item+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataClass.swift"; sourceTree = "<group>"; };
 		B0CDE90422044B59008DBB85 /* Item+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B0F3985921F651DB00A74F4F /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
 		B0FBC4FB21FA0A26000F0EBD /* CustomDropButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDropButton.swift; sourceTree = "<group>"; };
+		C124427DFC3F2034CEC62BDA /* Pods-workingOutApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-workingOutApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-workingOutApp/Pods-workingOutApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,12 +123,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52E7876E00D017B52F996699 /* Pods_workingOutApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3006FF3D1C626A61D438FB06 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				07EB7DABBD6C5B16889C10B6 /* Pods_workingOutApp.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		864079D3752D87AB88A5688C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				48DD62CCB58DAEF3D3F7EE78 /* Pods-workingOutApp.debug.xcconfig */,
+				C124427DFC3F2034CEC62BDA /* Pods-workingOutApp.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		B0029777220DDC61009207A6 /* Timer Screen */ = {
 			isa = PBXGroup;
 			children = (
@@ -111,6 +163,8 @@
 			children = (
 				B0479A4321DE4D5500AC09A7 /* workingOutApp */,
 				B0479A4221DE4D5500AC09A7 /* Products */,
+				864079D3752D87AB88A5688C /* Pods */,
+				3006FF3D1C626A61D438FB06 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -127,29 +181,30 @@
 			children = (
 				B0479A4421DE4D5500AC09A7 /* AppDelegate.swift */,
 				B0479A7D21E6978700AC09A7 /* Info.plist */,
+				B062F0B8221D727900497783 /* GoogleService-Info.plist */,
 				B0CB149D2214C3E10057E5DD /* Screens */,
 				B0479A6721E0A42900AC09A7 /* Models */,
-				B0479A5E21DE555900AC09A7 /* tools */,
+				B0479A5E21DE555900AC09A7 /* Other */,
 			);
 			path = workingOutApp;
 			sourceTree = "<group>";
 		};
-		B0479A5E21DE555900AC09A7 /* tools */ = {
+		B0479A5E21DE555900AC09A7 /* Other */ = {
 			isa = PBXGroup;
 			children = (
 				B0CB14952214ACEA0057E5DD /* Assets.xcassets */,
+				B0CD59B3221E79B400244139 /* excercises.json */,
 				B0CB149E2214C4A30057E5DD /* LaunchScreen.storyboard */,
 				B0479A6321DEAE7100AC09A7 /* Extetions +UIView.swift */,
-				B0479A7921E61CFA00AC09A7 /* excercises.json */,
 			);
-			path = tools;
+			path = Other;
 			sourceTree = "<group>";
 		};
 		B0479A6721E0A42900AC09A7 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				B0CDE8FF22044B59008DBB85 /* Workouts+CoreDataClass.swift */,
-				B0CDE90022044B59008DBB85 /* Workouts+CoreDataProperties.swift */,
+				B062F0CF221DE0AA00497783 /* Workouts+CoreDataClass.swift */,
+				B0CD59B6221EAE2E00244139 /* Workouts+CoreDataProperties.swift */,
 				B0CDE90122044B59008DBB85 /* Sets+CoreDataClass.swift */,
 				B0CDE90222044B59008DBB85 /* Sets+CoreDataProperties.swift */,
 				B0CDE90322044B59008DBB85 /* Item+CoreDataClass.swift */,
@@ -160,6 +215,28 @@
 				B04EF66B220A460C00BE2C67 /* CoreDataStack.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		B062F0B1221D5C8D00497783 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				B062F0BA221D7BC700497783 /* LoginControlls */,
+				B062F0B2221D5CA000497783 /* LoginView.swift */,
+				B062F0B6221D5CBA00497783 /* LoginViewController.swift */,
+				B062F0BF221D7F2200497783 /* RegisterViewController.swift */,
+				B062F0C5221D9F7600497783 /* ResetPasswordViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		B062F0BA221D7BC700497783 /* LoginControlls */ = {
+			isa = PBXGroup;
+			children = (
+				B062F0BB221D7BDC00497783 /* LoginTextField.swift */,
+				B062F0BD221D7BE700497783 /* LoginButton.swift */,
+				B062F0C3221D99AA00497783 /* ErrorLabel.swift */,
+			);
+			path = LoginControlls;
 			sourceTree = "<group>";
 		};
 		B0CB14942214A9A10057E5DD /* TimerViews */ = {
@@ -177,9 +254,11 @@
 		B0CB14972214BF420057E5DD /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				B0CDE8D9220437BC008DBB85 /* MainCollectionViewController.swift */,
-				B0479A5A21DE539B00AC09A7 /* ExerciseCollectionViewCell.swift */,
-				B0479A5C21DE553600AC09A7 /* ExerciseCell.swift */,
+				B0CDE8D9220437BC008DBB85 /* MainViewController.swift */,
+				B0CB14A5221C07B00057E5DD /* MainCollectionViewCell.swift */,
+				B0CB14AF221C56400057E5DD /* Main+UIView.swift */,
+				B0CB14AB221C52980057E5DD /* Main+UICollectionView.swift */,
+				B0CB14AD221C53650057E5DD /* Main+CoreData.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -224,7 +303,9 @@
 		B0CB149D2214C3E10057E5DD /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				B062F0B1221D5C8D00497783 /* Login */,
 				B0CB14972214BF420057E5DD /* Main */,
+				B0CB14A4221C07580057E5DD /* ExerciseSxreen */,
 				B0CB14992214C2400057E5DD /* SetsScreen */,
 				B0CB149A2214C28F0057E5DD /* AddExerciseScreen */,
 				B0CB149B2214C2DE0057E5DD /* CreateExerciseScreen */,
@@ -234,6 +315,18 @@
 			path = Screens;
 			sourceTree = "<group>";
 		};
+		B0CB14A4221C07580057E5DD /* ExerciseSxreen */ = {
+			isa = PBXGroup;
+			children = (
+				B0CB14A9221C1D570057E5DD /* ExerciseViewController.swift */,
+				B0479A5C21DE553600AC09A7 /* ExerciseCell.swift */,
+				B0CB14B1221C576C0057E5DD /* Exercise+UITableView.swift */,
+				B0CB14B3221C57DF0057E5DD /* Exercise+CoreData.swift */,
+				B0CB14B5221C5A430057E5DD /* Exercise+UIView.swift */,
+			);
+			path = ExerciseSxreen;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -241,9 +334,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B0479A5321DE4D5800AC09A7 /* Build configuration list for PBXNativeTarget "workingOutApp" */;
 			buildPhases = (
+				84813EAA32DCF367A9F1D09E /* [CP] Check Pods Manifest.lock */,
 				B0479A3D21DE4D5500AC09A7 /* Sources */,
 				B0479A3E21DE4D5500AC09A7 /* Frameworks */,
 				B0479A3F21DE4D5500AC09A7 /* Resources */,
+				931F7FD637E1BC1297654ACC /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -298,49 +393,115 @@
 			buildActionMask = 2147483647;
 			files = (
 				B0CB149F2214C4A30057E5DD /* LaunchScreen.storyboard in Resources */,
+				B0CD59B4221E79B500244139 /* excercises.json in Resources */,
+				B062F0B9221D727900497783 /* GoogleService-Info.plist in Resources */,
 				B0CB14962214ACEA0057E5DD /* Assets.xcassets in Resources */,
-				B0479A7A21E61CFA00AC09A7 /* excercises.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		84813EAA32DCF367A9F1D09E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-workingOutApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		931F7FD637E1BC1297654ACC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-workingOutApp/Pods-workingOutApp-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-workingOutApp/Pods-workingOutApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B0479A3D21DE4D5500AC09A7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B062F0B7221D5CBA00497783 /* LoginViewController.swift in Sources */,
 				AB4D6DB6220DA3360054F682 /* TimerTrackView.swift in Sources */,
 				B0479A7421E34BD900AC09A7 /* AddNewExCollectionViewCell.swift in Sources */,
 				B0CB1491221465B90057E5DD /* TimerStatusValuesLabel.swift in Sources */,
+				B062F0BC221D7BDC00497783 /* LoginTextField.swift in Sources */,
 				B0479A7621E36C5700AC09A7 /* InfoViewController.swift in Sources */,
 				B0CDE90722044B59008DBB85 /* Sets+CoreDataClass.swift in Sources */,
 				B0CB148F22145FF80057E5DD /* TimerStatusTitlesLabel.swift in Sources */,
 				B0479A4521DE4D5500AC09A7 /* AppDelegate.swift in Sources */,
+				B062F0D0221DE0AB00497783 /* Workouts+CoreDataClass.swift in Sources */,
+				B0CB14A6221C07B00057E5DD /* MainCollectionViewCell.swift in Sources */,
+				B0CB14B4221C57DF0057E5DD /* Exercise+CoreData.swift in Sources */,
 				B0479A5D21DE553600AC09A7 /* ExerciseCell.swift in Sources */,
 				B0CB148D22145B300057E5DD /* TimerView.swift in Sources */,
 				B0F3985A21F651DB00A74F4F /* SectionHeader.swift in Sources */,
-				B0CDE90622044B59008DBB85 /* Workouts+CoreDataProperties.swift in Sources */,
+				B062F0C6221D9F7600497783 /* ResetPasswordViewController.swift in Sources */,
 				B04EF66C220A460C00BE2C67 /* CoreDataStack.swift in Sources */,
 				B0479A7C21E61DBC00AC09A7 /* LocalJson.swift in Sources */,
+				B0CB14AA221C1D570057E5DD /* ExerciseViewController.swift in Sources */,
 				AB4D6DB4220D9E130054F682 /* TimerLabel.swift in Sources */,
 				B0CDE90822044B59008DBB85 /* Sets+CoreDataProperties.swift in Sources */,
-				B0CDE90522044B59008DBB85 /* Workouts+CoreDataClass.swift in Sources */,
 				B0CB1493221481880057E5DD /* TimerButton.swift in Sources */,
+				B0CB14AC221C52980057E5DD /* Main+UICollectionView.swift in Sources */,
 				B0479A8421EDE4C200AC09A7 /* Item.xcdatamodeld in Sources */,
+				B0CB14AE221C53650057E5DD /* Main+CoreData.swift in Sources */,
 				B0479A8C21F3142300AC09A7 /* DetailsViewController.swift in Sources */,
-				B0CDE8DA220437BC008DBB85 /* MainCollectionViewController.swift in Sources */,
+				B0CDE8DA220437BC008DBB85 /* MainViewController.swift in Sources */,
+				B0CD59B7221EAE2E00244139 /* Workouts+CoreDataProperties.swift in Sources */,
 				B0FBC4FC21FA0A26000F0EBD /* CustomDropButton.swift in Sources */,
 				B0479A7021E282DC00AC09A7 /* Item.swift in Sources */,
+				B0CB14B6221C5A430057E5DD /* Exercise+UIView.swift in Sources */,
 				B0CDE90A22044B59008DBB85 /* Item+CoreDataProperties.swift in Sources */,
 				B0479A9421F3B7B900AC09A7 /* CustomExerciseViewController.swift in Sources */,
+				B062F0BE221D7BE700497783 /* LoginButton.swift in Sources */,
 				B0479A7221E3485C00AC09A7 /* AddNewExCollectionViewController.swift in Sources */,
+				B062F0C4221D99AA00497783 /* ErrorLabel.swift in Sources */,
 				B0CDE90922044B59008DBB85 /* Item+CoreDataClass.swift in Sources */,
-				B0479A5B21DE539B00AC09A7 /* ExerciseCollectionViewCell.swift in Sources */,
+				B062F0C0221D7F2200497783 /* RegisterViewController.swift in Sources */,
+				B0CB14B2221C576C0057E5DD /* Exercise+UITableView.swift in Sources */,
 				B04EF6682208EE5A00BE2C67 /* LineView.swift in Sources */,
 				B0029772220CD870009207A6 /* TimerModel.swift in Sources */,
 				B0479A9221F33C8000AC09A7 /* DetailTableViewCell.swift in Sources */,
+				B0CB14B0221C56400057E5DD /* Main+UIView.swift in Sources */,
 				B0479A6421DEAE7100AC09A7 /* Extetions +UIView.swift in Sources */,
+				B062F0B3221D5CA000497783 /* LoginView.swift in Sources */,
 				B0029775220CDF15009207A6 /* TimerViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -466,6 +627,7 @@
 		};
 		B0479A5421DE4D5800AC09A7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 48DD62CCB58DAEF3D3F7EE78 /* Pods-workingOutApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -484,6 +646,7 @@
 		};
 		B0479A5521DE4D5800AC09A7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C124427DFC3F2034CEC62BDA /* Pods-workingOutApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

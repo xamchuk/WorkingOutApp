@@ -1,0 +1,66 @@
+{
+
+        "items": [
+            {
+                "name": "Barbell Bench Press",
+                "imageName": "https://dumielauxepices.net/sites/default/files/icons-clipart-gym-646058-6092089.png",
+                "rounds": 0,
+                "amount": 0,
+                "weight": 0,
+                "videoString": "ukDEXCXJxdM",
+                "description": "Comming Soon",
+                "group": "Chest"
+            },
+            {
+                "name": "Dumbbell Flyes",
+                "imageName": "https://iq-body.ru/uploads/ra/755x567/training/original/%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D0%B4%D0%BA%D0%B01.jpg",
+                "rounds": 0,
+                "amount": 0,
+                "weight": 0,
+                "videoString": "QwuUZ5wgQOk",
+                "description": "Comming Soon",
+                "group": "Chest"
+            },
+            {
+                "name": "Barbell Curl",
+                "imageName": "https://iq-body.ru/uploads/ra/755x567/training/original/%D0%B1%D0%B8%D1%8622.jpg",
+                "rounds": 0,
+                "amount": 0,
+                "weight": 0,
+                "videoString": "dDI8ClxRS04",
+                "description": "Comming Soon",
+                "group": "Biceps"
+            },
+            {
+                "name": "Hammer Curl",
+                "imageName": "https://iq-body.ru/uploads/ra/755x567/training/original/sgibanie-ruk-molot2.jpg",
+                "rounds": 0,
+                "amount": 0,
+                "weight": 0,
+                "videoString": "0IAM2YtviQY",
+                "description": "Comming Soon",
+                "group": "Biceps"
+            },
+            {
+                "name": "Barbell Deadlift",
+                "imageName": "https://iq-body.ru/uploads/ra/755x567/training/original/%D0%A1%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%B0%D1%8F1.jpg",
+                "rounds": 0,
+                "amount": 0,
+                "weight": 0,
+                "videoString": "a5zhnubunoE",
+                "description": "Comming Soon",
+                "group": "Back"
+            },
+            {
+                "name": "Wide-Grip Lat Pulldown ",
+                "imageName": "https://iq-body.ru/uploads/ra/755x567/training/original/%D1%82%D1%8F%D0%B3%D0%B0%20%D0%B1%D0%BB%D0%BE%D0%BA%D0%B0%20%D0%BA%20%D0%B3%D1%80%D1%83%D0%B4%D0%B82.jpeg",
+                "rounds": 0,
+                "amount": 0,
+                "weight": 0,
+                "videoString": "lueEJGjTuPQ",
+                "description": "Comming Soon",
+                "group": "Back"
+            },
+        ]
+
+}

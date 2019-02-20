@@ -6,9 +6,10 @@
 //  Copyright © 2019 Rusłan Chamski. All rights reserved.
 //
 
-import UIKit
+import Firebase
 import CoreData
 import UserNotifications
+import UIKit
 
 @UIApplicationMain
  class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,12 +19,16 @@ import UserNotifications
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
+        FirebaseApp.configure()
+        
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
 
-        let collectionView = MainCollectionViewController()
-        collectionView.coreDataStack = coreDataStack
-        let nc = UINavigationController(rootViewController: collectionView)
+
+
+        let loginVC = LoginViewController()
+        loginVC.coreDataStack = coreDataStack
+        let nc = UINavigationController(rootViewController: loginVC)
         window?.rootViewController = nc
 
 

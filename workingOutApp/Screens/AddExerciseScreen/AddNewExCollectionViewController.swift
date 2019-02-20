@@ -9,20 +9,20 @@
 import UIKit
 
 protocol SelectedItemFromCollectionView: class {
-    func appendingItem(item: ItemJson)
+    func appendingItem(item: Exercise)
 }
 
 class AddNewExCollectionViewController: UIViewController {
 
     private let reuseIdentifier = "Cell"
     var collectionView: UICollectionView?
-    var items: [ItemJson]?
-    var group = [[ItemJson]]()
+    var items: [Exercise]?
+    var group = [[Exercise]]()
     weak var delegate: SelectedItemFromCollectionView?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.makeGradients()
+        view.setBackgroudView()
         setupNavigationBar()
         setupCollectionView()
         tabBarController?.tabBar.isHidden = true
@@ -37,18 +37,6 @@ class AddNewExCollectionViewController: UIViewController {
         }
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        tabBarController?.tabBar.isHidden = true
-    }
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(true)
-        tabBarController?.tabBar.isHidden = false
-    }
 
     @objc func handleDoneButton() {
         dismiss(animated: true)
@@ -105,16 +93,16 @@ extension AddNewExCollectionViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-extension AddNewExCollectionViewController: PassingItemFromCellToController {
-    func pasingToController(itemFromFunc: ItemJson) {
+extension AddNewExCollectionViewController: AddNewExCollectionViewDelegate {
+    func addNewExCellDidAdd(exercise: Exercise) {
         let infoViewController = InfoViewController()
-        infoViewController.item = itemFromFunc
+        infoViewController.item = exercise
         show(infoViewController, sender: nil)
     }
 }
 
 extension AddNewExCollectionViewController: CustomExerciseDelegate {
-    func customItem(item: ItemJson) {
+    func customItem(item: Exercise) {
         delegate?.appendingItem(item: item)
     }
 }
@@ -135,16 +123,15 @@ extension AddNewExCollectionViewController {
 
     fileprivate func setupNavigationBar() {
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(handleDoneButton))
+         navigationItem.leftBarButtonItem = doneButton
         let addCustom = UIBarButtonItem(title: "Add Own Exercise", style: .plain, target: self, action: #selector(handleAddCustom))
-        navigationItem.leftBarButtonItem = doneButton
         navigationItem.rightBarButtonItem = addCustom
-        navigationItem.rightBarButtonItem?.tintColor = .textColor
-        doneButton.tintColor = .textColor
-        navigationController?.navigationBar.barTintColor = .gradientDarker
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.textColor]
-        let backButton = UIBarButtonItem()
-        backButton.tintColor = .textColor
-        navigationController!.navigationBar.topItem!.backBarButtonItem = backButton
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.isTranslucent = true
+        navigationController?.navigationBar.barTintColor = .clear
+        navigationController?.navigationBar.tintColor = .white
+
     }
 }
 

@@ -27,7 +27,6 @@ class DetailTableViewCell: UITableViewCell {
             pickerView.selectRow(Int(weight - 1), inComponent: 3, animated: true)
         }
     }
-    let verticalStrokeView = UIView()
     let numberLabel = UILabel()
     var repeatsNumberLabel = UILabel() 
     let repeatsLabel = UILabel()
@@ -101,7 +100,7 @@ extension DetailTableViewCell: UIPickerViewDelegate, UIPickerViewDataSource {
             label.textAlignment = .center
             label.font = UIFont.boldSystemFont(ofSize: heightOfComponent - 2)
             label.adjustsFontSizeToFitWidth = true
-            label.textColor = .darkOrange
+            label.textColor = .mainLight
             label.text = pickerData[component][row]
             numbersView.addSubview(label)
             return numbersView
@@ -111,7 +110,7 @@ extension DetailTableViewCell: UIPickerViewDelegate, UIPickerViewDataSource {
             label.textAlignment = .center
             label.font = UIFont.boldSystemFont(ofSize: heightOfComponent - 2)
             label.adjustsFontSizeToFitWidth = true
-            label.textColor = .textColor
+            label.textColor = .white
             label.text = pickerData[component][row]
             titlesView.addSubview(label)
             return titlesView
@@ -130,12 +129,11 @@ extension DetailTableViewCell: UIPickerViewDelegate, UIPickerViewDataSource {
 extension DetailTableViewCell {
 
     fileprivate func setupUI() {
-        addSubview(verticalStrokeView)
-        setupVerticalStroke()
+
         addSubview(numberLabel)
         setupNumberOfSetLabel()
         addSubview(repeatsNumberLabel)
-        setupRepeatsTextField()
+        setupNumberOfRepeatsLabel()
         addSubview(repeatsLabel)
         setupRepeatsLabel()
         addSubview(weightTextLabel)
@@ -155,40 +153,29 @@ extension DetailTableViewCell {
         makeVarsForPicker()
     }
 
-    fileprivate func setupVerticalStroke() {
-        verticalStrokeView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            verticalStrokeView.topAnchor.constraint(equalTo: topAnchor),
-            verticalStrokeView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
-            verticalStrokeView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            verticalStrokeView.widthAnchor.constraint(equalToConstant: 2)])
-        verticalStrokeView.layer.borderWidth = 2
-        verticalStrokeView.layer.borderColor = UIColor.linesColor.cgColor
-    }
-
     fileprivate func setupNumberOfSetLabel() {
         numberLabel.textAlignment = .center
-        numberLabel.backgroundColor = .linesColor
+        numberLabel.backgroundColor = .clear
         numberLabel.layer.cornerRadius = 10
-        numberLabel.layer.borderColor = UIColor.linesColor.cgColor
+        numberLabel.layer.borderColor = UIColor.white.cgColor
         numberLabel.layer.borderWidth = 1
         numberLabel.font = UIFont.boldSystemFont(ofSize: 20)
-        numberLabel.textColor = .gradientDarker
+        numberLabel.textColor = .white
         numberLabel.layer.masksToBounds = true
         numberLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            numberLabel.centerXAnchor.constraint(equalTo: verticalStrokeView.centerXAnchor),
-            numberLabel.topAnchor.constraint(equalTo: verticalStrokeView.topAnchor, constant: 16),
-            numberLabel.widthAnchor.constraint(equalToConstant: 30)
+            numberLabel.topAnchor.constraint(equalTo: topAnchor, constant: 16),
+            numberLabel.centerXAnchor.constraint(equalTo: leadingAnchor, constant: 18),
+            numberLabel.widthAnchor.constraint(equalToConstant: 24)
             ])
-        let height = numberLabel.heightAnchor.constraint(equalToConstant: 30)
+        let height = numberLabel.heightAnchor.constraint(equalToConstant: 24)
         height.priority = .defaultLow
         height.isActive = true
     }
 
-    fileprivate func setupRepeatsTextField() {
+    fileprivate func setupNumberOfRepeatsLabel() {
         repeatsNumberLabel.font = UIFont.boldSystemFont(ofSize: 30)
-        repeatsNumberLabel.textColor = .textColor
+        repeatsNumberLabel.textColor = .white
         repeatsNumberLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             repeatsNumberLabel.centerYAnchor.constraint(equalTo: numberLabel.centerYAnchor),
@@ -197,7 +184,7 @@ extension DetailTableViewCell {
 
     fileprivate func setupRepeatsLabel() {
         repeatsLabel.text = "repeats /"
-        repeatsLabel.textColor = .textColor
+        repeatsLabel.textColor = .white
         repeatsLabel.font = UIFont.systemFont(ofSize: 24)
         repeatsLabel.translatesAutoresizingMaskIntoConstraints = false
         restLabel.adjustsFontSizeToFitWidth = true
@@ -207,7 +194,7 @@ extension DetailTableViewCell {
     }
 
     fileprivate func setupWeightTextField() {
-        weightTextLabel.textColor = .textColor
+        weightTextLabel.textColor = .white
         weightTextLabel.font = UIFont.boldSystemFont(ofSize: 30)
         weightTextLabel.adjustsFontSizeToFitWidth = true
         weightTextLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -218,7 +205,7 @@ extension DetailTableViewCell {
 
     fileprivate func setupWeightLabel() {
         weightLabel.text = "kilos"
-        weightLabel.textColor = .textColor
+        weightLabel.textColor = .white
         weightLabel.font = UIFont.systemFont(ofSize: 24)
         weightLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -228,14 +215,14 @@ extension DetailTableViewCell {
 
     fileprivate func setupRestImageView() {
         restImageView.image = UIImage(named: "timer")
-        restImageView.tintColor = .darkOrange
+        restImageView.tintColor = .white
         restImageView.contentMode = .scaleAspectFill
         restImageView.layer.masksToBounds = false
         restImageView.layer.cornerRadius = 18
-        restImageView.backgroundColor = .gradientDarker
+        restImageView.backgroundColor = .clear
         restImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            restImageView.centerXAnchor.constraint(equalTo: verticalStrokeView.centerXAnchor),
+            restImageView.centerXAnchor.constraint(equalTo: numberLabel.centerXAnchor),
             restImageView.topAnchor.constraint(equalTo: numberLabel.bottomAnchor, constant: 16),
             restImageView.widthAnchor.constraint(equalToConstant: 20),
             restImageView.heightAnchor.constraint(equalToConstant: 20)])
@@ -244,7 +231,7 @@ extension DetailTableViewCell {
     fileprivate func setupRestLabel() {
         restLabel.text = "Rest 1:00"
         restLabel.font = UIFont.systemFont(ofSize: 16)
-        restLabel.textColor = .darkOrange
+        restLabel.textColor = .mainLight
         restLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             restLabel.centerYAnchor.constraint(equalTo: restImageView.centerYAnchor),
@@ -252,9 +239,9 @@ extension DetailTableViewCell {
     }
 
     fileprivate func setupPickerView() {
-        pickerStackView.anchor(top: restLabel.bottomAnchor, leading: verticalStrokeView.trailingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: -6, left: 24, bottom: 0, right: 44))
+        pickerStackView.anchor(top: restLabel.bottomAnchor, leading: numberLabel.trailingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: -6, left: 24, bottom: 0, right: 44))
         pickerView.delegate = self
-        pickerView.tintColor = .gradientDarker
+        pickerView.tintColor = .mainDark
         pickerView.layer.cornerRadius = 20
         pickerView.contentMode = .center
         pickerStackView.addArrangedSubview(pickerView)
@@ -265,7 +252,7 @@ extension DetailTableViewCell {
         editImageView.anchor(top: nil, leading: pickerView.trailingAnchor, bottom: bottomAnchor, trailing: nil, padding: .init(top: 0, left: 8, bottom: 8, right: 0), size: CGSize(width: 16, height: 16))
         editImageView.image = UIImage(named: "edit")
         editImageView.contentMode = .scaleAspectFit
-        editImageView.tintColor = .linesColor
+        editImageView.tintColor = .white
     }
 
     fileprivate func setupBottomLine() {
@@ -277,7 +264,7 @@ extension DetailTableViewCell {
             bottomLine.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 2 / 3),
             bottomLine.heightAnchor.constraint(equalToConstant: 1)])
         bottomLine.layer.borderWidth = 0.5
-        bottomLine.layer.borderColor = UIColor.linesColor.cgColor
+        bottomLine.layer.borderColor = UIColor.white.cgColor
     }
 }
 

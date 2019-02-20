@@ -87,7 +87,6 @@ class TimerModel {
                 switchNextExerciseOrSet()
             }
         } else {
-           // delegate?.refresh(title: "Training completed", startButtonTitle: "Done")
             timer.invalidate()
         }
     }
@@ -130,7 +129,7 @@ class TimerModel {
                 delegate?.nextButton(isEnabled: true)
             } else  if seconds == 0 && isBreak {
                 delegate?.refresh(breakTitle: "REST")
-                delegate?.refresh(infoTitle: "Prepeare for next set, your braek will finish in:")
+                delegate?.refresh(infoTitle: "Prepeare for next set, your break will finish in:")
                 seconds = 60
                 isBreak = false
                 startValue = 100 / Double(seconds)

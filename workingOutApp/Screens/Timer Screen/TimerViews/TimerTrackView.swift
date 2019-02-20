@@ -8,7 +8,7 @@ import UIKit
 class CircleStatusView: UIView {
     enum Defaults {
         static let trackStrokeColor: UIColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.5)
-        static let circleStrokeStatusColor: UIColor = .darkGreen
+        static let circleStrokeStatusColor: UIColor = .mainLight
     }
 
     private let trackLayer = CAShapeLayer()
@@ -50,7 +50,6 @@ class CircleStatusView: UIView {
         if firstLoad {
             setupLayers(frame)
             firstLoad = false
-            trackLayer.lineWidth = 24
         }
     }
 

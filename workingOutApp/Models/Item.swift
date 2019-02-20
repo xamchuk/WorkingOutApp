@@ -9,10 +9,10 @@
 import Foundation
 
 struct Items: Decodable {
-    var items: [ItemJson]
+    var items: [Exercise]
 }
 
-struct ItemJson: Equatable, Decodable {
+struct Exercise: Equatable, Decodable {
     var name: String
     var imageName: String?
     var imageLocalName: String?

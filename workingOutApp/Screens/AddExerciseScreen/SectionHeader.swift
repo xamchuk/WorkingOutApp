@@ -20,12 +20,12 @@ class SectionHeader: UICollectionReusableView {
 
     fileprivate func setupNameLabel() {
         nameLabel.textAlignment = .center
-        nameLabel.backgroundColor = .darkOrange
+        nameLabel.backgroundColor = .mainDark
         nameLabel.layer.cornerRadius = 10
         let style  = UIFont.TextStyle.headline
         nameLabel.font = UIFont.preferredFont(forTextStyle: style)
         nameLabel.adjustsFontSizeToFitWidth = true
-        nameLabel.textColor = .gradientDarker
+        nameLabel.textColor = .white
         nameLabel.layer.masksToBounds = true
         nameLabel.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 8, left: 8, bottom: 8, right: 8))
     }

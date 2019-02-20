@@ -9,7 +9,7 @@
 import UIKit
 
 class LocalJson {
-    func loadJson() -> [ItemJson]? {
+    func loadJson() -> [Exercise]? {
         if let url = Bundle.main.url(forResource: "excercises", withExtension: "json") {
             do {
                 let data = try Data(contentsOf: url)

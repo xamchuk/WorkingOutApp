@@ -1,9 +1,8 @@
 //
 //  Workouts+CoreDataProperties.swift
-//  workingOutApp
+//  
 //
-//  Created by Rusłan Chamski on 15/02/2019.
-//  Copyright © 2019 Rusłan Chamski. All rights reserved.
+//  Created by Rusłan Chamski on 21/02/2019.
 //
 //
 
@@ -17,8 +16,10 @@ extension Workouts {
         return NSFetchRequest<Workouts>(entityName: "Workouts")
     }
 
-    @NSManaged public var name: String?
+    @NSManaged public var imageName: NSData?
     @NSManaged public var index: Int16
+    @NSManaged public var name: String?
+    @NSManaged public var userName: String?
     @NSManaged public var items: NSSet?
 
 }

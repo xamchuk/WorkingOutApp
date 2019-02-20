@@ -26,10 +26,8 @@ class DetailsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        tabBarController?.tabBar.isHidden = true
-        navigationItem.title = "\(exercise?.name ?? "")"
-        view.makeGradients()
-        view.addSubview(tableView)
+        view.setBackgroudView()
+        setupNavigationController()
         setupTableView()
         defaultCellData(item: exercise)
     }
@@ -120,7 +118,7 @@ extension DetailsViewController: UITableViewDataSource {
             self.refreshCoData()
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
-        action.backgroundColor = UIColor.darkOrange
+        action.backgroundColor = UIColor.mainDark
         return [action]
     }
 
@@ -134,11 +132,11 @@ extension DetailsViewController: UITableViewDataSource {
         }
         if let old = oldIndexPath {
         (tableView.cellForRow(at: old) as! DetailTableViewCell).pickerStackView.isHidden = true
-        (tableView.cellForRow(at: old) as! DetailTableViewCell).editImageView.tintColor = .linesColor
+        (tableView.cellForRow(at: old) as! DetailTableViewCell).editImageView.tintColor = .white
         }
         if selectedIndexPath != nil {
             selectedCell.pickerStackView.isHidden = false
-            selectedCell.editImageView.tintColor = .darkOrange
+            selectedCell.editImageView.tintColor = .mainDark
         }
         tableView.beginUpdates()
         tableView.layoutIfNeeded()
@@ -179,7 +177,19 @@ extension DetailsViewController: UITableViewDelegate {
 
 extension DetailsViewController {
 
+
+    fileprivate func setupNavigationController() {
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.isTranslucent = true
+        navigationController?.navigationBar.barTintColor = .clear
+        navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        navigationItem.title = "\(exercise?.name ?? "")"
+    }
+
     fileprivate func setupTableView() {
+        view.addSubview(tableView)
         footerView = UIView.init(frame: CGRect(x: 0, y: 0, width: 0, height: 55))
         tableView.fillSuperview()
         tableView.backgroundColor = .clear
@@ -195,7 +205,7 @@ extension DetailsViewController {
     }
 
     fileprivate func setupFooterVerticalStroke() {
-        strokeView.layer.borderColor = UIColor.linesColor.cgColor
+        strokeView.layer.borderColor = UIColor.white.cgColor
         strokeView.layer.borderWidth = 1
         strokeView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -207,9 +217,9 @@ extension DetailsViewController {
 
     fileprivate func setUpButtonOfFooter() {
         footerAddButton.layer.cornerRadius = 20
-        footerAddButton.layer.borderColor = UIColor.linesColor.cgColor
+        footerAddButton.layer.borderColor = UIColor.white.cgColor
         footerAddButton.layer.borderWidth = 2
-        footerAddButton.tintColor = .linesColor
+        footerAddButton.tintColor = .white
         footerAddButton.backgroundColor = .clear
         footerAddButton.setImage(UIImage(named: "plus"), for: .normal)
         footerAddButton.addTarget(self, action: #selector(hendleFooterAddButton), for: .touchUpInside)

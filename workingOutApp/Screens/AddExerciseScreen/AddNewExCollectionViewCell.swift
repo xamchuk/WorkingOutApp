@@ -8,19 +8,19 @@
 
 import UIKit
 
-protocol PassingItemFromCellToController: AnyObject {
-    func pasingToController(itemFromFunc: ItemJson)
+protocol AddNewExCollectionViewDelegate: AnyObject {
+    func addNewExCellDidAdd(exercise: Exercise)
 }
 
 class AddNewExCollectionViewCell: UICollectionViewCell {
 
-    var item: ItemJson? {
+    var item: Exercise? {
         didSet {
             imageViewOfExersice.downloaded(from: item?.imageName ?? "", completion: nil)
             title.text = item?.name
         }
     }
-    weak var delegate: PassingItemFromCellToController?
+    weak var delegate: AddNewExCollectionViewDelegate?
     let imageViewOfExersice = UIImageView()
     let viewTitle = UIView()
     let title = UILabel()
@@ -33,7 +33,7 @@ class AddNewExCollectionViewCell: UICollectionViewCell {
 
     @objc func passingItem() {
        guard let item = item else { return }
-        delegate?.pasingToController(itemFromFunc: item)
+        delegate?.addNewExCellDidAdd(exercise: item)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -73,7 +73,7 @@ extension AddNewExCollectionViewCell {
         viewTitle.addSubview(title)
         title.anchor(top: viewTitle.topAnchor, leading: viewTitle.leadingAnchor, bottom: viewTitle.bottomAnchor, trailing: viewTitle.trailingAnchor, padding: .init(top: 0, left: 6, bottom: 0, right: 6))
         title.adjustsFontSizeToFitWidth = true
-        title.textColor = UIColor.textColor
+        title.textColor = UIColor.white
     }
 }
 

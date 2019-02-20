@@ -10,7 +10,6 @@ import UIKit
 
 class TimerView: UIView {
 
-    let backgroundImage = UIImageView()
     let titleLabel = UILabel()
     let statusStackView = UIStackView()
     let rowStackView = UIStackView()
@@ -28,12 +27,7 @@ class TimerView: UIView {
     var nextButton = TimerButton(type: .system)
     var stopButton = TimerButton(type: .system)
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
-
     func setupSubViews() {
-        addSubview(backgroundImage)
         setupBackgroundImage()
         addSubview(titleLabel)
         setupTitleLabel()
@@ -53,22 +47,17 @@ class TimerView: UIView {
         setupNextButton()
     }
 
-
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    func timeString(time:TimeInterval) -> String {
+        let hours = Int(time) / 3600
+        let minutes = Int(time) / 60 % 60
+        let seconds = Int(time) % 60
+        return String(format: "%02i:%02i:%02i", hours, minutes, seconds)
     }
 }
 
 extension TimerView {
     fileprivate func setupBackgroundImage() {
-        backgroundImage.image = UIImage(named: "screen")
-        backgroundImage.contentMode = .scaleAspectFill
-        backgroundImage.fillSuperview()
-        let blurEffect = UIBlurEffect(style: .regular)
-        let visualEffectView = UIVisualEffectView(effect: blurEffect)
-        visualEffectView.alpha = 0.9
-        addSubview(visualEffectView)
-        visualEffectView.fillSuperview()
+       setBackgroudView()
     }
 
     fileprivate func setupTitleLabel() {
@@ -82,7 +71,7 @@ extension TimerView {
         titleLabel.textColor = .white
         let style = UIFont.TextStyle.body
         titleLabel.font = UIFont.preferredFont(forTextStyle: style)
-        layer.shadowColor = UIColor.gradientLighter.cgColor
+       // layer.shadowColor = UIColor.gradientLighter.cgColor
         titleLabel.anchor(top: safeAreaLayoutGuide.topAnchor, leading: safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: safeAreaLayoutGuide.trailingAnchor, padding: .init(top: 8, left: 8, bottom: 0, right: 8), size: .init(width: 0, height: 50))
     }
 
@@ -175,9 +164,50 @@ extension TimerView {
 
     fileprivate func setupStopButton() {
         stopButton.setTitle("", for: .normal)
-        stopButton.tintColor = .gray
+        stopButton.tintColor = .mainLight
         stopButton.setImage(UIImage(named: "stop"), for: .normal)
         stopButton.imageEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         stopButton.anchor(top: allTimerCounterLabel.bottomAnchor, leading: nil, bottom: nil, trailing: allProgramTitleLabel.leadingAnchor, padding: .init(top: 24, left: 0, bottom: 0, right: 8), size: .init(width: 75, height: 75))
+    }
+}
+
+extension TimerView: TimerDelegate {
+    func refresh(exerice: String, sets: String, reps: String, weight: String) {
+        exerciseValue.text = exerice
+        setsValue.text = sets
+        repsValue.text = reps
+        weightValue.text = weight
+    }
+
+    func nextButton(isEnabled: Bool) {
+        nextButton.isEnabled = isEnabled
+    }
+
+    func refresh(titleOfExercise: String) {
+        titleLabel.text = titleOfExercise
+    }
+
+
+    func refresh(infoTitle: String) {
+        infoLabel.text = infoTitle
+    }
+    func refresh(startButtonTitle: String) {
+        startButton.setTitle(startButtonTitle, for: .normal)
+    }
+
+    func refresh(breakTitle: String) {
+        breakLabel.text = breakTitle
+    }
+
+    func refresh(singleSeconds: String) {
+        singleTimerLabel.text = singleSeconds
+    }
+
+    func refreshAllSeconds(seconds: Int) {
+        allTimerCounterLabel.text = timeString(time: Double(seconds))
+    }
+
+    func refresh(strokeEnd: CGFloat) {
+        circleStatusView.value = strokeEnd
     }
 }

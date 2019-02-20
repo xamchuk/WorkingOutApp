@@ -6,11 +6,12 @@
 //  Copyright © 2019 Rusłan Chamski. All rights reserved.
 //
 
-import UIKit
+
 import Photos
+import UIKit
 
 protocol CustomExerciseDelegate: AnyObject {
-    func customItem(item: ItemJson)
+    func customItem(item: Exercise)
 }
 
 class CustomExerciseViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -18,20 +19,25 @@ class CustomExerciseViewController: UIViewController, UITextFieldDelegate, UIIma
     let imageView = UIImageView()
     let imagePicker = UIImagePickerController()
     let fontStyle = UIFont.TextStyle.body
-    let backgroundColor = UIColor.linesColor
-    let cornerRadius: CGFloat = 6
-    let nameTextField = UITextField()
+    let backgroundColor = UIColor.white
+    let cornerRadius: CGFloat = 5
+    let nameTextField = LoginTextField()
     var groupButton = DropDownBtn()
     let saveButton = UIButton(type: .system)
     
-    var item: ItemJson?
+    var item: Exercise?
     weak var delegate: CustomExerciseDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.barTintColor = .gradientLighter
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.isTranslucent = true
+        navigationController?.navigationBar.barTintColor = .clear
+        navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         navigationItem.title = "Create your own exercise"
-        view.makeGradients()
+        view.setBackgroudView()
         imagePicker.delegate = self
         view.addSubview(imageView)
         setupImageView()
@@ -73,9 +79,9 @@ class CustomExerciseViewController: UIViewController, UITextFieldDelegate, UIIma
             alert.addAction(okAction)
             self.present(alert, animated: true, completion: nil)
         } else {
-            item = ItemJson(name: "")
+            item = Exercise(name: "")
             item?.name = nameTextField.text!
-            item?.imageData = imageView.image?.pngData()
+            item?.imageData = UIImage(named: groupButton.title(for: .normal)!)?.pngData()//imageView.image?.pngData()
             item?.group = groupButton.title(for: .normal)
             delegate?.customItem(item: item!)
             dismiss(animated: true)
@@ -97,7 +103,7 @@ class CustomExerciseViewController: UIViewController, UITextFieldDelegate, UIIma
 extension CustomExerciseViewController {
 
     fileprivate func setupImageView() {
-        imageView.backgroundColor = UIColor.gradientLighter
+        imageView.backgroundColor = UIColor.mainLight
         imageView.image = UIImage(named: "test")
         imageView.layer.cornerRadius = 20
         imageView.layer.masksToBounds = true
@@ -113,21 +119,17 @@ extension CustomExerciseViewController {
 
     fileprivate func setupNameTextField() {
         nameTextField.delegate = self
-        nameTextField.font = UIFont.preferredFont(forTextStyle: fontStyle)
-        nameTextField.textAlignment = .center
-        nameTextField.adjustsFontSizeToFitWidth = true
-        nameTextField.placeholder = "Input the name"
-        nameTextField.backgroundColor = backgroundColor
-        nameTextField.layer.cornerRadius = cornerRadius
+        nameTextField.placeholderString = "Input name"
         nameTextField.anchor(top: imageView.bottomAnchor, leading: imageView.leadingAnchor, bottom: nil, trailing: imageView.trailingAnchor, padding: .init(top: 8, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: 25))
     }
     
     fileprivate func setupDropButton() {
         groupButton.setTitle("Muscle Groups", for: .normal)
         groupButton.translatesAutoresizingMaskIntoConstraints = false
-        groupButton.layer.cornerRadius = cornerRadius
         groupButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: fontStyle)
-        groupButton.backgroundColor = backgroundColor
+        groupButton.layer.cornerRadius = 5
+        groupButton.layer.borderWidth = 1
+        groupButton.layer.borderColor = UIColor.mainLight.cgColor
         NSLayoutConstraint.activate([
             groupButton.leadingAnchor.constraint(equalTo: nameTextField.leadingAnchor),
             groupButton.trailingAnchor.constraint(equalTo: nameTextField.trailingAnchor),
@@ -139,10 +141,9 @@ extension CustomExerciseViewController {
 
     fileprivate func setupSaveButton() {
         saveButton.setTitle("Create", for: .normal)
-        saveButton.setTitleColor(.white, for: .normal)
         saveButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 32)
-        saveButton.setTitleColor(.gradientLighter, for: .normal)
-        saveButton.backgroundColor = .linesColor
+        saveButton.setTitleColor(.mainLight, for: .normal)
+        saveButton.backgroundColor = .mainDark
         saveButton.layer.cornerRadius = cornerRadius
         saveButton.addTarget(self, action: #selector(handleSave), for: .touchUpInside)
         saveButton.anchor(top: nil, leading: groupButton.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor , trailing: groupButton.trailingAnchor, padding: .init(top: 0, left: 0, bottom: 16, right: 0))

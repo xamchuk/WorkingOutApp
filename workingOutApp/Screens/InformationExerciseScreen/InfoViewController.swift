@@ -15,12 +15,13 @@ class InfoViewController: UIViewController, WKUIDelegate {
     var landscapeHeihtAnchor: NSLayoutConstraint?
     var continerView: UIView?
     var webView: WKWebView!
-    var item: ItemJson?
+    var item: Exercise?
 
     let nameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 24)
         label.text = "Name"
+        label.textColor = .white
         return label
     }()
 
@@ -28,6 +29,7 @@ class InfoViewController: UIViewController, WKUIDelegate {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 16)
         label.text = "Group"
+        label.textColor = .white
         return label
     }()
 
@@ -35,6 +37,7 @@ class InfoViewController: UIViewController, WKUIDelegate {
         let label = UILabel()
         label.numberOfLines = 0
         label.text = "this is long description this is long description this is long description this is long description this is long description this is long description this is long description this is long description this is long description this is long description this is long description"
+        label.textColor = .white
         return label
     }()
 
@@ -50,23 +53,13 @@ class InfoViewController: UIViewController, WKUIDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        imageView.downloaded(from: item?.imageName ?? "")
-        imageView.contentMode = .scaleAspectFill
-        view.addSubview(imageView)
-        imageView.fillSuperview()
-
-        let blurEffect = UIBlurEffect(style: .regular)
-        let visualEffectView = UIVisualEffectView(effect: blurEffect)
-        visualEffectView.alpha = 0.9
-        imageView.addSubview(visualEffectView)
-        visualEffectView.fillSuperview()
-
-
-        navigationController?.navigationBar.prefersLargeTitles = false
-        let backButton = UIBarButtonItem()
-        backButton.tintColor = .textColor
-        navigationController!.navigationBar.topItem!.backBarButtonItem = backButton
+        view.setBackgroudView()
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.isTranslucent = true
+        navigationController?.navigationBar.barTintColor = .clear
+        navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
 
     }
     override func viewWillAppear(_ animated: Bool) {

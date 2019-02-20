@@ -99,7 +99,7 @@ class DropDownView: UIView, UITableViewDelegate, UITableViewDataSource  {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-       tableView.backgroundColor = .clear
+       tableView.backgroundColor = .mainDark
 
         tableView.delegate = self
         tableView.dataSource = self
@@ -134,7 +134,7 @@ class DropDownView: UIView, UITableViewDelegate, UITableViewDataSource  {
         cell.imageView?.layer.masksToBounds = true
         cell.imageView?.layer.cornerRadius = cell.frame.height / 4
         cell.textLabel?.text = dropDownOptions[indexPath.row]
-        cell.textLabel?.textColor = UIColor.gradientLighter
+        cell.textLabel?.textColor = UIColor.white
         cell.backgroundColor = .clear
         return cell
     }

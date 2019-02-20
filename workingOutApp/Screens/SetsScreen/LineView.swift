@@ -5,7 +5,7 @@ class LineView : UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        layer.borderColor = UIColor.linesColor.cgColor
+        layer.borderColor = UIColor.white.cgColor
         layer.borderWidth = 3
         translatesAutoresizingMaskIntoConstraints = false
     }
